@@ -1,0 +1,6 @@
+[book]
+authors = ["XUKUNYUAN"]
+language = "Chinese"
+multilingual = false
+src = "src"
+title = "第一期傲来操作系统训练营进阶阶段学习引导"
