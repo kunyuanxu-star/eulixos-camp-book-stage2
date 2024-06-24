@@ -1,4 +1,4 @@
-# 第一章节 矩阵与卷积算法
+# 第一章 矩阵与卷积算法
 
 ## 本章要求
 
@@ -25,20 +25,47 @@
      - 计算 A(i, k) * B(k, j) 并将结果累加到 C(i, j) 中。
    - 输出矩阵 C 的元素即为输入矩阵 A 和输出矩阵 B 的卷积。
 
+示例代码（C语言）：
+
+```c
+// 假设我们有两个矩阵A和B，它们的尺寸分别为 m x n 和 n x p，矩阵C是结果矩阵，尺寸为 m x p。
+void matrix_multiply(int m, int n, int p, double A[m][n], double B[n][p], double C[m][p]) {
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < p; j++) {
+            C[i][j] = 0;
+            for (int k = 0; k < n; k++) {
+                C[i][j] += A[i][k] * B[k][j];
+            }
+        }
+    }
+}
+```
+
+
 ## 1.2 卷积算法
 
 卷积算法是一种在信号处理、图像处理、机器学习等领域广泛使用的数学运算。它涉及到两个函数的卷积，通常用来分析一个信号或函数与另一个信号或函数的相似度。在深度学习中，卷积神经网络（CNN）就是基于卷积算法构建的。
 
-卷积是两个函数 $f(t)$ 和 $g(t)$ 的运算，记作 $(f∗g)(t)(f∗g)(t)$ ，定义为：
-$$
-(f∗g)(t)=∫−∞f(τ)g(t−τ)dτ(f∗g)(t)=∫−∞​f(τ)g(t−τ)dτ
-$$
-其中，ττ是积分变量，tt是时间或空间的坐标。
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<p>
+The convolution of two functions \( f(t) \) and \( g(t) \), denoted as \( (f * g)(t) \), is defined as:
+</p>
+<p>
+\[
+        (f * g)(t) = \int_{-\infty}^{\infty} f(\tau) g(t - \tau) \, d\tau
+        \]
+</p>
+
+其中，τ是积分变量，t是时间或空间的坐标。
 
 在离散情况下，卷积定义为：
-$$
-(f∗g)(n)=∑m=−∞f(m)g(n−m)(f∗g)(n)=∑m=−∞​f(m)g(n−m)
-$$
+<p>
+        \[
+        (f * g)(n) = \sum_{m=-\infty}^{\infty} f(m) g(n - m)
+        \]
+    </p>
 这里的f(m)和g(m)是离散信号的值。
 
 卷积的应用
@@ -59,20 +86,78 @@ $$
 1. [知乎 - 如何通俗易懂地解释卷积?](https://www.zhihu.com/question/22298352)
 2. [CSDN - 卷积算法详解](https://blog.csdn.net/weixin_43702653/article/details/123776987)
 
+示例代码（C语言）：
+
+```c
+// 假设我们有一个输入矩阵 input 和一个卷积核 kernel，我们需要计算输出矩阵 output。
+void convolution2D(int inputRows, int inputCols, double input[inputRows][inputCols], 
+                   int kernelRows, int kernelCols, double kernel[kernelRows][kernelCols], 
+                   double output[inputRows][inputCols]) {
+    int kernelCenterX = kernelCols / 2;
+    int kernelCenterY = kernelRows / 2;
+
+    for (int i = 0; i < inputRows; ++i) {
+        for (int j = 0; j < inputCols; ++j) {
+            output[i][j] = 0; // 初始化输出矩阵
+            for (int m = 0; m < kernelRows; ++m) {
+                for (int n = 0; n < kernelCols; ++n) {
+                    int ii = i + (m - kernelCenterY);
+                    int jj = j + (n - kernelCenterX);
+
+                    // 检查是否越界
+                    if (ii >= 0 && ii < inputRows && jj >= 0 && jj < inputCols) {
+                        output[i][j] += input[ii][jj] * kernel[m][n];
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
 ## 1.3 矩阵转置
 
 矩阵转置是指矩阵的行列互换，记作$A^T$，定义为：
-$$
-A^T=[a_{ij}]_{m\times n}=\left[
-\begin{array}{ccc}
-a_{11} & a_{12} & \cdots & a_{1n} \\
-a_{21} & a_{22} & \cdots & a_{2n} \\
-\vdots & \vdots & \ddots & \vdots \\
-a_{m1} & a_{m2} & \cdots & a_{mn}
-\end{array}
-\right]
-$$
+<p>
+        \[
+        A^T = [a_{ij}]_{m\times n} = \left[
+        \begin{array}{cccc}
+        a_{11} & a_{12} & \cdots & a_{1n} \\
+        a_{21} & a_{22} & \cdots & a_{2n} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        a_{m1} & a_{m2} & \cdots & a_{mn}
+        \end{array}
+        \right]
+        \]
+    </p>
 
 即为：
 对每一个i，j，将矩阵A的第i行的元素与第j列的元素进行交换。
+
+示例代码（C语言）：
+
+```c
+// 假设我们有一个矩阵 A，我们需要计算它的转置矩阵。
+void transpose(int m, int n, double A[m][n], double AT[n][m]) {
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            AT[j][i] = A[i][j];
+        }
+    }
+}
+```
+
+原地转置：
+
+```c
+void transpose(int m, int n, double A[m][n]) {
+    for (int i = 0; i < m; i++) {
+        for (int j = i + 1; j < n; j++) {
+            double temp = A[i][j];
+            A[i][j] = A[j][i];
+            A[j][i] = temp;
+        }
+    }
+}
+```
 
