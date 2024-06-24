@@ -8,16 +8,16 @@
 4. 学会利用内核模块创建一个虚拟字符设备。
 5. 了解如何通过数组参数传递给内核模块。
 
-## 2.0 前提条件
+## 前提条件
 要跟随本教程，您需要具备以下前提条件：
 - 熟练掌握C编程
 - 基本的Linux命令行知识
 - 已设置好Linux开发环境（例如，运行Linux发行版并安装了`make`和`gcc`）
 
-## 2.1 内核模块简介
+## 内核模块简介
 Linux内核模块（LKM）是一段代码，可以加载到内核中以扩展其功能，而无需重新启动系统。模块通常用于设备驱动程序，可以动态加载和卸载。
 
-## 2.2 编写一个简单的内核模块
+## 编写一个简单的内核模块
 从一个简单的“Hello, World!”内核模块开始，了解模块编程的基础。
 
 ### hello_module.c
@@ -77,7 +77,7 @@ MODULE_DESCRIPTION("A simple Hello World module");
     sudo rmmod hello_module
     ```
 
-## 2.3 内核模块传残
+##  内核模块传残
 
 ### param_module.c
 ```c
@@ -115,7 +115,7 @@ sudo insmod param_module.ko param_var=42
 dmesg | tail
 ```
 
-## 2.4 内核模块传入一个数组作为参数
+##  内核模块传入一个数组作为参数
 
 Linux 内核模块可以接受数组作为参数，这对于配置和自定义模块行为非常有用。下面我们展示如何实现这一点。
 
@@ -169,7 +169,7 @@ MODULE_DESCRIPTION("A module with array parameter passing");
 ### 总结
 通过这种方式，您可以向内核模块传递数组参数，从而使模块更加灵活和可配置。这对于需要动态传递多个参数的情况非常有用。
 
-## 2.5 创建虚拟字符设备
+##  创建虚拟字符设备
 虚拟字符设备通过文件操作与用户空间应用程序交互。
 
 
@@ -283,7 +283,7 @@ MODULE_AUTHOR("Your Name");
 MODULE_DESCRIPTION("A simple virtual character device");
 ```
 
-## 2.6 开始计时器
+##  开始计时器
 计时器对于在内核空间中处理定时操作至关重要。
 
 
@@ -325,7 +325,7 @@ MODULE_AUTHOR("Your Name");
 MODULE_DESCRIPTION("A simple timer module");
 ```
 
-## 2.7 实现简单的文件操作函数
+##  实现简单的文件操作函数
 ### filp_open
 `filp_open` 用于在内核空间打开一个文件。
 

@@ -5,3 +5,6 @@
 - [第一章 矩阵与卷积算法](./chapter_1.md)
 - [第二章 Linux内核模块](./chapter_2.md)
 - [第三章 RISC-V架构内联汇编](./chapter_3.md)
+- [第四章 操作系统常用算法（上）](./chapter_4.md)
+- [第五章 操作系统常用算法（下）](./chapter_5.md)
+- [第六章 Linux系统编程基础](./chapter_6.md)
