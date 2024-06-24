@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Chapter 1</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Chapter 2</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> 第一章 矩阵与卷积算法</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> 第二章 Linux内核模块</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> 第三章 RISC-V架构内联汇编</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -174,7 +174,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="第一章节-矩阵与卷积算法"><a class="header" href="#第一章节-矩阵与卷积算法">第一章节 矩阵与卷积算法</a></h1>
+                        <h1 id="第一章-矩阵与卷积算法"><a class="header" href="#第一章-矩阵与卷积算法">第一章 矩阵与卷积算法</a></h1>
 <h2 id="本章要求"><a class="header" href="#本章要求">本章要求</a></h2>
 <ol>
 <li>了解矩阵乘法和卷积算法。</li>
@@ -204,18 +204,39 @@
 </ul>
 </li>
 </ol>
+<p>示例代码（C语言）：</p>
+<pre><code class="language-c">// 假设我们有两个矩阵A和B，它们的尺寸分别为 m x n 和 n x p，矩阵C是结果矩阵，尺寸为 m x p。
+void matrix_multiply(int m, int n, int p, double A[m][n], double B[n][p], double C[m][p]) {
+    for (int i = 0; i &lt; m; i++) {
+        for (int j = 0; j &lt; p; j++) {
+            C[i][j] = 0;
+            for (int k = 0; k &lt; n; k++) {
+                C[i][j] += A[i][k] * B[k][j];
+            }
+        }
+    }
+}
+</code></pre>
 <h2 id="12-卷积算法"><a class="header" href="#12-卷积算法">1.2 卷积算法</a></h2>
 <p>卷积算法是一种在信号处理、图像处理、机器学习等领域广泛使用的数学运算。它涉及到两个函数的卷积，通常用来分析一个信号或函数与另一个信号或函数的相似度。在深度学习中，卷积神经网络（CNN）就是基于卷积算法构建的。</p>
-<p>卷积是两个函数 $f(t)$ 和 $g(t)$ 的运算，记作 $(f∗g)(t)(f∗g)(t)$ ，定义为：
-$$
-(f∗g)(t)=∫−∞f(τ)g(t−τ)dτ(f∗g)(t)=∫−∞​f(τ)g(t−τ)dτ
-$$
-其中，ττ是积分变量，tt是时间或空间的坐标。</p>
-<p>在离散情况下，卷积定义为：
-$$
-(f∗g)(n)=∑m=−∞f(m)g(n−m)(f∗g)(n)=∑m=−∞​f(m)g(n−m)
-$$
-这里的f(m)和g(m)是离散信号的值。</p>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<p>
+The convolution of two functions \( f(t) \) and \( g(t) \), denoted as \( (f * g)(t) \), is defined as:
+</p>
+<p>
+\[
+        (f * g)(t) = \int_{-\infty}^{\infty} f(\tau) g(t - \tau) \, d\tau
+        \]
+</p>
+<p>其中，τ是积分变量，t是时间或空间的坐标。</p>
+<p>在离散情况下，卷积定义为：</p>
+<p>
+        \[
+        (f * g)(n) = \sum_{m=-\infty}^{\infty} f(m) g(n - m)
+        \]
+    </p>
+这里的f(m)和g(m)是离散信号的值。
 <p>卷积的应用</p>
 <pre><code>信号处理：用于滤波、平滑、特征提取等。
 图像处理：用于边缘检测、图像平滑、特征提取等。
@@ -234,20 +255,69 @@ $$
 <li><a href="https://www.zhihu.com/question/22298352">知乎 - 如何通俗易懂地解释卷积?</a></li>
 <li><a href="https://blog.csdn.net/weixin_43702653/article/details/123776987">CSDN - 卷积算法详解</a></li>
 </ol>
+<p>示例代码（C语言）：</p>
+<pre><code class="language-c">// 假设我们有一个输入矩阵 input 和一个卷积核 kernel，我们需要计算输出矩阵 output。
+void convolution2D(int inputRows, int inputCols, double input[inputRows][inputCols], 
+                   int kernelRows, int kernelCols, double kernel[kernelRows][kernelCols], 
+                   double output[inputRows][inputCols]) {
+    int kernelCenterX = kernelCols / 2;
+    int kernelCenterY = kernelRows / 2;
+
+    for (int i = 0; i &lt; inputRows; ++i) {
+        for (int j = 0; j &lt; inputCols; ++j) {
+            output[i][j] = 0; // 初始化输出矩阵
+            for (int m = 0; m &lt; kernelRows; ++m) {
+                for (int n = 0; n &lt; kernelCols; ++n) {
+                    int ii = i + (m - kernelCenterY);
+                    int jj = j + (n - kernelCenterX);
+
+                    // 检查是否越界
+                    if (ii &gt;= 0 &amp;&amp; ii &lt; inputRows &amp;&amp; jj &gt;= 0 &amp;&amp; jj &lt; inputCols) {
+                        output[i][j] += input[ii][jj] * kernel[m][n];
+                    }
+                }
+            }
+        }
+    }
+}
+</code></pre>
 <h2 id="13-矩阵转置"><a class="header" href="#13-矩阵转置">1.3 矩阵转置</a></h2>
-<p>矩阵转置是指矩阵的行列互换，记作$A^T$，定义为：
-$$
-A^T=[a_{ij}]<em>{m\times n}=\left[
-\begin{array}{ccc}
-a</em>{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \
-a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n} \
-\vdots &amp; \vdots &amp; \ddots &amp; \vdots \
-a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn}
-\end{array}
-\right]
-$$</p>
+<p>矩阵转置是指矩阵的行列互换，记作$A^T$，定义为：</p>
+<p>
+        \[
+        A^T = [a_{ij}]_{m\times n} = \left[
+        \begin{array}{cccc}
+        a_{11} & a_{12} & \cdots & a_{1n} \\
+        a_{21} & a_{22} & \cdots & a_{2n} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        a_{m1} & a_{m2} & \cdots & a_{mn}
+        \end{array}
+        \right]
+        \]
+    </p>
 <p>即为：
 对每一个i，j，将矩阵A的第i行的元素与第j列的元素进行交换。</p>
+<p>示例代码（C语言）：</p>
+<pre><code class="language-c">// 假设我们有一个矩阵 A，我们需要计算它的转置矩阵。
+void transpose(int m, int n, double A[m][n], double AT[n][m]) {
+    for (int i = 0; i &lt; m; i++) {
+        for (int j = 0; j &lt; n; j++) {
+            AT[j][i] = A[i][j];
+        }
+    }
+}
+</code></pre>
+<p>原地转置：</p>
+<pre><code class="language-c">void transpose(int m, int n, double A[m][n]) {
+    for (int i = 0; i &lt; m; i++) {
+        for (int j = i + 1; j &lt; n; j++) {
+            double temp = A[i][j];
+            A[i][j] = A[j][i];
+            A[j][i] = temp;
+        }
+    }
+}
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="第二章-linux内核模块"><a class="header" href="#第二章-linux内核模块">第二章 Linux内核模块</a></h1>
 <h2 id="本章要求-1"><a class="header" href="#本章要求-1">本章要求</a></h2>
 <ol>
@@ -612,6 +682,176 @@ MODULE_DESCRIPTION("A module demonstrating filp_open");
 <li><a href="https://lwn.net/Kernel/LDD3/">Linux Device Drivers, Third Edition</a></li>
 <li><a href="https://www.kernel.org/doc/html/latest/">Kernel API Documentation</a></li>
 </ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="第三章-risc-v架构内联汇编"><a class="header" href="#第三章-risc-v架构内联汇编">第三章 RISC-V架构内联汇编</a></h1>
+<h2 id="介绍"><a class="header" href="#介绍">介绍</a></h2>
+<p>内联汇编允许在C语言代码中直接嵌入汇编指令，从而能够利用底层硬件特性来优化性能。本教程将介绍如何在RISC-V架构上使用内联汇编，涵盖RISC-V指令集的基础知识，以及如何将C语言中的常见控制结构用汇编表示。</p>
+<h2 id="risc-v指令集简介"><a class="header" href="#risc-v指令集简介">RISC-V指令集简介</a></h2>
+<p>RISC-V（Reduced Instruction Set Computing V）是一种开源的指令集架构（ISA），它具有简洁、模块化和高效等特点。以下是一些基本的RISC-V指令：</p>
+<h3 id="寄存器"><a class="header" href="#寄存器">寄存器</a></h3>
+<ul>
+<li><code>x0</code>-<code>x31</code>：32个整数寄存器。</li>
+<li><code>f0</code>-<code>f31</code>：32个浮点寄存器。</li>
+</ul>
+<h3 id="基本指令"><a class="header" href="#基本指令">基本指令</a></h3>
+<ul>
+<li><code>add rd, rs1, rs2</code>：rd = rs1 + rs2</li>
+<li><code>sub rd, rs1, rs2</code>：rd = rs1 - rs2</li>
+<li><code>mul rd, rs1, rs2</code>：rd = rs1 * rs2</li>
+<li><code>div rd, rs1, rs2</code>：rd = rs1 / rs2</li>
+<li><code>lw rd, offset(rs1)</code>：从内存加载字到rd</li>
+<li><code>sw rs2, offset(rs1)</code>：将字存储到内存</li>
+</ul>
+<h2 id="内联汇编语法"><a class="header" href="#内联汇编语法">内联汇编语法</a></h2>
+<p>在GCC编译器中，内联汇编使用<code>asm</code>关键字。以下是一个基本的内联汇编语法示例：</p>
+<pre><code class="language-c">int result;
+asm("add %0, %1, %2" : "=r" (result) : "r" (a), "r" (b));
+</code></pre>
+<ul>
+<li><code>"add %0, %1, %2"</code>：汇编指令模板。</li>
+<li><code>: "=r" (result)</code>：输出操作数，<code>=r</code>表示输出到寄存器。</li>
+<li><code>: "r" (a), "r" (b)</code>：输入操作数，<code>r</code>表示从寄存器读取。</li>
+</ul>
+<h2 id="控制结构的内联汇编表示"><a class="header" href="#控制结构的内联汇编表示">控制结构的内联汇编表示</a></h2>
+<h3 id="while循环"><a class="header" href="#while循环">while循环</a></h3>
+<pre><code class="language-c">int i = 0;
+while (i &lt; 10) {
+    // 循环体
+    i++;
+}
+</code></pre>
+<p>等价的内联汇编：</p>
+<pre><code class="language-c">int i = 0;
+asm volatile (
+    "loop_start:            \n\t"
+    "   blt  %[i], %[max], loop_body \n\t"
+    "   j    loop_end       \n\t"
+    "loop_body:             \n\t"
+    "   addi %[i], %[i], 1  \n\t"
+    "   j    loop_start     \n\t"
+    "loop_end:              \n\t"
+    : [i] "+r" (i)
+    : [max] "r" (10)
+    : "cc"
+);
+</code></pre>
+<h3 id="if-else语句"><a class="header" href="#if-else语句">if-else语句</a></h3>
+<pre><code class="language-c">int a = 5, b = 10;
+if (a &lt; b) {
+    // 真分支
+} else {
+    // 假分支
+}
+</code></pre>
+<p>等价的内联汇编：</p>
+<pre><code class="language-c">int a = 5, b = 10;
+asm volatile (
+    "   blt   %[a], %[b], if_true  \n\t"
+    "   j     else_branch          \n\t"
+    "if_true:                      \n\t"
+    // 真分支代码
+    "   j     end_if               \n\t"
+    "else_branch:                  \n\t"
+    // 假分支代码
+    "end_if:                       \n\t"
+    :
+    : [a] "r" (a), [b] "r" (b)
+    : "cc"
+);
+</code></pre>
+<h3 id="do-while循环"><a class="header" href="#do-while循环">do-while循环</a></h3>
+<pre><code class="language-c">int i = 0;
+do {
+    // 循环体
+    i++;
+} while (i &lt; 10);
+</code></pre>
+<p>等价的内联汇编：</p>
+<pre><code class="language-c">int i = 0;
+asm volatile (
+    "do_start:                \n\t"
+    "   addi %[i], %[i], 1    \n\t"
+    "   blt  %[i], %[max], do_start \n\t"
+    : [i] "+r" (i)
+    : [max] "r" (10)
+    : "cc"
+);
+</code></pre>
+<h3 id="switch语句"><a class="header" href="#switch语句">switch语句</a></h3>
+<pre><code class="language-c">int val = 2;
+switch (val) {
+    case 1:
+        // case 1代码
+        break;
+    case 2:
+        // case 2代码
+        break;
+    default:
+        // 默认代码
+        break;
+}
+</code></pre>
+<p>等价的内联汇编：</p>
+<pre><code class="language-c">int val = 2;
+asm volatile (
+    "   li    t0, 1           \n\t"
+    "   beq   %[val], t0, case1 \n\t"
+    "   li    t0, 2           \n\t"
+    "   beq   %[val], t0, case2 \n\t"
+    "   j     default_case    \n\t"
+    "case1:                   \n\t"
+    // case 1代码
+    "   j     end_switch      \n\t"
+    "case2:                   \n\t"
+    // case 2代码
+    "   j     end_switch      \n\t"
+    "default_case:            \n\t"
+    // 默认代码
+    "end_switch:              \n\t"
+    :
+    : [val] "r" (val)
+    : "t0", "cc"
+);
+</code></pre>
+<h3 id="continue与break"><a class="header" href="#continue与break">continue与break</a></h3>
+<p>在循环中使用<code>continue</code>和<code>break</code>：</p>
+<pre><code class="language-c">for (int i = 0; i &lt; 10; i++) {
+    if (i == 5) continue;
+    if (i == 8) break;
+    // 循环体
+}
+</code></pre>
+<p>等价的内联汇编：</p>
+<pre><code class="language-c">int i = 0;
+asm volatile (
+    "for_start:                \n\t"
+    "   bge   %[i], %[max], for_end   \n\t"
+    "   li    t0, 5           \n\t"
+    "   beq   %[i], t0, continue_loop \n\t"
+    "   li    t0, 8           \n\t"
+    "   beq   %[i], t0, for_end       \n\t"
+    // 循环体代码
+    "continue_loop:           \n\t"
+    "   addi  %[i], %[i], 1   \n\t"
+    "   j     for_start       \n\t"
+    "for_end:                 \n\t"
+    : [i] "+r" (i)
+    : [max] "r" (10)
+    : "t0", "cc"
+);
+</code></pre>
+<h2 id="参考资料"><a class="header" href="#参考资料">参考资料</a></h2>
+<ul>
+<li><a href="https://riscv.org/technical/specifications/">RISC-V 官方文档</a></li>
+<li><a href="https://gcc.gnu.org/onlinedocs/gcc/Using-Assembly-Language-with-C.html">GCC 内联汇编指南</a></li>
+<li><a href="https://riscv.org/software-tools/risc-v-assembly-programming/">RISC-V 汇编教程</a></li>
+</ul>
+<h2 id="相关教程"><a class="header" href="#相关教程">相关教程</a></h2>
+<ul>
+<li>《RISC-V汇编语言程序设计》</li>
+<li>《嵌入式系统与RISC-V架构》</li>
+<li><a href="https://riscvasm.com">Learn RISC-V Assembly</a></li>
+</ul>
+<p>通过本教程，你已经了解了如何在RISC-V架构上使用内联汇编，并掌握了将C语言中的控制结构转换为汇编代码的方法。希望这些内容对你在实际编程中有所帮助。</p>
 
                     </main>
 
