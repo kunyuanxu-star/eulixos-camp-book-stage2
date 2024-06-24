@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>第三章 RISC-V架构内联汇编 - 第一期傲来操作系统训练营进阶阶段学习引导</title>
+        <title>第六章 Linux系统编程基础 - 第一期傲来操作系统训练营进阶阶段学习引导</title>
 
 
         <!-- Custom HTML head -->
@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> 第一章 矩阵与卷积算法</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> 第二章 Linux内核模块</a></li><li class="chapter-item expanded "><a href="chapter_3.html" class="active"><strong aria-hidden="true">3.</strong> 第三章 RISC-V架构内联汇编</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> 第四章 操作系统常用算法（上）</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> 第五章 操作系统常用算法（下）</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> 第六章 Linux系统编程基础</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> 第一章 矩阵与卷积算法</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> 第二章 Linux内核模块</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> 第三章 RISC-V架构内联汇编</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> 第四章 操作系统常用算法（上）</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> 第五章 操作系统常用算法（下）</a></li><li class="chapter-item expanded "><a href="chapter_6.html" class="active"><strong aria-hidden="true">6.</strong> 第六章 Linux系统编程基础</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -173,194 +173,225 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="第三章-risc-v架构内联汇编"><a class="header" href="#第三章-risc-v架构内联汇编">第三章 RISC-V架构内联汇编</a></h1>
+                        <h1 id="第六章-linux系统编程基础"><a class="header" href="#第六章-linux系统编程基础">第六章 Linux系统编程基础</a></h1>
 <h2 id="本章要求"><a class="header" href="#本章要求">本章要求</a></h2>
 <ol>
-<li>了解RISC-V指令集的基本知识。</li>
-<li>了解RISC-V架构的特点，以及如何在C语言中使用内联汇编。</li>
-<li>掌握C语言中常见的控制结构的汇编表示方法。</li>
+<li>了解Linux系统编程的基本概念，包括进程、线程、内存管理、文件系统接口等。</li>
+<li>掌握Linux系统编程的基本技术，包括获取主机名、设置程序内存上限、使用<code>fork</code>创建子进程、通过管道进行进程间通讯等。</li>
+<li>能够编写简单的Linux系统编程程序。</li>
 </ol>
 <h2 id="介绍"><a class="header" href="#介绍">介绍</a></h2>
-<p>内联汇编允许在C语言代码中直接嵌入汇编指令，从而能够利用底层硬件特性来优化性能。本教程将介绍如何在RISC-V架构上使用内联汇编，涵盖RISC-V指令集的基础知识，以及如何将C语言中的常见控制结构用汇编表示。</p>
-<h2 id="risc-v指令集简介"><a class="header" href="#risc-v指令集简介">RISC-V指令集简介</a></h2>
-<p>RISC-V（Reduced Instruction Set Computing V）是一种开源的指令集架构（ISA），它具有简洁、模块化和高效等特点。以下是一些基本的RISC-V指令：</p>
-<h3 id="寄存器"><a class="header" href="#寄存器">寄存器</a></h3>
-<ul>
-<li><code>x0</code>-<code>x31</code>：32个整数寄存器。</li>
-<li><code>f0</code>-<code>f31</code>：32个浮点寄存器。</li>
-</ul>
-<h3 id="基本指令"><a class="header" href="#基本指令">基本指令</a></h3>
-<ul>
-<li><code>add rd, rs1, rs2</code>：rd = rs1 + rs2</li>
-<li><code>sub rd, rs1, rs2</code>：rd = rs1 - rs2</li>
-<li><code>mul rd, rs1, rs2</code>：rd = rs1 * rs2</li>
-<li><code>div rd, rs1, rs2</code>：rd = rs1 / rs2</li>
-<li><code>lw rd, offset(rs1)</code>：从内存加载字到rd</li>
-<li><code>sw rs2, offset(rs1)</code>：将字存储到内存</li>
-</ul>
-<h2 id="内联汇编语法"><a class="header" href="#内联汇编语法">内联汇编语法</a></h2>
-<p>在GCC编译器中，内联汇编使用<code>asm</code>关键字。以下是一个基本的内联汇编语法示例：</p>
-<pre><code class="language-c">int result;
-asm("add %0, %1, %2" : "=r" (result) : "r" (a), "r" (b));
+<p>Linux系统编程涉及使用C语言与操作系统进行直接交互。本文将详细介绍一些基本的Linux系统编程技术，并通过示例代码展示如何获取主机名、设置程序内存上限、使用<code>fork</code>创建子进程，以及通过管道进行进程间通讯。</p>
+<h2 id="获取主机名"><a class="header" href="#获取主机名">获取主机名</a></h2>
+<h3 id="gethostname函数"><a class="header" href="#gethostname函数"><code>gethostname</code>函数</a></h3>
+<p><code>gethostname</code>函数用于获取当前主机的名称。它的原型如下：</p>
+<pre><code class="language-c">#include &lt;unistd.h&gt;
+int gethostname(char *name, size_t len);
 </code></pre>
-<ul>
-<li><code>"add %0, %1, %2"</code>：汇编指令模板。</li>
-<li><code>: "=r" (result)</code>：输出操作数，<code>=r</code>表示输出到寄存器。</li>
-<li><code>: "r" (a), "r" (b)</code>：输入操作数，<code>r</code>表示从寄存器读取。</li>
-</ul>
-<h2 id="控制结构的内联汇编表示"><a class="header" href="#控制结构的内联汇编表示">控制结构的内联汇编表示</a></h2>
-<h3 id="while循环"><a class="header" href="#while循环">while循环</a></h3>
-<pre><code class="language-c">int i = 0;
-while (i &lt; 10) {
-    // 循环体
-    i++;
+<h3 id="示例代码"><a class="header" href="#示例代码">示例代码</a></h3>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;limits.h&gt;
+
+int main() {
+    char hostname[HOST_NAME_MAX];
+    
+    if (gethostname(hostname, sizeof(hostname)) == -1) {
+        perror("gethostname");
+        return 1;
+    }
+
+    printf("Hostname: %s\n", hostname);
+    return 0;
 }
 </code></pre>
-<p>等价的内联汇编：</p>
-<pre><code class="language-c">int i = 0;
-asm volatile (
-    "loop_start:            \n\t"
-    "   blt  %[i], %[max], loop_body \n\t"
-    "   j    loop_end       \n\t"
-    "loop_body:             \n\t"
-    "   addi %[i], %[i], 1  \n\t"
-    "   j    loop_start     \n\t"
-    "loop_end:              \n\t"
-    : [i] "+r" (i)
-    : [max] "r" (10)
-    : "cc"
-);
+<h2 id="使用rlimit设置程序内存上限"><a class="header" href="#使用rlimit设置程序内存上限">使用<code>rlimit</code>设置程序内存上限</a></h2>
+<h3 id="setrlimit函数"><a class="header" href="#setrlimit函数"><code>setrlimit</code>函数</a></h3>
+<p><code>setrlimit</code>函数用于设置进程的资源限制。它的原型如下：</p>
+<pre><code class="language-c">#include &lt;sys/resource.h&gt;
+int setrlimit(int resource, const struct rlimit *rlim);
 </code></pre>
-<h3 id="if-else语句"><a class="header" href="#if-else语句">if-else语句</a></h3>
-<pre><code class="language-c">int a = 5, b = 10;
-if (a &lt; b) {
-    // 真分支
-} else {
-    // 假分支
+<h3 id="示例代码-1"><a class="header" href="#示例代码-1">示例代码</a></h3>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;sys/resource.h&gt;
+
+int main() {
+    struct rlimit rl;
+    
+    // 设置程序的内存上限为128MB
+    rl.rlim_cur = 128 * 1024 * 1024;
+    rl.rlim_max = 128 * 1024 * 1024;
+    
+    if (setrlimit(RLIMIT_AS, &amp;rl) == -1) {
+        perror("setrlimit");
+        return 1;
+    }
+
+    printf("Memory limit set to 128MB\n");
+    return 0;
 }
 </code></pre>
-<p>等价的内联汇编：</p>
-<pre><code class="language-c">int a = 5, b = 10;
-asm volatile (
-    "   blt   %[a], %[b], if_true  \n\t"
-    "   j     else_branch          \n\t"
-    "if_true:                      \n\t"
-    // 真分支代码
-    "   j     end_if               \n\t"
-    "else_branch:                  \n\t"
-    // 假分支代码
-    "end_if:                       \n\t"
-    :
-    : [a] "r" (a), [b] "r" (b)
-    : "cc"
-);
+<h2 id="fork函数创建子进程"><a class="header" href="#fork函数创建子进程"><code>fork</code>函数创建子进程</a></h2>
+<h3 id="fork函数"><a class="header" href="#fork函数"><code>fork</code>函数</a></h3>
+<p><code>fork</code>函数用于创建一个子进程。它的原型如下：</p>
+<pre><code class="language-c">#include &lt;unistd.h&gt;
+pid_t fork(void);
 </code></pre>
-<h3 id="do-while循环"><a class="header" href="#do-while循环">do-while循环</a></h3>
-<pre><code class="language-c">int i = 0;
-do {
-    // 循环体
-    i++;
-} while (i &lt; 10);
-</code></pre>
-<p>等价的内联汇编：</p>
-<pre><code class="language-c">int i = 0;
-asm volatile (
-    "do_start:                \n\t"
-    "   addi %[i], %[i], 1    \n\t"
-    "   blt  %[i], %[max], do_start \n\t"
-    : [i] "+r" (i)
-    : [max] "r" (10)
-    : "cc"
-);
-</code></pre>
-<h3 id="switch语句"><a class="header" href="#switch语句">switch语句</a></h3>
-<pre><code class="language-c">int val = 2;
-switch (val) {
-    case 1:
-        // case 1代码
-        break;
-    case 2:
-        // case 2代码
-        break;
-    default:
-        // 默认代码
-        break;
+<h3 id="示例代码-2"><a class="header" href="#示例代码-2">示例代码</a></h3>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+
+int main() {
+    pid_t pid = fork();
+
+    if (pid == -1) {
+        perror("fork");
+        return 1;
+    } else if (pid == 0) {
+        // 子进程
+        printf("Hello from the child process!\n");
+    } else {
+        // 父进程
+        printf("Hello from the parent process!\n");
+    }
+
+    return 0;
 }
 </code></pre>
-<p>等价的内联汇编：</p>
-<pre><code class="language-c">int val = 2;
-asm volatile (
-    "   li    t0, 1           \n\t"
-    "   beq   %[val], t0, case1 \n\t"
-    "   li    t0, 2           \n\t"
-    "   beq   %[val], t0, case2 \n\t"
-    "   j     default_case    \n\t"
-    "case1:                   \n\t"
-    // case 1代码
-    "   j     end_switch      \n\t"
-    "case2:                   \n\t"
-    // case 2代码
-    "   j     end_switch      \n\t"
-    "default_case:            \n\t"
-    // 默认代码
-    "end_switch:              \n\t"
-    :
-    : [val] "r" (val)
-    : "t0", "cc"
-);
+<h2 id="管道与进程间通讯"><a class="header" href="#管道与进程间通讯">管道与进程间通讯</a></h2>
+<h3 id="pipe函数"><a class="header" href="#pipe函数"><code>pipe</code>函数</a></h3>
+<p><code>pipe</code>函数用于创建一个管道，管道是进程间通讯的一种方式。它的原型如下：</p>
+<pre><code class="language-c">#include &lt;unistd.h&gt;
+int pipe(int pipefd[2]);
 </code></pre>
-<h3 id="continue与break"><a class="header" href="#continue与break">continue与break</a></h3>
-<p>在循环中使用<code>continue</code>和<code>break</code>：</p>
-<pre><code class="language-c">for (int i = 0; i &lt; 10; i++) {
-    if (i == 5) continue;
-    if (i == 8) break;
-    // 循环体
+<h3 id="示例代码-3"><a class="header" href="#示例代码-3">示例代码</a></h3>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;string.h&gt;
+
+int main() {
+    int pipefd[2];
+    char buffer[128];
+
+    if (pipe(pipefd) == -1) {
+        perror("pipe");
+        return 1;
+    }
+
+    pid_t pid = fork();
+
+    if (pid == -1) {
+        perror("fork");
+        return 1;
+    } else if (pid == 0) {
+        // 子进程
+        close(pipefd[0]); // 关闭读端
+        char message[] = "Hello from the child process!";
+        write(pipefd[1], message, strlen(message));
+        close(pipefd[1]); // 关闭写端
+    } else {
+        // 父进程
+        close(pipefd[1]); // 关闭写端
+        read(pipefd[0], buffer, sizeof(buffer));
+        printf("Parent received: %s\n", buffer);
+        close(pipefd[0]); // 关闭读端
+    }
+
+    return 0;
 }
 </code></pre>
-<p>等价的内联汇编：</p>
-<pre><code class="language-c">int i = 0;
-asm volatile (
-    "for_start:                \n\t"
-    "   bge   %[i], %[max], for_end   \n\t"
-    "   li    t0, 5           \n\t"
-    "   beq   %[i], t0, continue_loop \n\t"
-    "   li    t0, 8           \n\t"
-    "   beq   %[i], t0, for_end       \n\t"
-    // 循环体代码
-    "continue_loop:           \n\t"
-    "   addi  %[i], %[i], 1   \n\t"
-    "   j     for_start       \n\t"
-    "for_end:                 \n\t"
-    : [i] "+r" (i)
-    : [max] "r" (10)
-    : "t0", "cc"
-);
-</code></pre>
-<h2 id="参考资料"><a class="header" href="#参考资料">参考资料</a></h2>
+<h2 id="资料"><a class="header" href="#资料">资料</a></h2>
+<p>学习Linux系统编程的相关资料和教程非常丰富，以下是一些推荐的资源：</p>
+<h3 id="书籍"><a class="header" href="#书籍">书籍</a></h3>
+<ol>
+<li>
+<p><strong>《UNIX环境高级编程》</strong>（Advanced Programming in the UNIX Environment） - 作者：W. Richard Stevens</p>
 <ul>
-<li><a href="https://riscv.org/technical/specifications/">RISC-V 官方文档</a></li>
-<li><a href="https://gcc.gnu.org/onlinedocs/gcc/Using-Assembly-Language-with-C.html">GCC 内联汇编指南</a></li>
-<li><a href="https://riscv.org/software-tools/risc-v-assembly-programming/">RISC-V 汇编教程</a></li>
+<li>这本书被誉为UNIX编程的经典之作，详细介绍了UNIX系统编程的各个方面，是深入学习Linux编程的必备书籍。</li>
 </ul>
-<h2 id="相关教程"><a class="header" href="#相关教程">相关教程</a></h2>
+</li>
+<li>
+<p><strong>《Linux系统编程》</strong>（Linux System Programming） - 作者：Robert Love</p>
 <ul>
-<li>《RISC-V汇编语言程序设计》</li>
-<li>《嵌入式系统与RISC-V架构》</li>
-<li><a href="https://riscvasm.com">Learn RISC-V Assembly</a></li>
+<li>本书专门介绍了Linux系统编程的基础和高级主题，涵盖了文件I/O、进程控制、线程和同步、网络编程等内容。</li>
 </ul>
-<p>通过本教程，你已经了解了如何在RISC-V架构上使用内联汇编，并掌握了将C语言中的控制结构转换为汇编代码的方法。希望这些内容对你在实际编程中有所帮助。</p>
+</li>
+<li>
+<p><strong>《深入理解Linux内核》</strong>（Understanding the Linux Kernel） - 作者：Daniel P. Bovet, Marco Cesati</p>
+<ul>
+<li>这本书深入解析了Linux内核的各个子系统和模块，对理解Linux系统的工作原理非常有帮助。</li>
+</ul>
+</li>
+</ol>
+<h3 id="在线教程和文档"><a class="header" href="#在线教程和文档">在线教程和文档</a></h3>
+<ol>
+<li>
+<p><strong>The Linux Programming Interface</strong> - 作者：Michael Kerrisk</p>
+<ul>
+<li>该书的官方网站提供了部分章节的在线阅读和示例代码，详细讲解了Linux编程接口。</li>
+</ul>
+</li>
+<li>
+<p><a href="https://www.gnu.org/software/libc/manual/"><strong>GNU C Library Documentation</strong></a></p>
+<ul>
+<li>官方文档详细介绍了GNU C库中的各个函数和数据结构，是查阅具体函数用法的权威资料。</li>
+</ul>
+</li>
+<li>
+<p><strong>Linux Manual Pages (man pages)</strong></p>
+<ul>
+<li>Linux系统自带的手册页提供了大量函数和命令的使用说明，使用<code>man</code>命令可以方便地查阅。</li>
+<li>例如，<code>man 2 fork</code> 可以查看<code>fork</code>系统调用的详细信息。</li>
+</ul>
+</li>
+</ol>
+<h3 id="在线课程"><a class="header" href="#在线课程">在线课程</a></h3>
+<ol>
+<li>
+<p><a href="(https://www.coursera.org/learn/os-power-user)"><strong>Coursera: "Operating Systems and You: Becoming a Power User"</strong></a></p>
+<ul>
+<li>这门课程由谷歌提供，介绍了Linux操作系统的基本使用和系统编程的基本概念。</li>
+</ul>
+</li>
+<li>
+<p><a href="https://www.udacity.com/course/linux-system-programming--ud923"><strong>Udacity: "Linux System Programming"</strong></a></p>
+<ul>
+<li>这门课程提供了Linux系统编程的入门知识，适合初学者学习。</li>
+</ul>
+</li>
+</ol>
+<h3 id="社区和论坛"><a class="header" href="#社区和论坛">社区和论坛</a></h3>
+<ol>
+<li>
+<p><a href="https://stackoverflow.com/"><strong>Stack Overflow</strong></a></p>
+<ul>
+<li>Stack Overflow是一个大型编程问答社区，里面有大量关于Linux系统编程的问答，搜索具体问题时可以找到许多有用的答案。</li>
+</ul>
+</li>
+<li>
+<p><a href="https://www.reddit.com/r/linux/"><strong>Reddit: r/linux</strong></a></p>
+<ul>
+<li>Reddit的Linux板块讨论Linux系统相关的各种话题，包括系统编程，里面有很多经验丰富的用户可以提供帮助。</li>
+</ul>
+</li>
+</ol>
+<h3 id="实验和实践"><a class="header" href="#实验和实践">实验和实践</a></h3>
+<ol>
+<li><a href="http://www.linuxfromscratch.org/lfs/"><strong>Linux From Scratch (LFS)</strong></a>
+<ul>
+<li>通过从零开始构建一个Linux系统，可以深入理解Linux的各个组件和编程接口。</li>
+</ul>
+</li>
+</ol>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="chapter_2.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="chapter_5.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="chapter_4.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -368,13 +399,10 @@ asm volatile (
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="chapter_2.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="chapter_5.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="chapter_4.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
             </nav>
 
         </div>

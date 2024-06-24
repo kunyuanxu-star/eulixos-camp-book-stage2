@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> 第一章 矩阵与卷积算法</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> 第二章 Linux内核模块</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> 第三章 RISC-V架构内联汇编</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> 第一章 矩阵与卷积算法</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> 第二章 Linux内核模块</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> 第三章 RISC-V架构内联汇编</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> 第四章 操作系统常用算法（上）</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> 第五章 操作系统常用算法（下）</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> 第六章 Linux系统编程基础</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -181,7 +181,7 @@
 <li>掌握矩阵转置的概念。</li>
 <li>学会通过编程实现矩阵乘法和卷积算法。</li>
 </ol>
-<h2 id="11-矩阵与线性代数"><a class="header" href="#11-矩阵与线性代数">1.1 矩阵与线性代数</a></h2>
+<h2 id="矩阵与线性代数"><a class="header" href="#矩阵与线性代数">矩阵与线性代数</a></h2>
 <p>-矩阵乘法是线性代数的基本运算，它可以用来表示和操作向量、矩阵、张量等数学对象。矩阵的加法、减法、乘法、除法、转置、行列式、特征值、特征向量等运算都是线性代数的基本概念。</p>
 <p>矩阵乘算法流程如下：</p>
 <ol>
@@ -217,7 +217,7 @@ void matrix_multiply(int m, int n, int p, double A[m][n], double B[n][p], double
     }
 }
 </code></pre>
-<h2 id="12-卷积算法"><a class="header" href="#12-卷积算法">1.2 卷积算法</a></h2>
+<h2 id="卷积算法"><a class="header" href="#卷积算法">卷积算法</a></h2>
 <p>卷积算法是一种在信号处理、图像处理、机器学习等领域广泛使用的数学运算。它涉及到两个函数的卷积，通常用来分析一个信号或函数与另一个信号或函数的相似度。在深度学习中，卷积神经网络（CNN）就是基于卷积算法构建的。</p>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -237,12 +237,11 @@ The convolution of two functions \( f(t) \) and \( g(t) \), denoted as \( (f * g
         \]
     </p>
 这里的f(m)和g(m)是离散信号的值。
-<p>卷积的应用</p>
-<pre><code>信号处理：用于滤波、平滑、特征提取等。
+<h3 id="卷积的应用"><a class="header" href="#卷积的应用">卷积的应用</a></h3>
+<p>信号处理：用于滤波、平滑、特征提取等。
 图像处理：用于边缘检测、图像平滑、特征提取等。
-机器学习：在卷积神经网络中，卷积层通过卷积操作提取输入数据的特征。
-</code></pre>
-<p>卷积算法流程</p>
+机器学习：在卷积神经网络中，卷积层通过卷积操作提取输入数据的特征。</p>
+<h3 id="卷积算法流程"><a class="header" href="#卷积算法流程">卷积算法流程</a></h3>
 <ol>
 <li>确定卷积核：选择或学习一个卷积核（滤波器）。</li>
 <li>卷积核中心定位：将卷积核中心对齐到输入数据的第一个位置。</li>
@@ -250,12 +249,12 @@ The convolution of two functions \( f(t) \) and \( g(t) \), denoted as \( (f * g
 <li>求和：将上一步得到的乘积求和，得到输出特征图的一个元素。</li>
 <li>滑动卷积核：将卷积核向右滑动一个元素宽度，重复步骤3和4。</li>
 </ol>
-<p>资料：</p>
+<h3 id="资料"><a class="header" href="#资料">资料</a></h3>
 <ol>
 <li><a href="https://www.zhihu.com/question/22298352">知乎 - 如何通俗易懂地解释卷积?</a></li>
 <li><a href="https://blog.csdn.net/weixin_43702653/article/details/123776987">CSDN - 卷积算法详解</a></li>
 </ol>
-<p>示例代码（C语言）：</p>
+<h3 id="示例代码c语言"><a class="header" href="#示例代码c语言">示例代码（C语言）</a></h3>
 <pre><code class="language-c">// 假设我们有一个输入矩阵 input 和一个卷积核 kernel，我们需要计算输出矩阵 output。
 void convolution2D(int inputRows, int inputCols, double input[inputRows][inputCols], 
                    int kernelRows, int kernelCols, double kernel[kernelRows][kernelCols], 
@@ -281,7 +280,7 @@ void convolution2D(int inputRows, int inputCols, double input[inputRows][inputCo
     }
 }
 </code></pre>
-<h2 id="13-矩阵转置"><a class="header" href="#13-矩阵转置">1.3 矩阵转置</a></h2>
+<h2 id="矩阵转置"><a class="header" href="#矩阵转置">矩阵转置</a></h2>
 <p>矩阵转置是指矩阵的行列互换，记作$A^T$，定义为：</p>
 <p>
         \[
@@ -297,7 +296,7 @@ void convolution2D(int inputRows, int inputCols, double input[inputRows][inputCo
     </p>
 <p>即为：
 对每一个i，j，将矩阵A的第i行的元素与第j列的元素进行交换。</p>
-<p>示例代码（C语言）：</p>
+<h3 id="示例代码c语言-1"><a class="header" href="#示例代码c语言-1">示例代码（C语言）</a></h3>
 <pre><code class="language-c">// 假设我们有一个矩阵 A，我们需要计算它的转置矩阵。
 void transpose(int m, int n, double A[m][n], double AT[n][m]) {
     for (int i = 0; i &lt; m; i++) {
@@ -307,7 +306,7 @@ void transpose(int m, int n, double A[m][n], double AT[n][m]) {
     }
 }
 </code></pre>
-<p>原地转置：</p>
+<h3 id="原地转置"><a class="header" href="#原地转置">原地转置</a></h3>
 <pre><code class="language-c">void transpose(int m, int n, double A[m][n]) {
     for (int i = 0; i &lt; m; i++) {
         for (int j = i + 1; j &lt; n; j++) {
@@ -327,16 +326,16 @@ void transpose(int m, int n, double A[m][n], double AT[n][m]) {
 <li>学会利用内核模块创建一个虚拟字符设备。</li>
 <li>了解如何通过数组参数传递给内核模块。</li>
 </ol>
-<h2 id="20-前提条件"><a class="header" href="#20-前提条件">2.0 前提条件</a></h2>
+<h2 id="前提条件"><a class="header" href="#前提条件">前提条件</a></h2>
 <p>要跟随本教程，您需要具备以下前提条件：</p>
 <ul>
 <li>熟练掌握C编程</li>
 <li>基本的Linux命令行知识</li>
 <li>已设置好Linux开发环境（例如，运行Linux发行版并安装了<code>make</code>和<code>gcc</code>）</li>
 </ul>
-<h2 id="21-内核模块简介"><a class="header" href="#21-内核模块简介">2.1 内核模块简介</a></h2>
+<h2 id="内核模块简介"><a class="header" href="#内核模块简介">内核模块简介</a></h2>
 <p>Linux内核模块（LKM）是一段代码，可以加载到内核中以扩展其功能，而无需重新启动系统。模块通常用于设备驱动程序，可以动态加载和卸载。</p>
-<h2 id="22-编写一个简单的内核模块"><a class="header" href="#22-编写一个简单的内核模块">2.2 编写一个简单的内核模块</a></h2>
+<h2 id="编写一个简单的内核模块"><a class="header" href="#编写一个简单的内核模块">编写一个简单的内核模块</a></h2>
 <p>从一个简单的“Hello, World!”内核模块开始，了解模块编程的基础。</p>
 <h3 id="hello_modulec"><a class="header" href="#hello_modulec">hello_module.c</a></h3>
 <pre><code class="language-c">#include &lt;linux/module.h&gt;  // Needed by all modules
@@ -395,7 +394,7 @@ clean:
 </code></pre>
 </li>
 </ol>
-<h2 id="23-内核模块传残"><a class="header" href="#23-内核模块传残">2.3 内核模块传残</a></h2>
+<h2 id="内核模块传残"><a class="header" href="#内核模块传残">内核模块传残</a></h2>
 <h3 id="param_modulec"><a class="header" href="#param_modulec">param_module.c</a></h3>
 <pre><code class="language-c">#include &lt;linux/module.h&gt;
 #include &lt;linux/kernel.h&gt;
@@ -428,7 +427,7 @@ MODULE_DESCRIPTION("A module with parameter passing");
 <pre><code class="language-bash">sudo insmod param_module.ko param_var=42
 dmesg | tail
 </code></pre>
-<h2 id="24-内核模块传入一个数组作为参数"><a class="header" href="#24-内核模块传入一个数组作为参数">2.4 内核模块传入一个数组作为参数</a></h2>
+<h2 id="内核模块传入一个数组作为参数"><a class="header" href="#内核模块传入一个数组作为参数">内核模块传入一个数组作为参数</a></h2>
 <p>Linux 内核模块可以接受数组作为参数，这对于配置和自定义模块行为非常有用。下面我们展示如何实现这一点。</p>
 <h3 id="array_param_modulec"><a class="header" href="#array_param_modulec">array_param_module.c</a></h3>
 <pre><code class="language-c">#include &lt;linux/module.h&gt;
@@ -476,7 +475,7 @@ sudo insmod array_param_module.ko array=1,2,3,4,5
 </code></pre>
 <h3 id="总结"><a class="header" href="#总结">总结</a></h3>
 <p>通过这种方式，您可以向内核模块传递数组参数，从而使模块更加灵活和可配置。这对于需要动态传递多个参数的情况非常有用。</p>
-<h2 id="25-创建虚拟字符设备"><a class="header" href="#25-创建虚拟字符设备">2.5 创建虚拟字符设备</a></h2>
+<h2 id="创建虚拟字符设备"><a class="header" href="#创建虚拟字符设备">创建虚拟字符设备</a></h2>
 <p>虚拟字符设备通过文件操作与用户空间应用程序交互。</p>
 <h3 id="virtual_char_devc"><a class="header" href="#virtual_char_devc">virtual_char_dev.c</a></h3>
 <pre><code class="language-c">#include &lt;linux/module.h&gt;
@@ -586,7 +585,7 @@ MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Your Name");
 MODULE_DESCRIPTION("A simple virtual character device");
 </code></pre>
-<h2 id="26-开始计时器"><a class="header" href="#26-开始计时器">2.6 开始计时器</a></h2>
+<h2 id="开始计时器"><a class="header" href="#开始计时器">开始计时器</a></h2>
 <p>计时器对于在内核空间中处理定时操作至关重要。</p>
 <h3 id="timer_modulec"><a class="header" href="#timer_modulec">timer_module.c</a></h3>
 <pre><code class="language-c">#include &lt;linux/module.h&gt;
@@ -624,7 +623,7 @@ MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Your Name");
 MODULE_DESCRIPTION("A simple timer module");
 </code></pre>
-<h2 id="27-实现简单的文件操作函数"><a class="header" href="#27-实现简单的文件操作函数">2.7 实现简单的文件操作函数</a></h2>
+<h2 id="实现简单的文件操作函数"><a class="header" href="#实现简单的文件操作函数">实现简单的文件操作函数</a></h2>
 <h3 id="filp_open"><a class="header" href="#filp_open">filp_open</a></h3>
 <p><code>filp_open</code> 用于在内核空间打开一个文件。</p>
 <h3 id="filp_open_examplec"><a class="header" href="#filp_open_examplec">filp_open_example.c</a></h3>
@@ -683,6 +682,12 @@ MODULE_DESCRIPTION("A module demonstrating filp_open");
 <li><a href="https://www.kernel.org/doc/html/latest/">Kernel API Documentation</a></li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="第三章-risc-v架构内联汇编"><a class="header" href="#第三章-risc-v架构内联汇编">第三章 RISC-V架构内联汇编</a></h1>
+<h2 id="本章要求-2"><a class="header" href="#本章要求-2">本章要求</a></h2>
+<ol>
+<li>了解RISC-V指令集的基本知识。</li>
+<li>了解RISC-V架构的特点，以及如何在C语言中使用内联汇编。</li>
+<li>掌握C语言中常见的控制结构的汇编表示方法。</li>
+</ol>
 <h2 id="介绍"><a class="header" href="#介绍">介绍</a></h2>
 <p>内联汇编允许在C语言代码中直接嵌入汇编指令，从而能够利用底层硬件特性来优化性能。本教程将介绍如何在RISC-V架构上使用内联汇编，涵盖RISC-V指令集的基础知识，以及如何将C语言中的常见控制结构用汇编表示。</p>
 <h2 id="risc-v指令集简介"><a class="header" href="#risc-v指令集简介">RISC-V指令集简介</a></h2>
@@ -852,6 +857,476 @@ asm volatile (
 <li><a href="https://riscvasm.com">Learn RISC-V Assembly</a></li>
 </ul>
 <p>通过本教程，你已经了解了如何在RISC-V架构上使用内联汇编，并掌握了将C语言中的控制结构转换为汇编代码的方法。希望这些内容对你在实际编程中有所帮助。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="第四章-操作系统常用算法上"><a class="header" href="#第四章-操作系统常用算法上">第四章 操作系统常用算法（上）</a></h1>
+<h2 id="本章要求-3"><a class="header" href="#本章要求-3">本章要求</a></h2>
+<ol>
+<li>了解操作系统中常用的页面置换算法。</li>
+<li>掌握FIFO页面置换算法的实现。</li>
+<li>掌握LRU页面置换算法的实现。</li>
+</ol>
+<h2 id="fifo-页面置换算法"><a class="header" href="#fifo-页面置换算法">FIFO 页面置换算法</a></h2>
+<h3 id="原理"><a class="header" href="#原理">原理</a></h3>
+<p>FIFO（First-In-First-Out）页面置换算法是一种最简单的页面置换算法。它将最早加载进内存的页面置换出去。换句话说，当需要一个新的页面时，最先进入内存的页面将被移除。</p>
+<h3 id="函数实现"><a class="header" href="#函数实现">函数实现</a></h3>
+<p>以下是FIFO页面置换算法的实现：</p>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+#define MAX_FRAMES 10
+
+void fifo_page_replacement(char *queue_frames, int num_frames) {
+    int frames[MAX_FRAMES];
+    int front = 0;
+    int rear = 0;
+    int size = 0;
+    int page_faults = 0;
+
+    for (int i = 0; i &lt; num_frames; i++) {
+        frames[i] = -1;  // 初始化页框为空
+    }
+
+    for (int i = 0; i &lt; strlen(queue_frames); i++) {
+        int page = queue_frames[i] - '0';
+        int found = 0;
+
+        // 检查页面是否已经在页框中
+        for (int j = 0; j &lt; size; j++) {
+            if (frames[j] == page) {
+                found = 1;
+                break;
+            }
+        }
+
+        // 页面不在页框中，需要置换
+        if (!found) {
+            page_faults++;
+            frames[rear] = page;
+            rear = (rear + 1) % num_frames;
+
+            // 如果页框未满，增加当前大小
+            if (size &lt; num_frames) {
+                size++;
+            }
+        }
+
+        // 打印当前页框状态
+        printf("Page %d: [", page);
+        for (int j = 0; j &lt; size; j++) {
+            printf("%d", frames[j]);
+            if (j &lt; size - 1) {
+                printf(" ");
+            }
+        }
+        printf("]\n");
+    }
+
+    printf("Total page faults: %d\n", page_faults);
+}
+
+int main() {
+    char queue_frames[] = "70120304230321201701";
+    int num_frames = 3;
+
+    fifo_page_replacement(queue_frames, num_frames);
+
+    return 0;
+}
+</code></pre>
+<h2 id="lru-页面置换算法"><a class="header" href="#lru-页面置换算法">LRU 页面置换算法</a></h2>
+<h3 id="原理-1"><a class="header" href="#原理-1">原理</a></h3>
+<p>LRU（Least Recently Used）页面置换算法根据页面最近使用的情况来决定置换哪一个页面。具体来说，它将最久未被使用的页面置换出去。</p>
+<h3 id="函数实现-1"><a class="header" href="#函数实现-1">函数实现</a></h3>
+<p>以下是LRU页面置换算法的实现：</p>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+#define MAX_FRAMES 100
+
+/**
+ * 函数：模拟LRU页面置换算法。
+ *
+ * @param queue_frames 一个字符串，表示页面访问序列。
+ *                     字符串中的每个字符是一个数字，表示一个页面号。
+ * @param num_frames   页框的数量，表示物理内存中可用的页框数。
+ */
+void lru_page_replacement(char *queue_frames, int num_frames) {
+    int frames[MAX_FRAMES];
+    int counter[MAX_FRAMES];
+    int time = 0;
+    int page_faults = 0;
+
+    for (int i = 0; i &lt; num_frames; i++) {
+        frames[i] = -1;  // 初始化页框为空
+        counter[i] = 0;  // 初始化计数器
+    }
+
+    for (int i = 0; i &lt; strlen(queue_frames); i++) {
+        int page = queue_frames[i] - '0';
+        int found = 0;
+
+        // 检查页面是否已经在页框中
+        for (int j = 0; j &lt; num_frames; j++) {
+            if (frames[j] == page) {
+                found = 1;
+                counter[j] = ++time;  // 更新页面使用时间
+                break;
+            }
+        }
+
+        // 页面不在页框中，需要置换
+        if (!found) {
+            page_faults++;
+            int lru_index = 0;
+            int lru_time = counter[0];
+
+            // 找到最久未使用的页面
+            for (int j = 1; j &lt; num_frames; j++) {
+                if (counter[j] &lt; lru_time) {
+                    lru_time = counter[j];
+                    lru_index = j;
+                }
+            }
+
+            frames[lru_index] = page;
+            counter[lru_index] = ++time;
+
+            // 打印当前页框状态
+            printf("Page %d: [", page);
+            for (int j = 0; j &lt; num_frames; j++) {
+                printf("%d", frames[j]);
+                if (j &lt; num_frames - 1) {
+                    printf(" ");
+                }
+            }
+            printf("]\n");
+        }
+    }
+
+    printf("Total page faults: %d\n", page_faults);
+}
+
+int main() {
+    char queue_frames[] = "70120304230321201701";
+    int num_frames = 3;
+
+    lru_page_replacement(queue_frames, num_frames);
+
+    return 0;
+}
+</code></pre>
+<p>这两个函数分别实现了FIFO和LRU页面置换算法。在每个函数中，<code>queue_frames</code>是页面访问序列，<code>num_frames</code>是可用的页框数。每次访问一个页面时，函数会检查该页面是否在页框中。如果不在，则需要置换一个页面。FIFO算法总是置换最早进入内存的页面，而LRU算法则置换最久未使用的页面。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="第五章-操作系统常用算法下"><a class="header" href="#第五章-操作系统常用算法下">第五章 操作系统常用算法（下）</a></h1>
+<h2 id="本章要求-4"><a class="header" href="#本章要求-4">本章要求</a></h2>
+<ul>
+<li>理解并实现时间片轮转调度算法。</li>
+</ul>
+<h2 id="模拟时间片轮转调度算法"><a class="header" href="#模拟时间片轮转调度算法">模拟时间片轮转调度算法</a></h2>
+<h3 id="原理-2"><a class="header" href="#原理-2">原理</a></h3>
+<p>时间片轮转（Round Robin, RR）是一种广泛使用的进程调度算法。其核心思想是将CPU时间划分成固定长度的时间片（time slices），并按顺序将这些时间片分配给就绪队列中的每个进程。每个进程在其时间片内运行，当时间片用完时，如果进程尚未完成，则将其置于就绪队列的末尾，等待下一轮调度。这样可以确保所有进程都能公平地获得CPU资源。</p>
+<h3 id="进程结构体"><a class="header" href="#进程结构体">进程结构体</a></h3>
+<p>进程结构体包含以下字段：</p>
+<ul>
+<li><code>pid</code>：进程ID，用于标识进程。</li>
+<li><code>arrival_time</code>：到达时间，进程进入系统的时间。</li>
+<li><code>burst_time</code>：运行时间，进程需要的总CPU时间。</li>
+<li><code>remaining_time</code>：剩余运行时间，用于记录进程还需要多少时间完成。</li>
+<li><code>completion_time</code>：完成时间，进程完成执行的时间。</li>
+<li><code>turnaround_time</code>：周转时间，进程从到达至完成所经历的总时间（完成时间 - 到达时间）。</li>
+<li><code>waiting_time</code>：等待时间，进程在就绪队列中等待的时间（周转时间 - 运行时间）。</li>
+</ul>
+<h3 id="输入数据"><a class="header" href="#输入数据">输入数据</a></h3>
+<p>时间片长度：4 个时间单位。<br />
+进程数量：4 个进程。<br />
+每个进程的到达时间和运行时间如下表所示：</p>
+<div class="table-wrapper"><table><thead><tr><th>进程ID</th><th>到达时间</th><th>运行时间</th></tr></thead><tbody>
+<tr><td>P1</td><td>0</td><td>10</td></tr>
+<tr><td>P2</td><td>1</td><td>6</td></tr>
+<tr><td>P3</td><td>2</td><td>8</td></tr>
+<tr><td>P4</td><td>3</td><td>4</td></tr>
+</tbody></table>
+</div>
+<h3 id="计算方法"><a class="header" href="#计算方法">计算方法</a></h3>
+<h4 id="calculatetime-函数"><a class="header" href="#calculatetime-函数">calculateTime 函数</a></h4>
+<p>该函数将模拟时间片轮转调度算法，并计算每个进程的完成时间、周转时间和等待时间。</p>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+
+typedef struct {
+    int pid;               // 进程ID
+    int arrival_time;      // 到达时间
+    int burst_time;        // 运行时间
+    int remaining_time;    // 剩余运行时间
+    int completion_time;   // 完成时间
+    int turnaround_time;   // 周转时间
+    int waiting_time;      // 等待时间
+} Process;
+
+#define TIME_SLICE 4
+#define NUM_PROCESSES 4
+
+void calculateTime(Process processes[], int n) {
+    int time = 0;
+    int completed = 0;
+
+    while (completed &lt; n) {
+        for (int i = 0; i &lt; n; i++) {
+            if (processes[i].arrival_time &lt;= time &amp;&amp; processes[i].remaining_time &gt; 0) {
+                if (processes[i].remaining_time &lt;= TIME_SLICE) {
+                    time += processes[i].remaining_time;
+                    processes[i].remaining_time = 0;
+                    processes[i].completion_time = time;
+                    processes[i].turnaround_time = processes[i].completion_time - processes[i].arrival_time;
+                    processes[i].waiting_time = processes[i].turnaround_time - processes[i].burst_time;
+                    completed++;
+                } else {
+                    time += TIME_SLICE;
+                    processes[i].remaining_time -= TIME_SLICE;
+                }
+            }
+        }
+    }
+}
+
+int main() {
+    Process processes[NUM_PROCESSES] = {
+        {1, 0, 10, 10, 0, 0, 0},
+        {2, 1, 6, 6, 0, 0, 0},
+        {3, 2, 8, 8, 0, 0, 0},
+        {4, 3, 4, 4, 0, 0, 0}
+    };
+
+    calculateTime(processes, NUM_PROCESSES);
+
+    for (int i = 0; i &lt; NUM_PROCESSES; i++) {
+        printf("P%d 完成时间: %d, 周转时间: %d, 等待时间: %d\n",
+               processes[i].pid,
+               processes[i].completion_time,
+               processes[i].turnaround_time,
+               processes[i].waiting_time);
+    }
+
+    return 0;
+}
+</code></pre>
+<h3 id="输出结果"><a class="header" href="#输出结果">输出结果</a></h3>
+<p>根据输入数据和时间片轮转调度算法的规则，输出结果如下：</p>
+<pre><code>P1 完成时间: 28, 周转时间: 28, 等待时间: 18
+P2 完成时间: 22, 周转时间: 21, 等待时间: 15
+P3 完成时间: 26, 周转时间: 24, 等待时间: 16
+P4 完成时间: 16, 周转时间: 13, 等待时间: 9
+</code></pre>
+<h3 id="结论-1"><a class="header" href="#结论-1">结论</a></h3>
+<p>通过时间片轮转调度算法，每个进程都能公平地获得CPU资源，并且算法能够计算出每个进程的完成时间、周转时间和等待时间。这对于实现操作系统中的进程调度是非常重要的。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="第六章-linux系统编程基础"><a class="header" href="#第六章-linux系统编程基础">第六章 Linux系统编程基础</a></h1>
+<h2 id="本章要求-5"><a class="header" href="#本章要求-5">本章要求</a></h2>
+<ol>
+<li>了解Linux系统编程的基本概念，包括进程、线程、内存管理、文件系统接口等。</li>
+<li>掌握Linux系统编程的基本技术，包括获取主机名、设置程序内存上限、使用<code>fork</code>创建子进程、通过管道进行进程间通讯等。</li>
+<li>能够编写简单的Linux系统编程程序。</li>
+</ol>
+<h2 id="介绍-1"><a class="header" href="#介绍-1">介绍</a></h2>
+<p>Linux系统编程涉及使用C语言与操作系统进行直接交互。本文将详细介绍一些基本的Linux系统编程技术，并通过示例代码展示如何获取主机名、设置程序内存上限、使用<code>fork</code>创建子进程，以及通过管道进行进程间通讯。</p>
+<h2 id="获取主机名"><a class="header" href="#获取主机名">获取主机名</a></h2>
+<h3 id="gethostname函数"><a class="header" href="#gethostname函数"><code>gethostname</code>函数</a></h3>
+<p><code>gethostname</code>函数用于获取当前主机的名称。它的原型如下：</p>
+<pre><code class="language-c">#include &lt;unistd.h&gt;
+int gethostname(char *name, size_t len);
+</code></pre>
+<h3 id="示例代码"><a class="header" href="#示例代码">示例代码</a></h3>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;limits.h&gt;
+
+int main() {
+    char hostname[HOST_NAME_MAX];
+    
+    if (gethostname(hostname, sizeof(hostname)) == -1) {
+        perror("gethostname");
+        return 1;
+    }
+
+    printf("Hostname: %s\n", hostname);
+    return 0;
+}
+</code></pre>
+<h2 id="使用rlimit设置程序内存上限"><a class="header" href="#使用rlimit设置程序内存上限">使用<code>rlimit</code>设置程序内存上限</a></h2>
+<h3 id="setrlimit函数"><a class="header" href="#setrlimit函数"><code>setrlimit</code>函数</a></h3>
+<p><code>setrlimit</code>函数用于设置进程的资源限制。它的原型如下：</p>
+<pre><code class="language-c">#include &lt;sys/resource.h&gt;
+int setrlimit(int resource, const struct rlimit *rlim);
+</code></pre>
+<h3 id="示例代码-1"><a class="header" href="#示例代码-1">示例代码</a></h3>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;sys/resource.h&gt;
+
+int main() {
+    struct rlimit rl;
+    
+    // 设置程序的内存上限为128MB
+    rl.rlim_cur = 128 * 1024 * 1024;
+    rl.rlim_max = 128 * 1024 * 1024;
+    
+    if (setrlimit(RLIMIT_AS, &amp;rl) == -1) {
+        perror("setrlimit");
+        return 1;
+    }
+
+    printf("Memory limit set to 128MB\n");
+    return 0;
+}
+</code></pre>
+<h2 id="fork函数创建子进程"><a class="header" href="#fork函数创建子进程"><code>fork</code>函数创建子进程</a></h2>
+<h3 id="fork函数"><a class="header" href="#fork函数"><code>fork</code>函数</a></h3>
+<p><code>fork</code>函数用于创建一个子进程。它的原型如下：</p>
+<pre><code class="language-c">#include &lt;unistd.h&gt;
+pid_t fork(void);
+</code></pre>
+<h3 id="示例代码-2"><a class="header" href="#示例代码-2">示例代码</a></h3>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+
+int main() {
+    pid_t pid = fork();
+
+    if (pid == -1) {
+        perror("fork");
+        return 1;
+    } else if (pid == 0) {
+        // 子进程
+        printf("Hello from the child process!\n");
+    } else {
+        // 父进程
+        printf("Hello from the parent process!\n");
+    }
+
+    return 0;
+}
+</code></pre>
+<h2 id="管道与进程间通讯"><a class="header" href="#管道与进程间通讯">管道与进程间通讯</a></h2>
+<h3 id="pipe函数"><a class="header" href="#pipe函数"><code>pipe</code>函数</a></h3>
+<p><code>pipe</code>函数用于创建一个管道，管道是进程间通讯的一种方式。它的原型如下：</p>
+<pre><code class="language-c">#include &lt;unistd.h&gt;
+int pipe(int pipefd[2]);
+</code></pre>
+<h3 id="示例代码-3"><a class="header" href="#示例代码-3">示例代码</a></h3>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;string.h&gt;
+
+int main() {
+    int pipefd[2];
+    char buffer[128];
+
+    if (pipe(pipefd) == -1) {
+        perror("pipe");
+        return 1;
+    }
+
+    pid_t pid = fork();
+
+    if (pid == -1) {
+        perror("fork");
+        return 1;
+    } else if (pid == 0) {
+        // 子进程
+        close(pipefd[0]); // 关闭读端
+        char message[] = "Hello from the child process!";
+        write(pipefd[1], message, strlen(message));
+        close(pipefd[1]); // 关闭写端
+    } else {
+        // 父进程
+        close(pipefd[1]); // 关闭写端
+        read(pipefd[0], buffer, sizeof(buffer));
+        printf("Parent received: %s\n", buffer);
+        close(pipefd[0]); // 关闭读端
+    }
+
+    return 0;
+}
+</code></pre>
+<h2 id="资料-1"><a class="header" href="#资料-1">资料</a></h2>
+<p>学习Linux系统编程的相关资料和教程非常丰富，以下是一些推荐的资源：</p>
+<h3 id="书籍"><a class="header" href="#书籍">书籍</a></h3>
+<ol>
+<li>
+<p><strong>《UNIX环境高级编程》</strong>（Advanced Programming in the UNIX Environment） - 作者：W. Richard Stevens</p>
+<ul>
+<li>这本书被誉为UNIX编程的经典之作，详细介绍了UNIX系统编程的各个方面，是深入学习Linux编程的必备书籍。</li>
+</ul>
+</li>
+<li>
+<p><strong>《Linux系统编程》</strong>（Linux System Programming） - 作者：Robert Love</p>
+<ul>
+<li>本书专门介绍了Linux系统编程的基础和高级主题，涵盖了文件I/O、进程控制、线程和同步、网络编程等内容。</li>
+</ul>
+</li>
+<li>
+<p><strong>《深入理解Linux内核》</strong>（Understanding the Linux Kernel） - 作者：Daniel P. Bovet, Marco Cesati</p>
+<ul>
+<li>这本书深入解析了Linux内核的各个子系统和模块，对理解Linux系统的工作原理非常有帮助。</li>
+</ul>
+</li>
+</ol>
+<h3 id="在线教程和文档"><a class="header" href="#在线教程和文档">在线教程和文档</a></h3>
+<ol>
+<li>
+<p><strong>The Linux Programming Interface</strong> - 作者：Michael Kerrisk</p>
+<ul>
+<li>该书的官方网站提供了部分章节的在线阅读和示例代码，详细讲解了Linux编程接口。</li>
+</ul>
+</li>
+<li>
+<p><a href="https://www.gnu.org/software/libc/manual/"><strong>GNU C Library Documentation</strong></a></p>
+<ul>
+<li>官方文档详细介绍了GNU C库中的各个函数和数据结构，是查阅具体函数用法的权威资料。</li>
+</ul>
+</li>
+<li>
+<p><strong>Linux Manual Pages (man pages)</strong></p>
+<ul>
+<li>Linux系统自带的手册页提供了大量函数和命令的使用说明，使用<code>man</code>命令可以方便地查阅。</li>
+<li>例如，<code>man 2 fork</code> 可以查看<code>fork</code>系统调用的详细信息。</li>
+</ul>
+</li>
+</ol>
+<h3 id="在线课程"><a class="header" href="#在线课程">在线课程</a></h3>
+<ol>
+<li>
+<p><a href="(https://www.coursera.org/learn/os-power-user)"><strong>Coursera: "Operating Systems and You: Becoming a Power User"</strong></a></p>
+<ul>
+<li>这门课程由谷歌提供，介绍了Linux操作系统的基本使用和系统编程的基本概念。</li>
+</ul>
+</li>
+<li>
+<p><a href="https://www.udacity.com/course/linux-system-programming--ud923"><strong>Udacity: "Linux System Programming"</strong></a></p>
+<ul>
+<li>这门课程提供了Linux系统编程的入门知识，适合初学者学习。</li>
+</ul>
+</li>
+</ol>
+<h3 id="社区和论坛"><a class="header" href="#社区和论坛">社区和论坛</a></h3>
+<ol>
+<li>
+<p><a href="https://stackoverflow.com/"><strong>Stack Overflow</strong></a></p>
+<ul>
+<li>Stack Overflow是一个大型编程问答社区，里面有大量关于Linux系统编程的问答，搜索具体问题时可以找到许多有用的答案。</li>
+</ul>
+</li>
+<li>
+<p><a href="https://www.reddit.com/r/linux/"><strong>Reddit: r/linux</strong></a></p>
+<ul>
+<li>Reddit的Linux板块讨论Linux系统相关的各种话题，包括系统编程，里面有很多经验丰富的用户可以提供帮助。</li>
+</ul>
+</li>
+</ol>
+<h3 id="实验和实践"><a class="header" href="#实验和实践">实验和实践</a></h3>
+<ol>
+<li><a href="http://www.linuxfromscratch.org/lfs/"><strong>Linux From Scratch (LFS)</strong></a>
+<ul>
+<li>通过从零开始构建一个Linux系统，可以深入理解Linux的各个组件和编程接口。</li>
+</ul>
+</li>
+</ol>
 
                     </main>
 

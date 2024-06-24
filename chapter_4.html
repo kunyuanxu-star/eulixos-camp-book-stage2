@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>第一章 矩阵与卷积算法 - 第一期傲来操作系统训练营进阶阶段学习引导</title>
+        <title>第四章 操作系统常用算法（上） - 第一期傲来操作系统训练营进阶阶段学习引导</title>
 
 
         <!-- Custom HTML head -->
@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html" class="active"><strong aria-hidden="true">1.</strong> 第一章 矩阵与卷积算法</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> 第二章 Linux内核模块</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> 第三章 RISC-V架构内联汇编</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> 第四章 操作系统常用算法（上）</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> 第五章 操作系统常用算法（下）</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> 第六章 Linux系统编程基础</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> 第一章 矩阵与卷积算法</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> 第二章 Linux内核模块</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> 第三章 RISC-V架构内联汇编</a></li><li class="chapter-item expanded "><a href="chapter_4.html" class="active"><strong aria-hidden="true">4.</strong> 第四章 操作系统常用算法（上）</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> 第五章 操作系统常用算法（下）</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> 第六章 Linux系统编程基础</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -173,156 +173,175 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="第一章-矩阵与卷积算法"><a class="header" href="#第一章-矩阵与卷积算法">第一章 矩阵与卷积算法</a></h1>
+                        <h1 id="第四章-操作系统常用算法上"><a class="header" href="#第四章-操作系统常用算法上">第四章 操作系统常用算法（上）</a></h1>
 <h2 id="本章要求"><a class="header" href="#本章要求">本章要求</a></h2>
 <ol>
-<li>了解矩阵乘法和卷积算法。</li>
-<li>掌握矩阵转置的概念。</li>
-<li>学会通过编程实现矩阵乘法和卷积算法。</li>
+<li>了解操作系统中常用的页面置换算法。</li>
+<li>掌握FIFO页面置换算法的实现。</li>
+<li>掌握LRU页面置换算法的实现。</li>
 </ol>
-<h2 id="矩阵与线性代数"><a class="header" href="#矩阵与线性代数">矩阵与线性代数</a></h2>
-<p>-矩阵乘法是线性代数的基本运算，它可以用来表示和操作向量、矩阵、张量等数学对象。矩阵的加法、减法、乘法、除法、转置、行列式、特征值、特征向量等运算都是线性代数的基本概念。</p>
-<p>矩阵乘算法流程如下：</p>
-<ol>
-<li>确定输入矩阵的维度。</li>
-<li>确定输出矩阵的维度。</li>
-<li>按照输出矩阵的维度，将输入矩阵的行向量依次与输出矩阵的列向量进行矩阵乘法运算，得到输出矩阵的相应元素。</li>
-<li>输出矩阵的元素即为输入矩阵与输出矩阵的乘积。</li>
-</ol>
-<p>伪代码如下</p>
-<ol>
-<li>输入矩阵 A 的维度为 m * n，输出矩阵 B 的维度为 p * q。</li>
-<li>对于 i = 1 to p，j = 1 to q，执行以下操作：
-<ul>
-<li>对于 k = 1 to n，执行以下操作：
-<ul>
-<li>计算 A(i, k) * B(k, j) 并将结果累加到 C(i, j) 中。</li>
-</ul>
-</li>
-<li>输出矩阵 C 的元素即为输入矩阵 A 和输出矩阵 B 的卷积。</li>
-</ul>
-</li>
-</ol>
-<p>示例代码（C语言）：</p>
-<pre><code class="language-c">// 假设我们有两个矩阵A和B，它们的尺寸分别为 m x n 和 n x p，矩阵C是结果矩阵，尺寸为 m x p。
-void matrix_multiply(int m, int n, int p, double A[m][n], double B[n][p], double C[m][p]) {
-    for (int i = 0; i &lt; m; i++) {
-        for (int j = 0; j &lt; p; j++) {
-            C[i][j] = 0;
-            for (int k = 0; k &lt; n; k++) {
-                C[i][j] += A[i][k] * B[k][j];
+<h2 id="fifo-页面置换算法"><a class="header" href="#fifo-页面置换算法">FIFO 页面置换算法</a></h2>
+<h3 id="原理"><a class="header" href="#原理">原理</a></h3>
+<p>FIFO（First-In-First-Out）页面置换算法是一种最简单的页面置换算法。它将最早加载进内存的页面置换出去。换句话说，当需要一个新的页面时，最先进入内存的页面将被移除。</p>
+<h3 id="函数实现"><a class="header" href="#函数实现">函数实现</a></h3>
+<p>以下是FIFO页面置换算法的实现：</p>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+#define MAX_FRAMES 10
+
+void fifo_page_replacement(char *queue_frames, int num_frames) {
+    int frames[MAX_FRAMES];
+    int front = 0;
+    int rear = 0;
+    int size = 0;
+    int page_faults = 0;
+
+    for (int i = 0; i &lt; num_frames; i++) {
+        frames[i] = -1;  // 初始化页框为空
+    }
+
+    for (int i = 0; i &lt; strlen(queue_frames); i++) {
+        int page = queue_frames[i] - '0';
+        int found = 0;
+
+        // 检查页面是否已经在页框中
+        for (int j = 0; j &lt; size; j++) {
+            if (frames[j] == page) {
+                found = 1;
+                break;
             }
         }
+
+        // 页面不在页框中，需要置换
+        if (!found) {
+            page_faults++;
+            frames[rear] = page;
+            rear = (rear + 1) % num_frames;
+
+            // 如果页框未满，增加当前大小
+            if (size &lt; num_frames) {
+                size++;
+            }
+        }
+
+        // 打印当前页框状态
+        printf("Page %d: [", page);
+        for (int j = 0; j &lt; size; j++) {
+            printf("%d", frames[j]);
+            if (j &lt; size - 1) {
+                printf(" ");
+            }
+        }
+        printf("]\n");
     }
+
+    printf("Total page faults: %d\n", page_faults);
+}
+
+int main() {
+    char queue_frames[] = "70120304230321201701";
+    int num_frames = 3;
+
+    fifo_page_replacement(queue_frames, num_frames);
+
+    return 0;
 }
 </code></pre>
-<h2 id="卷积算法"><a class="header" href="#卷积算法">卷积算法</a></h2>
-<p>卷积算法是一种在信号处理、图像处理、机器学习等领域广泛使用的数学运算。它涉及到两个函数的卷积，通常用来分析一个信号或函数与另一个信号或函数的相似度。在深度学习中，卷积神经网络（CNN）就是基于卷积算法构建的。</p>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-<p>
-The convolution of two functions \( f(t) \) and \( g(t) \), denoted as \( (f * g)(t) \), is defined as:
-</p>
-<p>
-\[
-        (f * g)(t) = \int_{-\infty}^{\infty} f(\tau) g(t - \tau) \, d\tau
-        \]
-</p>
-<p>其中，τ是积分变量，t是时间或空间的坐标。</p>
-<p>在离散情况下，卷积定义为：</p>
-<p>
-        \[
-        (f * g)(n) = \sum_{m=-\infty}^{\infty} f(m) g(n - m)
-        \]
-    </p>
-这里的f(m)和g(m)是离散信号的值。
-<h3 id="卷积的应用"><a class="header" href="#卷积的应用">卷积的应用</a></h3>
-<p>信号处理：用于滤波、平滑、特征提取等。
-图像处理：用于边缘检测、图像平滑、特征提取等。
-机器学习：在卷积神经网络中，卷积层通过卷积操作提取输入数据的特征。</p>
-<h3 id="卷积算法流程"><a class="header" href="#卷积算法流程">卷积算法流程</a></h3>
-<ol>
-<li>确定卷积核：选择或学习一个卷积核（滤波器）。</li>
-<li>卷积核中心定位：将卷积核中心对齐到输入数据的第一个位置。</li>
-<li>元素乘积：计算卷积核和输入数据对应位置的元素乘积。</li>
-<li>求和：将上一步得到的乘积求和，得到输出特征图的一个元素。</li>
-<li>滑动卷积核：将卷积核向右滑动一个元素宽度，重复步骤3和4。</li>
-</ol>
-<h3 id="资料"><a class="header" href="#资料">资料</a></h3>
-<ol>
-<li><a href="https://www.zhihu.com/question/22298352">知乎 - 如何通俗易懂地解释卷积?</a></li>
-<li><a href="https://blog.csdn.net/weixin_43702653/article/details/123776987">CSDN - 卷积算法详解</a></li>
-</ol>
-<h3 id="示例代码c语言"><a class="header" href="#示例代码c语言">示例代码（C语言）</a></h3>
-<pre><code class="language-c">// 假设我们有一个输入矩阵 input 和一个卷积核 kernel，我们需要计算输出矩阵 output。
-void convolution2D(int inputRows, int inputCols, double input[inputRows][inputCols], 
-                   int kernelRows, int kernelCols, double kernel[kernelRows][kernelCols], 
-                   double output[inputRows][inputCols]) {
-    int kernelCenterX = kernelCols / 2;
-    int kernelCenterY = kernelRows / 2;
+<h2 id="lru-页面置换算法"><a class="header" href="#lru-页面置换算法">LRU 页面置换算法</a></h2>
+<h3 id="原理-1"><a class="header" href="#原理-1">原理</a></h3>
+<p>LRU（Least Recently Used）页面置换算法根据页面最近使用的情况来决定置换哪一个页面。具体来说，它将最久未被使用的页面置换出去。</p>
+<h3 id="函数实现-1"><a class="header" href="#函数实现-1">函数实现</a></h3>
+<p>以下是LRU页面置换算法的实现：</p>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
 
-    for (int i = 0; i &lt; inputRows; ++i) {
-        for (int j = 0; j &lt; inputCols; ++j) {
-            output[i][j] = 0; // 初始化输出矩阵
-            for (int m = 0; m &lt; kernelRows; ++m) {
-                for (int n = 0; n &lt; kernelCols; ++n) {
-                    int ii = i + (m - kernelCenterY);
-                    int jj = j + (n - kernelCenterX);
+#define MAX_FRAMES 100
 
-                    // 检查是否越界
-                    if (ii &gt;= 0 &amp;&amp; ii &lt; inputRows &amp;&amp; jj &gt;= 0 &amp;&amp; jj &lt; inputCols) {
-                        output[i][j] += input[ii][jj] * kernel[m][n];
-                    }
+/**
+ * 函数：模拟LRU页面置换算法。
+ *
+ * @param queue_frames 一个字符串，表示页面访问序列。
+ *                     字符串中的每个字符是一个数字，表示一个页面号。
+ * @param num_frames   页框的数量，表示物理内存中可用的页框数。
+ */
+void lru_page_replacement(char *queue_frames, int num_frames) {
+    int frames[MAX_FRAMES];
+    int counter[MAX_FRAMES];
+    int time = 0;
+    int page_faults = 0;
+
+    for (int i = 0; i &lt; num_frames; i++) {
+        frames[i] = -1;  // 初始化页框为空
+        counter[i] = 0;  // 初始化计数器
+    }
+
+    for (int i = 0; i &lt; strlen(queue_frames); i++) {
+        int page = queue_frames[i] - '0';
+        int found = 0;
+
+        // 检查页面是否已经在页框中
+        for (int j = 0; j &lt; num_frames; j++) {
+            if (frames[j] == page) {
+                found = 1;
+                counter[j] = ++time;  // 更新页面使用时间
+                break;
+            }
+        }
+
+        // 页面不在页框中，需要置换
+        if (!found) {
+            page_faults++;
+            int lru_index = 0;
+            int lru_time = counter[0];
+
+            // 找到最久未使用的页面
+            for (int j = 1; j &lt; num_frames; j++) {
+                if (counter[j] &lt; lru_time) {
+                    lru_time = counter[j];
+                    lru_index = j;
                 }
             }
+
+            frames[lru_index] = page;
+            counter[lru_index] = ++time;
+
+            // 打印当前页框状态
+            printf("Page %d: [", page);
+            for (int j = 0; j &lt; num_frames; j++) {
+                printf("%d", frames[j]);
+                if (j &lt; num_frames - 1) {
+                    printf(" ");
+                }
+            }
+            printf("]\n");
         }
     }
+
+    printf("Total page faults: %d\n", page_faults);
+}
+
+int main() {
+    char queue_frames[] = "70120304230321201701";
+    int num_frames = 3;
+
+    lru_page_replacement(queue_frames, num_frames);
+
+    return 0;
 }
 </code></pre>
-<h2 id="矩阵转置"><a class="header" href="#矩阵转置">矩阵转置</a></h2>
-<p>矩阵转置是指矩阵的行列互换，记作$A^T$，定义为：</p>
-<p>
-        \[
-        A^T = [a_{ij}]_{m\times n} = \left[
-        \begin{array}{cccc}
-        a_{11} & a_{12} & \cdots & a_{1n} \\
-        a_{21} & a_{22} & \cdots & a_{2n} \\
-        \vdots & \vdots & \ddots & \vdots \\
-        a_{m1} & a_{m2} & \cdots & a_{mn}
-        \end{array}
-        \right]
-        \]
-    </p>
-<p>即为：
-对每一个i，j，将矩阵A的第i行的元素与第j列的元素进行交换。</p>
-<h3 id="示例代码c语言-1"><a class="header" href="#示例代码c语言-1">示例代码（C语言）</a></h3>
-<pre><code class="language-c">// 假设我们有一个矩阵 A，我们需要计算它的转置矩阵。
-void transpose(int m, int n, double A[m][n], double AT[n][m]) {
-    for (int i = 0; i &lt; m; i++) {
-        for (int j = 0; j &lt; n; j++) {
-            AT[j][i] = A[i][j];
-        }
-    }
-}
-</code></pre>
-<h3 id="原地转置"><a class="header" href="#原地转置">原地转置</a></h3>
-<pre><code class="language-c">void transpose(int m, int n, double A[m][n]) {
-    for (int i = 0; i &lt; m; i++) {
-        for (int j = i + 1; j &lt; n; j++) {
-            double temp = A[i][j];
-            A[i][j] = A[j][i];
-            A[j][i] = temp;
-        }
-    }
-}
-</code></pre>
+<p>这两个函数分别实现了FIFO和LRU页面置换算法。在每个函数中，<code>queue_frames</code>是页面访问序列，<code>num_frames</code>是可用的页框数。每次访问一个页面时，函数会检查该页面是否在页框中。如果不在，则需要置换一个页面。FIFO算法总是置换最早进入内存的页面，而LRU算法则置换最久未使用的页面。</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="chapter_3.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
 
-                            <a rel="next prefetch" href="chapter_2.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="chapter_5.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -332,8 +351,11 @@ void transpose(int m, int n, double A[m][n], double AT[n][m]) {
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="chapter_3.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
 
-                    <a rel="next prefetch" href="chapter_2.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="chapter_5.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

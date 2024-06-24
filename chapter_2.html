@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> 第一章 矩阵与卷积算法</a></li><li class="chapter-item expanded "><a href="chapter_2.html" class="active"><strong aria-hidden="true">2.</strong> 第二章 Linux内核模块</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> 第三章 RISC-V架构内联汇编</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> 第一章 矩阵与卷积算法</a></li><li class="chapter-item expanded "><a href="chapter_2.html" class="active"><strong aria-hidden="true">2.</strong> 第二章 Linux内核模块</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> 第三章 RISC-V架构内联汇编</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> 第四章 操作系统常用算法（上）</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> 第五章 操作系统常用算法（下）</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> 第六章 Linux系统编程基础</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -182,16 +182,16 @@
 <li>学会利用内核模块创建一个虚拟字符设备。</li>
 <li>了解如何通过数组参数传递给内核模块。</li>
 </ol>
-<h2 id="20-前提条件"><a class="header" href="#20-前提条件">2.0 前提条件</a></h2>
+<h2 id="前提条件"><a class="header" href="#前提条件">前提条件</a></h2>
 <p>要跟随本教程，您需要具备以下前提条件：</p>
 <ul>
 <li>熟练掌握C编程</li>
 <li>基本的Linux命令行知识</li>
 <li>已设置好Linux开发环境（例如，运行Linux发行版并安装了<code>make</code>和<code>gcc</code>）</li>
 </ul>
-<h2 id="21-内核模块简介"><a class="header" href="#21-内核模块简介">2.1 内核模块简介</a></h2>
+<h2 id="内核模块简介"><a class="header" href="#内核模块简介">内核模块简介</a></h2>
 <p>Linux内核模块（LKM）是一段代码，可以加载到内核中以扩展其功能，而无需重新启动系统。模块通常用于设备驱动程序，可以动态加载和卸载。</p>
-<h2 id="22-编写一个简单的内核模块"><a class="header" href="#22-编写一个简单的内核模块">2.2 编写一个简单的内核模块</a></h2>
+<h2 id="编写一个简单的内核模块"><a class="header" href="#编写一个简单的内核模块">编写一个简单的内核模块</a></h2>
 <p>从一个简单的“Hello, World!”内核模块开始，了解模块编程的基础。</p>
 <h3 id="hello_modulec"><a class="header" href="#hello_modulec">hello_module.c</a></h3>
 <pre><code class="language-c">#include &lt;linux/module.h&gt;  // Needed by all modules
@@ -250,7 +250,7 @@ clean:
 </code></pre>
 </li>
 </ol>
-<h2 id="23-内核模块传残"><a class="header" href="#23-内核模块传残">2.3 内核模块传残</a></h2>
+<h2 id="内核模块传残"><a class="header" href="#内核模块传残">内核模块传残</a></h2>
 <h3 id="param_modulec"><a class="header" href="#param_modulec">param_module.c</a></h3>
 <pre><code class="language-c">#include &lt;linux/module.h&gt;
 #include &lt;linux/kernel.h&gt;
@@ -283,7 +283,7 @@ MODULE_DESCRIPTION("A module with parameter passing");
 <pre><code class="language-bash">sudo insmod param_module.ko param_var=42
 dmesg | tail
 </code></pre>
-<h2 id="24-内核模块传入一个数组作为参数"><a class="header" href="#24-内核模块传入一个数组作为参数">2.4 内核模块传入一个数组作为参数</a></h2>
+<h2 id="内核模块传入一个数组作为参数"><a class="header" href="#内核模块传入一个数组作为参数">内核模块传入一个数组作为参数</a></h2>
 <p>Linux 内核模块可以接受数组作为参数，这对于配置和自定义模块行为非常有用。下面我们展示如何实现这一点。</p>
 <h3 id="array_param_modulec"><a class="header" href="#array_param_modulec">array_param_module.c</a></h3>
 <pre><code class="language-c">#include &lt;linux/module.h&gt;
@@ -331,7 +331,7 @@ sudo insmod array_param_module.ko array=1,2,3,4,5
 </code></pre>
 <h3 id="总结"><a class="header" href="#总结">总结</a></h3>
 <p>通过这种方式，您可以向内核模块传递数组参数，从而使模块更加灵活和可配置。这对于需要动态传递多个参数的情况非常有用。</p>
-<h2 id="25-创建虚拟字符设备"><a class="header" href="#25-创建虚拟字符设备">2.5 创建虚拟字符设备</a></h2>
+<h2 id="创建虚拟字符设备"><a class="header" href="#创建虚拟字符设备">创建虚拟字符设备</a></h2>
 <p>虚拟字符设备通过文件操作与用户空间应用程序交互。</p>
 <h3 id="virtual_char_devc"><a class="header" href="#virtual_char_devc">virtual_char_dev.c</a></h3>
 <pre><code class="language-c">#include &lt;linux/module.h&gt;
@@ -441,7 +441,7 @@ MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Your Name");
 MODULE_DESCRIPTION("A simple virtual character device");
 </code></pre>
-<h2 id="26-开始计时器"><a class="header" href="#26-开始计时器">2.6 开始计时器</a></h2>
+<h2 id="开始计时器"><a class="header" href="#开始计时器">开始计时器</a></h2>
 <p>计时器对于在内核空间中处理定时操作至关重要。</p>
 <h3 id="timer_modulec"><a class="header" href="#timer_modulec">timer_module.c</a></h3>
 <pre><code class="language-c">#include &lt;linux/module.h&gt;
@@ -479,7 +479,7 @@ MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Your Name");
 MODULE_DESCRIPTION("A simple timer module");
 </code></pre>
-<h2 id="27-实现简单的文件操作函数"><a class="header" href="#27-实现简单的文件操作函数">2.7 实现简单的文件操作函数</a></h2>
+<h2 id="实现简单的文件操作函数"><a class="header" href="#实现简单的文件操作函数">实现简单的文件操作函数</a></h2>
 <h3 id="filp_open"><a class="header" href="#filp_open">filp_open</a></h3>
 <p><code>filp_open</code> 用于在内核空间打开一个文件。</p>
 <h3 id="filp_open_examplec"><a class="header" href="#filp_open_examplec">filp_open_example.c</a></h3>
