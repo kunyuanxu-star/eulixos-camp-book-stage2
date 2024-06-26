@@ -1,115 +1,205 @@
-# 第五章 操作系统常用算法（下）
+# 第五章 Linux系统编程基础
 
 ## 本章要求
 
-- 理解并实现时间片轮转调度算法。
+1. 了解Linux系统编程的基本概念，包括进程、线程、内存管理、文件系统接口等。
+2. 掌握Linux系统编程的基本技术，包括获取主机名、设置程序内存上限、使用`fork`创建子进程、通过管道进行进程间通讯等。
+3. 能够编写简单的Linux系统编程程序。
 
-## 模拟时间片轮转调度算法
+## 介绍
 
-### 原理
-时间片轮转（Round Robin, RR）是一种广泛使用的进程调度算法。其核心思想是将CPU时间划分成固定长度的时间片（time slices），并按顺序将这些时间片分配给就绪队列中的每个进程。每个进程在其时间片内运行，当时间片用完时，如果进程尚未完成，则将其置于就绪队列的末尾，等待下一轮调度。这样可以确保所有进程都能公平地获得CPU资源。
+Linux系统编程涉及使用C语言与操作系统进行直接交互。本文将详细介绍一些基本的Linux系统编程技术，并通过示例代码展示如何获取主机名、设置程序内存上限、使用`fork`创建子进程，以及通过管道进行进程间通讯。
 
-### 进程结构体
+## 获取主机名
 
-进程结构体包含以下字段：
+### `gethostname`函数
 
-- `pid`：进程ID，用于标识进程。
-- `arrival_time`：到达时间，进程进入系统的时间。
-- `burst_time`：运行时间，进程需要的总CPU时间。
-- `remaining_time`：剩余运行时间，用于记录进程还需要多少时间完成。
-- `completion_time`：完成时间，进程完成执行的时间。
-- `turnaround_time`：周转时间，进程从到达至完成所经历的总时间（完成时间 - 到达时间）。
-- `waiting_time`：等待时间，进程在就绪队列中等待的时间（周转时间 - 运行时间）。
+`gethostname`函数用于获取当前主机的名称。它的原型如下：
 
-### 输入数据
+```c
+#include <unistd.h>
+int gethostname(char *name, size_t len);
+```
 
-时间片长度：4 个时间单位。  
-进程数量：4 个进程。  
-每个进程的到达时间和运行时间如下表所示：  
-
-| 进程ID | 到达时间 | 运行时间 |
-|--------|----------|----------|
-| P1     | 0        | 10       |
-| P2     | 1        | 6        |
-| P3     | 2        | 8        |
-| P4     | 3        | 4        |
-
-### 计算方法
-#### calculateTime 函数
-该函数将模拟时间片轮转调度算法，并计算每个进程的完成时间、周转时间和等待时间。
+### 示例代码
 
 ```c
 #include <stdio.h>
-
-typedef struct {
-    int pid;               // 进程ID
-    int arrival_time;      // 到达时间
-    int burst_time;        // 运行时间
-    int remaining_time;    // 剩余运行时间
-    int completion_time;   // 完成时间
-    int turnaround_time;   // 周转时间
-    int waiting_time;      // 等待时间
-} Process;
-
-#define TIME_SLICE 4
-#define NUM_PROCESSES 4
-
-void calculateTime(Process processes[], int n) {
-    int time = 0;
-    int completed = 0;
-
-    while (completed < n) {
-        for (int i = 0; i < n; i++) {
-            if (processes[i].arrival_time <= time && processes[i].remaining_time > 0) {
-                if (processes[i].remaining_time <= TIME_SLICE) {
-                    time += processes[i].remaining_time;
-                    processes[i].remaining_time = 0;
-                    processes[i].completion_time = time;
-                    processes[i].turnaround_time = processes[i].completion_time - processes[i].arrival_time;
-                    processes[i].waiting_time = processes[i].turnaround_time - processes[i].burst_time;
-                    completed++;
-                } else {
-                    time += TIME_SLICE;
-                    processes[i].remaining_time -= TIME_SLICE;
-                }
-            }
-        }
-    }
-}
+#include <unistd.h>
+#include <limits.h>
 
 int main() {
-    Process processes[NUM_PROCESSES] = {
-        {1, 0, 10, 10, 0, 0, 0},
-        {2, 1, 6, 6, 0, 0, 0},
-        {3, 2, 8, 8, 0, 0, 0},
-        {4, 3, 4, 4, 0, 0, 0}
-    };
+    char hostname[HOST_NAME_MAX];
+    
+    if (gethostname(hostname, sizeof(hostname)) == -1) {
+        perror("gethostname");
+        return 1;
+    }
 
-    calculateTime(processes, NUM_PROCESSES);
+    printf("Hostname: %s\n", hostname);
+    return 0;
+}
+```
 
-    for (int i = 0; i < NUM_PROCESSES; i++) {
-        printf("P%d 完成时间: %d, 周转时间: %d, 等待时间: %d\n",
-               processes[i].pid,
-               processes[i].completion_time,
-               processes[i].turnaround_time,
-               processes[i].waiting_time);
+## 使用`rlimit`设置程序内存上限
+
+### `setrlimit`函数
+
+`setrlimit`函数用于设置进程的资源限制。它的原型如下：
+
+```c
+#include <sys/resource.h>
+int setrlimit(int resource, const struct rlimit *rlim);
+```
+
+### 6.3.2 示例代码
+
+```c
+#include <stdio.h>
+#include <sys/resource.h>
+
+int main() {
+    struct rlimit rl;
+    
+    // 设置程序的内存上限为128MB
+    rl.rlim_cur = 128 * 1024 * 1024;
+    rl.rlim_max = 128 * 1024 * 1024;
+    
+    if (setrlimit(RLIMIT_AS, &rl) == -1) {
+        perror("setrlimit");
+        return 1;
+    }
+
+    printf("Memory limit set to 128MB\n");
+    return 0;
+}
+```
+
+## `fork`函数创建子进程
+
+### `fork`函数
+
+`fork`函数用于创建一个子进程。它的原型如下：
+
+```c
+#include <unistd.h>
+pid_t fork(void);
+```
+
+### 示例代码
+
+```c
+#include <stdio.h>
+#include <unistd.h>
+
+int main() {
+    pid_t pid = fork();
+
+    if (pid == -1) {
+        perror("fork");
+        return 1;
+    } else if (pid == 0) {
+        // 子进程
+        printf("Hello from the child process!\n");
+    } else {
+        // 父进程
+        printf("Hello from the parent process!\n");
     }
 
     return 0;
 }
 ```
 
-### 输出结果
-根据输入数据和时间片轮转调度算法的规则，输出结果如下：
+## 管道与进程间通讯
 
+### `pipe`函数
+
+`pipe`函数用于创建一个管道，管道是进程间通讯的一种方式。它的原型如下：
+
+```c
+#include <unistd.h>
+int pipe(int pipefd[2]);
 ```
-P1 完成时间: 28, 周转时间: 28, 等待时间: 18
-P2 完成时间: 22, 周转时间: 21, 等待时间: 15
-P3 完成时间: 26, 周转时间: 24, 等待时间: 16
-P4 完成时间: 16, 周转时间: 13, 等待时间: 9
+
+### 示例代码
+
+```c
+#include <stdio.h>
+#include <unistd.h>
+#include <string.h>
+
+int main() {
+    int pipefd[2];
+    char buffer[128];
+
+    if (pipe(pipefd) == -1) {
+        perror("pipe");
+        return 1;
+    }
+
+    pid_t pid = fork();
+
+    if (pid == -1) {
+        perror("fork");
+        return 1;
+    } else if (pid == 0) {
+        // 子进程
+        close(pipefd[0]); // 关闭读端
+        char message[] = "Hello from the child process!";
+        write(pipefd[1], message, strlen(message));
+        close(pipefd[1]); // 关闭写端
+    } else {
+        // 父进程
+        close(pipefd[1]); // 关闭写端
+        read(pipefd[0], buffer, sizeof(buffer));
+        printf("Parent received: %s\n", buffer);
+        close(pipefd[0]); // 关闭读端
+    }
+
+    return 0;
+}
 ```
 
-### 结论
-通过时间片轮转调度算法，每个进程都能公平地获得CPU资源，并且算法能够计算出每个进程的完成时间、周转时间和等待时间。这对于实现操作系统中的进程调度是非常重要的。
+## 学习资料
 
+学习Linux系统编程的相关资料和教程非常丰富，以下是一些推荐的资源：
+
+### 书籍
+1. **《UNIX环境高级编程》**（Advanced Programming in the UNIX Environment） - 作者：W. Richard Stevens
+   - 这本书被誉为UNIX编程的经典之作，详细介绍了UNIX系统编程的各个方面，是深入学习Linux编程的必备书籍。
+
+2. **《Linux系统编程》**（Linux System Programming） - 作者：Robert Love
+   - 本书专门介绍了Linux系统编程的基础和高级主题，涵盖了文件I/O、进程控制、线程和同步、网络编程等内容。
+
+3. **《深入理解Linux内核》**（Understanding the Linux Kernel） - 作者：Daniel P. Bovet, Marco Cesati
+   - 这本书深入解析了Linux内核的各个子系统和模块，对理解Linux系统的工作原理非常有帮助。
+
+### 在线教程和文档
+1. **The Linux Programming Interface** - 作者：Michael Kerrisk
+   - 该书的官方网站提供了部分章节的在线阅读和示例代码，详细讲解了Linux编程接口。
+
+2. [**GNU C Library Documentation**](https://www.gnu.org/software/libc/manual/)
+   - 官方文档详细介绍了GNU C库中的各个函数和数据结构，是查阅具体函数用法的权威资料。
+
+3. **Linux Manual Pages (man pages)**
+   - Linux系统自带的手册页提供了大量函数和命令的使用说明，使用`man`命令可以方便地查阅。
+   - 例如，`man 2 fork` 可以查看`fork`系统调用的详细信息。
+
+### 在线课程
+1. [**Coursera: "Operating Systems and You: Becoming a Power User"**]((https://www.coursera.org/learn/os-power-user))
+   - 这门课程由谷歌提供，介绍了Linux操作系统的基本使用和系统编程的基本概念。
+
+2. [**Udacity: "Linux System Programming"**](https://www.udacity.com/course/linux-system-programming--ud923)
+   - 这门课程提供了Linux系统编程的入门知识，适合初学者学习。
+
+### 社区和论坛
+1. [**Stack Overflow**](https://stackoverflow.com/)
+   - Stack Overflow是一个大型编程问答社区，里面有大量关于Linux系统编程的问答，搜索具体问题时可以找到许多有用的答案。
+
+2. [**Reddit: r/linux**](https://www.reddit.com/r/linux/)
+   - Reddit的Linux板块讨论Linux系统相关的各种话题，包括系统编程，里面有很多经验丰富的用户可以提供帮助。
+
+### 实验和实践
+1. [**Linux From Scratch (LFS)**](http://www.linuxfromscratch.org/lfs/)
+   - 通过从零开始构建一个Linux系统，可以深入理解Linux的各个组件和编程接口。
 
