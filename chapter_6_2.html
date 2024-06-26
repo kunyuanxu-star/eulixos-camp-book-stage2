@@ -1,0 +1,322 @@
+<!DOCTYPE HTML>
+<html lang="Chinese" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>RISC-V 虚拟内存管理机制 - 第一期傲来操作系统训练营进阶阶段学习引导</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="preface.html"><strong aria-hidden="true">1.</strong> 前言</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">2.</strong> 第一章 虚拟内存与物理内存管理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_6_1.html"><strong aria-hidden="true">2.1.</strong> 虚拟内存与物理内存管理概念</a></li><li class="chapter-item expanded "><a href="chapter_6_2.html" class="active"><strong aria-hidden="true">2.2.</strong> RISC-V 虚拟内存管理机制</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">3.</strong> 第二章 系统虚拟化与容器</a></li><li class="chapter-item expanded "><a href="chapter_8.html"><strong aria-hidden="true">4.</strong> 第三章 RISC-V向量拓展基础与优化基础C库实践</a></li><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">5.</strong> 第四章 矩阵与卷积算法</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_1_1.html"><strong aria-hidden="true">5.1.</strong> 矩阵与线性代数</a></li><li class="chapter-item expanded "><a href="chapter_1_2.html"><strong aria-hidden="true">5.2.</strong> 卷积算法</a></li><li class="chapter-item expanded "><a href="chapter_1_3.html"><strong aria-hidden="true">5.3.</strong> 矩阵转置</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">6.</strong> 第五章 Linux内核模块</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_2_1.html"><strong aria-hidden="true">6.1.</strong> 编写一个简单的内核模块</a></li><li class="chapter-item expanded "><a href="chapter_2_2.html"><strong aria-hidden="true">6.2.</strong> 内核模块传参</a></li><li class="chapter-item expanded "><a href="chapter_2_3.html"><strong aria-hidden="true">6.3.</strong> 创建字符设备</a></li><li class="chapter-item expanded "><a href="chapter_2_4.html"><strong aria-hidden="true">6.4.</strong> 实现计时器</a></li><li class="chapter-item expanded "><a href="chapter_2_5.html"><strong aria-hidden="true">6.5.</strong> 实现简单文件操作</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">7.</strong> 第六章 RISC-V架构内联汇编</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_3_1.html"><strong aria-hidden="true">7.1.</strong> RISC-V架构简介</a></li><li class="chapter-item expanded "><a href="chapter_3_2.html"><strong aria-hidden="true">7.2.</strong> RISC-V基础指令集</a></li><li class="chapter-item expanded "><a href="chapter_3_3.html"><strong aria-hidden="true">7.3.</strong> 控制结构的汇编表示方法</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">8.</strong> 第七章 操作系统常用算法</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_4_1.html"><strong aria-hidden="true">8.1.</strong> FIFO 页面置换算法</a></li><li class="chapter-item expanded "><a href="chapter_4_2.html"><strong aria-hidden="true">8.2.</strong> LRU 页面置换算法</a></li><li class="chapter-item expanded "><a href="chapter_4_3.html"><strong aria-hidden="true">8.3.</strong> 模拟时间片轮转调度算法</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">9.</strong> 第八章 Linux系统编程基础</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">第一期傲来操作系统训练营进阶阶段学习引导</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="risc-v-虚拟内存管理机制"><a class="header" href="#risc-v-虚拟内存管理机制">RISC-V 虚拟内存管理机制</a></h1>
+<h2 id="虚拟内存模式sv32sv39-和-sv48"><a class="header" href="#虚拟内存模式sv32sv39-和-sv48">虚拟内存模式：Sv32、Sv39 和 Sv48</a></h2>
+<p>RISC-V 支持多种虚拟内存模式，以适应不同的地址空间需求：</p>
+<ol>
+<li>
+<p><strong>Sv32 (32-bit 虚拟地址)</strong></p>
+<ul>
+<li>适用于简单的系统和嵌入式应用。</li>
+<li>支持 32 位虚拟地址空间（4 GB）。</li>
+<li>使用两级页表，每级页表有 1024 个条目。</li>
+<li>每个页表条目大小为 4 字节。</li>
+</ul>
+</li>
+<li>
+<p><strong>Sv39 (39-bit 虚拟地址)</strong></p>
+<ul>
+<li>常用于中等规模的系统。</li>
+<li>支持 39 位虚拟地址空间（512 GB）。</li>
+<li>使用三级页表，每级页表有 512 个条目。</li>
+<li>每个页表条目大小为 8 字节。</li>
+</ul>
+</li>
+<li>
+<p><strong>Sv48 (48-bit 虚拟地址)</strong></p>
+<ul>
+<li>适用于大型系统和服务器应用。</li>
+<li>支持 48 位虚拟地址空间（256 TB）。</li>
+<li>使用四级页表，每级页表有 512 个条目。</li>
+<li>每个页表条目大小为 8 字节。</li>
+</ul>
+</li>
+</ol>
+<h2 id="页表基地址寄存器-satp-supervisor-address-translation-and-protection"><a class="header" href="#页表基地址寄存器-satp-supervisor-address-translation-and-protection">页表基地址寄存器 (SATP, Supervisor Address Translation and Protection)</a></h2>
+<p>SATP 寄存器是 RISC-V 中用于管理页表的关键寄存器。它存储当前使用的页表基地址和地址转换模式。SATP 寄存器的结构如下：</p>
+<ul>
+<li><strong>Mode</strong>：地址转换模式，指示当前使用的虚拟内存模式（如 Sv32、Sv39 或 Sv48）。</li>
+<li><strong>ASID</strong>：地址空间标识符，用于多进程环境中区分不同进程的地址空间。</li>
+<li><strong>PPN</strong>：页表根页的物理页号，指示页表在物理内存中的位置。</li>
+</ul>
+<p>操作系统通过设置 SATP 寄存器来控制虚拟地址到物理地址的映射。</p>
+<h2 id="页表结构与多级页表"><a class="header" href="#页表结构与多级页表">页表结构与多级页表</a></h2>
+<p>不同虚拟内存模式的页表结构各不相同，但其核心思想是相似的。以 Sv39 为例，解释多级页表的工作原理：</p>
+<ul>
+<li><strong>VPN[2]</strong>：最高 9 位，索引第一级页表。</li>
+<li><strong>VPN[1]</strong>：中间 9 位，索引第二级页表。</li>
+<li><strong>VPN[0]</strong>：最低 9 位，索引第三级页表。</li>
+<li><strong>Offset</strong>：页内偏移，12 位。</li>
+</ul>
+<p>虚拟地址在转换为物理地址时，按照上述三级页表逐级查找，最终得到物理页号 (PPN) 和页内偏移组合成物理地址。</p>
+<h2 id="页表条目-pte-page-table-entry"><a class="header" href="#页表条目-pte-page-table-entry">页表条目 (PTE, Page Table Entry)</a></h2>
+<p>每个页表条目包含以下信息：</p>
+<ul>
+<li><strong>V</strong>：有效位，指示该条目是否有效。</li>
+<li><strong>R</strong>：读权限位。</li>
+<li><strong>W</strong>：写权限位。</li>
+<li><strong>X</strong>：执行权限位。</li>
+<li><strong>U</strong>：用户态权限位。</li>
+<li><strong>G</strong>：全局位。</li>
+<li><strong>A</strong>：访问位，指示页是否被访问。</li>
+<li><strong>D</strong>：脏位，指示页是否被修改。</li>
+<li><strong>PPN</strong>：物理页号，指示虚拟页映射到的物理页。</li>
+</ul>
+<p>这些位的组合决定了该页的属性和权限。</p>
+<h2 id="地址转换缓冲区-tlb-translation-lookaside-buffer"><a class="header" href="#地址转换缓冲区-tlb-translation-lookaside-buffer">地址转换缓冲区 (TLB, Translation Lookaside Buffer)</a></h2>
+<p>TLB 是一种高速缓存，用于快速查找和转换虚拟地址到物理地址。由于页表存储在内存中，频繁的地址转换会带来显著的性能开销。TLB 缓存常用的页表条目，大大加快地址转换速度，减少访问内存的延迟。</p>
+<h2 id="异常处理"><a class="header" href="#异常处理">异常处理</a></h2>
+<p>当发生页错误 (Page Fault) 时，硬件会触发异常，操作系统捕获并处理这些异常。页错误通常由以下原因引起：</p>
+<ul>
+<li><strong>缺页异常</strong>：访问的虚拟页没有映射到物理内存。</li>
+<li><strong>权限异常</strong>：访问权限不符合要求（如读写权限不足）。</li>
+<li><strong>非法地址</strong>：访问的虚拟地址不在进程的地址空间范围内。</li>
+</ul>
+<p>操作系统在处理页错误时，通常会执行以下步骤：</p>
+<ol>
+<li><strong>缺页异常处理</strong>：分配新的物理页并更新页表条目，使虚拟页正确映射到物理页。</li>
+<li><strong>权限异常处理</strong>：调整页表条目的权限位，确保进程的内存访问符合权限要求。</li>
+<li><strong>非法地址处理</strong>：终止进程或采取其他安全措施，防止非法访问。</li>
+</ol>
+<h2 id="页表管理过程"><a class="header" href="#页表管理过程">页表管理过程</a></h2>
+<ol>
+<li><strong>页表初始化</strong>：操作系统在初始化时为每个进程创建页表，并设置 SATP 寄存器指向根页表。</li>
+<li><strong>页表查找</strong>：当 CPU 需要转换虚拟地址时，首先查找 TLB。如果命中，直接得到物理地址；如果未命中，按照多级页表逐级查找，最终得到物理地址。</li>
+<li><strong>页表更新</strong>：当进程需要分配或释放内存时，操作系统会更新相应的页表条目，确保虚拟地址正确映射到物理地址。</li>
+<li><strong>页表回收</strong>：当进程结束时，操作系统会回收其页表，释放内存资源。</li>
+</ol>
+<h2 id="页大小和大页支持"><a class="header" href="#页大小和大页支持">页大小和大页支持</a></h2>
+<p>不同大小的页可以在页表中混合使用，以提高内存管理的灵活性和效率。SV39 支持三种页大小：</p>
+<ul>
+<li><strong>4KB</strong>：最小页，用于细粒度内存管理。</li>
+<li><strong>2MB</strong>：中等大小页，用于中等大小数据的管理。</li>
+<li><strong>1GB</strong>：大页，用于大块数据的快速访问。</li>
+</ul>
+<p>不同大小的页使系统能够根据具体应用需求选择合适的页大小，从而优化内存管理效率。</p>
+<h2 id="结论"><a class="header" href="#结论">结论</a></h2>
+<p>RISC-V 特权态下的页表管理机制通过虚拟内存模式、SATP 寄存器、多级页表结构、页表条目、TLB 和异常处理的协同工作，实现了高效的内存管理。操作系统通过这些机制为每个进程提供独立的虚拟地址空间，提高系统的安全性、稳定性和性能。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="chapter_6_1.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="chapter_7.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="chapter_6_1.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="chapter_7.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
