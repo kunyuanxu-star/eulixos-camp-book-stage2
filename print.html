@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> 第一章 矩阵与卷积算法</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> 第二章 Linux内核模块</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> 第三章 RISC-V架构内联汇编</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> 第四章 操作系统常用算法（上）</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> 第五章 操作系统常用算法（下）</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> 第六章 Linux系统编程基础</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> 第一章 矩阵与卷积算法</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_1_1.html"><strong aria-hidden="true">1.1.</strong> 矩阵与线性代数</a></li><li class="chapter-item expanded "><a href="chapter_1_2.html"><strong aria-hidden="true">1.2.</strong> 卷积算法</a></li><li class="chapter-item expanded "><a href="chapter_1_3.html"><strong aria-hidden="true">1.3.</strong> 矩阵转置</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> 第二章 Linux内核模块</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_2_1.html"><strong aria-hidden="true">2.1.</strong> 编写一个简单的内核模块</a></li><li class="chapter-item expanded "><a href="chapter_2_2.html"><strong aria-hidden="true">2.2.</strong> 内核模块传参</a></li><li class="chapter-item expanded "><a href="chapter_2_3.html"><strong aria-hidden="true">2.3.</strong> 创建字符设备</a></li><li class="chapter-item expanded "><a href="chapter_2_4.html"><strong aria-hidden="true">2.4.</strong> 实现计时器</a></li><li class="chapter-item expanded "><a href="chapter_2_5.html"><strong aria-hidden="true">2.5.</strong> 实现简单文件操作</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> 第三章 RISC-V架构内联汇编</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_3_1.html"><strong aria-hidden="true">3.1.</strong> RISC-V架构简介</a></li><li class="chapter-item expanded "><a href="chapter_3_2.html"><strong aria-hidden="true">3.2.</strong> RISC-V基础指令集</a></li><li class="chapter-item expanded "><a href="chapter_3_3.html"><strong aria-hidden="true">3.3.</strong> 控制结构的汇编表示方法</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> 第四章 操作系统常用算法</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_4_1.html"><strong aria-hidden="true">4.1.</strong> FIFO 页面置换算法</a></li><li class="chapter-item expanded "><a href="chapter_4_2.html"><strong aria-hidden="true">4.2.</strong> LRU 页面置换算法</a></li><li class="chapter-item expanded "><a href="chapter_4_3.html"><strong aria-hidden="true">4.3.</strong> 模拟时间片轮转调度算法</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">5.</strong> 第五章 Linux系统编程基础</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -181,16 +181,24 @@
 <li>掌握矩阵转置的概念。</li>
 <li>学会通过编程实现矩阵乘法和卷积算法。</li>
 </ol>
-<h2 id="矩阵与线性代数"><a class="header" href="#矩阵与线性代数">矩阵与线性代数</a></h2>
-<p>-矩阵乘法是线性代数的基本运算，它可以用来表示和操作向量、矩阵、张量等数学对象。矩阵的加法、减法、乘法、除法、转置、行列式、特征值、特征向量等运算都是线性代数的基本概念。</p>
-<p>矩阵乘算法流程如下：</p>
+<h2 id="主要内容"><a class="header" href="#主要内容">主要内容</a></h2>
+<ul>
+<li><a href="./chapter_1_1.html">矩阵与线性代数</a></li>
+<li><a href="./chapter_1_2.html">卷积算法</a></li>
+<li><a href="./chapter_1_3.html">矩阵转置</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="矩阵与线性代数"><a class="header" href="#矩阵与线性代数">矩阵与线性代数</a></h1>
+<ul>
+<li>矩阵乘法是线性代数的基本运算，它可以用来表示和操作向量、矩阵、张量等数学对象。矩阵的加法、减法、乘法、除法、转置、行列式、特征值、特征向量等运算都是线性代数的基本概念。</li>
+</ul>
+<h2 id="算法流程"><a class="header" href="#算法流程">算法流程</a></h2>
 <ol>
 <li>确定输入矩阵的维度。</li>
 <li>确定输出矩阵的维度。</li>
 <li>按照输出矩阵的维度，将输入矩阵的行向量依次与输出矩阵的列向量进行矩阵乘法运算，得到输出矩阵的相应元素。</li>
 <li>输出矩阵的元素即为输入矩阵与输出矩阵的乘积。</li>
 </ol>
-<p>伪代码如下</p>
+<h2 id="伪代码"><a class="header" href="#伪代码">伪代码</a></h2>
 <ol>
 <li>输入矩阵 A 的维度为 m * n，输出矩阵 B 的维度为 p * q。</li>
 <li>对于 i = 1 to p，j = 1 to q，执行以下操作：
@@ -204,7 +212,7 @@
 </ul>
 </li>
 </ol>
-<p>示例代码（C语言）：</p>
+<h2 id="示例代码c语言"><a class="header" href="#示例代码c语言">示例代码（C语言）</a></h2>
 <pre><code class="language-c">// 假设我们有两个矩阵A和B，它们的尺寸分别为 m x n 和 n x p，矩阵C是结果矩阵，尺寸为 m x p。
 void matrix_multiply(int m, int n, int p, double A[m][n], double B[n][p], double C[m][p]) {
     for (int i = 0; i &lt; m; i++) {
@@ -217,7 +225,7 @@ void matrix_multiply(int m, int n, int p, double A[m][n], double B[n][p], double
     }
 }
 </code></pre>
-<h2 id="卷积算法"><a class="header" href="#卷积算法">卷积算法</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="12-卷积算法"><a class="header" href="#12-卷积算法">1.2 卷积算法</a></h1>
 <p>卷积算法是一种在信号处理、图像处理、机器学习等领域广泛使用的数学运算。它涉及到两个函数的卷积，通常用来分析一个信号或函数与另一个信号或函数的相似度。在深度学习中，卷积神经网络（CNN）就是基于卷积算法构建的。</p>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -237,11 +245,11 @@ The convolution of two functions \( f(t) \) and \( g(t) \), denoted as \( (f * g
         \]
     </p>
 这里的f(m)和g(m)是离散信号的值。
-<h3 id="卷积的应用"><a class="header" href="#卷积的应用">卷积的应用</a></h3>
+<h2 id="卷积的应用"><a class="header" href="#卷积的应用">卷积的应用</a></h2>
 <p>信号处理：用于滤波、平滑、特征提取等。
 图像处理：用于边缘检测、图像平滑、特征提取等。
 机器学习：在卷积神经网络中，卷积层通过卷积操作提取输入数据的特征。</p>
-<h3 id="卷积算法流程"><a class="header" href="#卷积算法流程">卷积算法流程</a></h3>
+<h2 id="卷积算法流程"><a class="header" href="#卷积算法流程">卷积算法流程</a></h2>
 <ol>
 <li>确定卷积核：选择或学习一个卷积核（滤波器）。</li>
 <li>卷积核中心定位：将卷积核中心对齐到输入数据的第一个位置。</li>
@@ -249,12 +257,12 @@ The convolution of two functions \( f(t) \) and \( g(t) \), denoted as \( (f * g
 <li>求和：将上一步得到的乘积求和，得到输出特征图的一个元素。</li>
 <li>滑动卷积核：将卷积核向右滑动一个元素宽度，重复步骤3和4。</li>
 </ol>
-<h3 id="资料"><a class="header" href="#资料">资料</a></h3>
+<h2 id="资料"><a class="header" href="#资料">资料</a></h2>
 <ol>
 <li><a href="https://www.zhihu.com/question/22298352">知乎 - 如何通俗易懂地解释卷积?</a></li>
 <li><a href="https://blog.csdn.net/weixin_43702653/article/details/123776987">CSDN - 卷积算法详解</a></li>
 </ol>
-<h3 id="示例代码c语言"><a class="header" href="#示例代码c语言">示例代码（C语言）</a></h3>
+<h2 id="示例代码c语言-1"><a class="header" href="#示例代码c语言-1">示例代码（C语言）</a></h2>
 <pre><code class="language-c">// 假设我们有一个输入矩阵 input 和一个卷积核 kernel，我们需要计算输出矩阵 output。
 void convolution2D(int inputRows, int inputCols, double input[inputRows][inputCols], 
                    int kernelRows, int kernelCols, double kernel[kernelRows][kernelCols], 
@@ -280,7 +288,7 @@ void convolution2D(int inputRows, int inputCols, double input[inputRows][inputCo
     }
 }
 </code></pre>
-<h2 id="矩阵转置"><a class="header" href="#矩阵转置">矩阵转置</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="13-矩阵转置"><a class="header" href="#13-矩阵转置">1.3 矩阵转置</a></h1>
 <p>矩阵转置是指矩阵的行列互换，记作$A^T$，定义为：</p>
 <p>
         \[
@@ -296,7 +304,7 @@ void convolution2D(int inputRows, int inputCols, double input[inputRows][inputCo
     </p>
 <p>即为：
 对每一个i，j，将矩阵A的第i行的元素与第j列的元素进行交换。</p>
-<h3 id="示例代码c语言-1"><a class="header" href="#示例代码c语言-1">示例代码（C语言）</a></h3>
+<h2 id="131-示例代码c语言"><a class="header" href="#131-示例代码c语言">1.3.1 示例代码（C语言）</a></h2>
 <pre><code class="language-c">// 假设我们有一个矩阵 A，我们需要计算它的转置矩阵。
 void transpose(int m, int n, double A[m][n], double AT[n][m]) {
     for (int i = 0; i &lt; m; i++) {
@@ -306,7 +314,7 @@ void transpose(int m, int n, double A[m][n], double AT[n][m]) {
     }
 }
 </code></pre>
-<h3 id="原地转置"><a class="header" href="#原地转置">原地转置</a></h3>
+<h2 id="132-原地转置"><a class="header" href="#132-原地转置">1.3.2 原地转置</a></h2>
 <pre><code class="language-c">void transpose(int m, int n, double A[m][n]) {
     for (int i = 0; i &lt; m; i++) {
         for (int j = i + 1; j &lt; n; j++) {
@@ -335,9 +343,25 @@ void transpose(int m, int n, double A[m][n], double AT[n][m]) {
 </ul>
 <h2 id="内核模块简介"><a class="header" href="#内核模块简介">内核模块简介</a></h2>
 <p>Linux内核模块（LKM）是一段代码，可以加载到内核中以扩展其功能，而无需重新启动系统。模块通常用于设备驱动程序，可以动态加载和卸载。</p>
-<h2 id="编写一个简单的内核模块"><a class="header" href="#编写一个简单的内核模块">编写一个简单的内核模块</a></h2>
+<h2 id="主要内容-1"><a class="header" href="#主要内容-1">主要内容</a></h2>
+<ul>
+<li><a href="./chapter_2_1.html">编写一个简单的内核模块</a></li>
+<li><a href="./chapter_2_2.html">内核模块传参</a></li>
+<li><a href="./chapter_2_3.html">创建字符设备</a></li>
+<li><a href="./chapter_2_4.html">实现计时器</a></li>
+<li><a href="./chapter_2_5.html">实现简单文件操作</a></li>
+</ul>
+<h2 id="简介"><a class="header" href="#简介">简介</a></h2>
+<p>本教程为编写 Linux 内核模块提供了一个起点。它涵盖了模块参数传递、创建虚拟字符设备、启动定时器以及使用简单的文件操作。对于更高级的主题，请参考《Linux 内核模块编程指南》和其他内核开发资源。</p>
+<h2 id="参考文献"><a class="header" href="#参考文献">参考文献</a></h2>
+<ul>
+<li><a href="https://tldp.org/LDP/lkmpg/2.6/html/">Linux Kernel Module Programming Guide</a></li>
+<li><a href="https://lwn.net/Kernel/LDD3/">Linux Device Drivers, Third Edition</a></li>
+<li><a href="https://www.kernel.org/doc/html/latest/">Kernel API Documentation</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="编写一个简单的内核模块"><a class="header" href="#编写一个简单的内核模块">编写一个简单的内核模块</a></h1>
 <p>从一个简单的“Hello, World!”内核模块开始，了解模块编程的基础。</p>
-<h3 id="hello_modulec"><a class="header" href="#hello_modulec">hello_module.c</a></h3>
+<h2 id="示例"><a class="header" href="#示例">示例</a></h2>
 <pre><code class="language-c">#include &lt;linux/module.h&gt;  // Needed by all modules
 #include &lt;linux/kernel.h&gt;  // Needed for KERN_INFO
 #include &lt;linux/init.h&gt;    // Needed for macros
@@ -360,10 +384,9 @@ MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Your Name");
 MODULE_DESCRIPTION("A simple Hello World module");
 </code></pre>
-<h3 id="编译与加载模块"><a class="header" href="#编译与加载模块">编译与加载模块</a></h3>
+<h2 id="编译与加载模块"><a class="header" href="#编译与加载模块">编译与加载模块</a></h2>
 <ol>
-<li>
-<p>在目录中编写<code>Makefile</code>:</p>
+<li>在目录中编写<code>Makefile</code>:
 <pre><code class="language-makefile">obj-m += hello_module.o
 
 all:
@@ -373,6 +396,11 @@ clean:
     make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
 </code></pre>
 </li>
+</ol>
+<blockquote>
+<p>注意：之后其他章节均有类似此示例的Makefile，故省略不写，Makefile中<code>obj-m</code>变量的值应与模块名一致。</p>
+</blockquote>
+<ol start="2">
 <li>
 <p>编译模块:</p>
 <pre><code class="language-bash">make
@@ -394,8 +422,8 @@ clean:
 </code></pre>
 </li>
 </ol>
-<h2 id="内核模块传残"><a class="header" href="#内核模块传残">内核模块传残</a></h2>
-<h3 id="param_modulec"><a class="header" href="#param_modulec">param_module.c</a></h3>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="内核模块传参"><a class="header" href="#内核模块传参">内核模块传参</a></h1>
+<h2 id="示例-1"><a class="header" href="#示例-1">示例</a></h2>
 <pre><code class="language-c">#include &lt;linux/module.h&gt;
 #include &lt;linux/kernel.h&gt;
 #include &lt;linux/init.h&gt;
@@ -427,9 +455,9 @@ MODULE_DESCRIPTION("A module with parameter passing");
 <pre><code class="language-bash">sudo insmod param_module.ko param_var=42
 dmesg | tail
 </code></pre>
-<h2 id="内核模块传入一个数组作为参数"><a class="header" href="#内核模块传入一个数组作为参数">内核模块传入一个数组作为参数</a></h2>
+<h1 id="数组传参"><a class="header" href="#数组传参">数组传参</a></h1>
 <p>Linux 内核模块可以接受数组作为参数，这对于配置和自定义模块行为非常有用。下面我们展示如何实现这一点。</p>
-<h3 id="array_param_modulec"><a class="header" href="#array_param_modulec">array_param_module.c</a></h3>
+<h2 id="示例-2"><a class="header" href="#示例-2">示例</a></h2>
 <pre><code class="language-c">#include &lt;linux/module.h&gt;
 #include &lt;linux/kernel.h&gt;
 #include &lt;linux/init.h&gt;
@@ -473,11 +501,11 @@ MODULE_DESCRIPTION("A module with array parameter passing");
 sudo insmod array_param_module.ko array=1,2,3,4,5
 ```
 </code></pre>
-<h3 id="总结"><a class="header" href="#总结">总结</a></h3>
-<p>通过这种方式，您可以向内核模块传递数组参数，从而使模块更加灵活和可配置。这对于需要动态传递多个参数的情况非常有用。</p>
-<h2 id="创建虚拟字符设备"><a class="header" href="#创建虚拟字符设备">创建虚拟字符设备</a></h2>
+<h2 id="总结"><a class="header" href="#总结">总结</a></h2>
+<p>通过这种方式，可以向内核模块传递数组参数，从而使模块更加灵活和可配置。这对于需要动态传递多个参数的情况非常有用。</p>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="创建虚拟字符设备"><a class="header" href="#创建虚拟字符设备">创建虚拟字符设备</a></h2>
 <p>虚拟字符设备通过文件操作与用户空间应用程序交互。</p>
-<h3 id="virtual_char_devc"><a class="header" href="#virtual_char_devc">virtual_char_dev.c</a></h3>
+<h2 id="示例代码"><a class="header" href="#示例代码">示例代码</a></h2>
 <pre><code class="language-c">#include &lt;linux/module.h&gt;
 #include &lt;linux/fs.h&gt;
 #include &lt;linux/uaccess.h&gt;  // copy_to_user, copy_from_user
@@ -585,9 +613,40 @@ MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Your Name");
 MODULE_DESCRIPTION("A simple virtual character device");
 </code></pre>
-<h2 id="开始计时器"><a class="header" href="#开始计时器">开始计时器</a></h2>
+<h2 id="编译运行调试"><a class="header" href="#编译运行调试">编译运行调试</a></h2>
+<p>编译代码：</p>
+<pre><code class="language-bash">$ make
+</code></pre>
+<p>加载模块：</p>
+<pre><code class="language-bash">$ insmod vchardev.ko
+</code></pre>
+<p>查看模块信息：</p>
+<pre><code class="language-bash">$ lsmod | grep vchardev
+vchardev 16384 0
+</code></pre>
+<p>创建设备文件：</p>
+<pre><code class="language-bash">$ mknod /dev/vchardev c 254 0
+</code></pre>
+<p>查看设备文件信息：</p>
+<pre><code class="language-bash">$ ls -l /dev/vchardev
+crw-rw-rw- 1 root root 254, 0 May 20 10:20 /dev/vchardev
+</code></pre>
+<p>打开设备文件：</p>
+<pre><code class="language-bash">$ cat /dev/vchardev
+</code></pre>
+<p>向设备文件写入数据：</p>
+<pre><code class="language-bash">$ echo "Hello, world!" &gt; /dev/vchardev
+</code></pre>
+<p>从设备文件读取数据：</p>
+<pre><code class="language-bash">$ cat /dev/vchardev
+Hello, world!
+</code></pre>
+<p>卸载模块：</p>
+<pre><code class="language-bash">$ rmmod vchardev
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="实现计时器"><a class="header" href="#实现计时器">实现计时器</a></h1>
 <p>计时器对于在内核空间中处理定时操作至关重要。</p>
-<h3 id="timer_modulec"><a class="header" href="#timer_modulec">timer_module.c</a></h3>
+<h2 id="示例-3"><a class="header" href="#示例-3">示例</a></h2>
 <pre><code class="language-c">#include &lt;linux/module.h&gt;
 #include &lt;linux/kernel.h&gt;
 #include &lt;linux/init.h&gt;
@@ -623,10 +682,20 @@ MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Your Name");
 MODULE_DESCRIPTION("A simple timer module");
 </code></pre>
-<h2 id="实现简单的文件操作函数"><a class="header" href="#实现简单的文件操作函数">实现简单的文件操作函数</a></h2>
-<h3 id="filp_open"><a class="header" href="#filp_open">filp_open</a></h3>
+<h2 id="编译运行调试-1"><a class="header" href="#编译运行调试-1">编译运行调试</a></h2>
+<p>加载模块：</p>
+<pre><code class="language-bash">sudo insmod timer.ko
+</code></pre>
+<p>卸载模块：</p>
+<pre><code class="language-bash">sudo rmmod timer
+</code></pre>
+<p>查看日志：</p>
+<pre><code class="language-bash">dmesg
+</code></pre>
+<p>在日志中可以看到打印的时间信息。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="实现简单的文件操作函数"><a class="header" href="#实现简单的文件操作函数">实现简单的文件操作函数</a></h1>
+<h2 id="filp_open函数及示例"><a class="header" href="#filp_open函数及示例">filp_open函数及示例</a></h2>
 <p><code>filp_open</code> 用于在内核空间打开一个文件。</p>
-<h3 id="filp_open_examplec"><a class="header" href="#filp_open_examplec">filp_open_example.c</a></h3>
 <pre><code class="language-c">#include &lt;linux/module.h&gt;
 #include &lt;linux/kernel.h&gt;
 #include &lt;linux/fs.h&gt;
@@ -673,14 +742,16 @@ MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Your Name");
 MODULE_DESCRIPTION("A module demonstrating filp_open");
 </code></pre>
-<h2 id="结论"><a class="header" href="#结论">结论</a></h2>
-<p>本教程为编写 Linux 内核模块提供了一个起点。它涵盖了模块参数传递、创建虚拟字符设备、启动定时器以及使用简单的文件操作。对于更高级的主题，请参考《Linux 内核模块编程指南》和其他内核开发资源。</p>
-<h2 id="参考文献"><a class="header" href="#参考文献">参考文献</a></h2>
-<ul>
-<li><a href="https://tldp.org/LDP/lkmpg/2.6/html/">Linux Kernel Module Programming Guide</a></li>
-<li><a href="https://lwn.net/Kernel/LDD3/">Linux Device Drivers, Third Edition</a></li>
-<li><a href="https://www.kernel.org/doc/html/latest/">Kernel API Documentation</a></li>
-</ul>
+<h2 id="加载与调试"><a class="header" href="#加载与调试">加载与调试</a></h2>
+<p>编译并加载模块：</p>
+<pre><code>$ make
+$ sudo insmod filp_open_example.ko
+</code></pre>
+<p>运行结果：</p>
+<pre><code>[   26.313563] Opening file from kernel space
+[   26.313602] File content: localhost
+[   26.313605] Unloading filp_open_example module
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="第三章-risc-v架构内联汇编"><a class="header" href="#第三章-risc-v架构内联汇编">第三章 RISC-V架构内联汇编</a></h1>
 <h2 id="本章要求-2"><a class="header" href="#本章要求-2">本章要求</a></h2>
 <ol>
@@ -690,22 +761,231 @@ MODULE_DESCRIPTION("A module demonstrating filp_open");
 </ol>
 <h2 id="介绍"><a class="header" href="#介绍">介绍</a></h2>
 <p>内联汇编允许在C语言代码中直接嵌入汇编指令，从而能够利用底层硬件特性来优化性能。本教程将介绍如何在RISC-V架构上使用内联汇编，涵盖RISC-V指令集的基础知识，以及如何将C语言中的常见控制结构用汇编表示。</p>
-<h2 id="risc-v指令集简介"><a class="header" href="#risc-v指令集简介">RISC-V指令集简介</a></h2>
-<p>RISC-V（Reduced Instruction Set Computing V）是一种开源的指令集架构（ISA），它具有简洁、模块化和高效等特点。以下是一些基本的RISC-V指令：</p>
-<h3 id="寄存器"><a class="header" href="#寄存器">寄存器</a></h3>
+<h2 id="主要内容-2"><a class="header" href="#主要内容-2">主要内容</a></h2>
+<ul>
+<li><a href="./chapter_3_1.html">RISC-V架构简介</a></li>
+<li><a href="./chapter_3_2.html">RISC-V基础指令集</a></li>
+<li><a href="./chapter_3_3.html">控制结构的汇编表示方法</a></li>
+</ul>
+<h2 id="简介-1"><a class="header" href="#简介-1">简介</a></h2>
+<p>通过本教程，你将了解如何在RISC-V架构上使用内联汇编，并掌握将C语言中的控制结构转换为汇编代码的方法。希望这些内容对你在实际编程中有所帮助。</p>
+<h2 id="36-参考资料"><a class="header" href="#36-参考资料">3.6 参考资料</a></h2>
+<ul>
+<li><a href="https://riscv.org/technical/specifications/">RISC-V 官方文档</a></li>
+<li><a href="https://gcc.gnu.org/onlinedocs/gcc/Using-Assembly-Language-with-C.html">GCC 内联汇编指南</a></li>
+<li><a href="https://riscv.org/software-tools/risc-v-assembly-programming/">RISC-V 汇编教程</a></li>
+<li><a href="https://riscvasm.com">Learn RISC-V Assembly</a></li>
+<li>《RISC-V汇编语言程序设计》</li>
+<li>《嵌入式系统与RISC-V架构》</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="risc-v架构简介"><a class="header" href="#risc-v架构简介">RISC-V架构简介</a></h1>
+<p>RISC-V（发音为“risk-five”）是一个开源的指令集架构（ISA），它由加利福尼亚大学伯克利分校开发。RISC-V 的设计原则是简洁、模块化和可扩展，使其在研究、教育和商业领域都得到了广泛应用。</p>
+<h3 id="risc-v-的主要特点"><a class="header" href="#risc-v-的主要特点">RISC-V 的主要特点</a></h3>
+<ol>
+<li>
+<p><strong>开源与自由</strong>：RISC-V 是一个开放标准的 ISA，任何人都可以免费使用、修改和发布。这种开源特性使得 RISC-V 在学术研究和商业应用中具有很大的吸引力。</p>
+</li>
+<li>
+<p><strong>简洁性</strong>：RISC-V 的设计强调简洁，采用了精简指令集计算（RISC）原则。这使得 RISC-V 指令集相比于复杂指令集计算（CISC）如 x86 更加简单和高效。</p>
+</li>
+<li>
+<p><strong>模块化</strong>：RISC-V 采用模块化设计，不同的应用可以选择不同的扩展。基础的 RISC-V ISA 被称为 RV32I（32位）或 RV64I（64位），并可以通过添加扩展模块（如浮点、原子操作、多线程等）来增强功能。</p>
+</li>
+<li>
+<p><strong>可扩展性</strong>：RISC-V 支持从嵌入式系统到高性能计算的各种应用场景。其指令集架构可以扩展以支持特定领域的需求，比如专门用于机器学习加速的扩展。</p>
+</li>
+</ol>
+<h3 id="risc-v-基础指令集"><a class="header" href="#risc-v-基础指令集">RISC-V 基础指令集</a></h3>
+<p>RISC-V 的基础指令集包括以下几个部分：</p>
+<ol>
+<li><strong>整数计算指令</strong>（RV32I/RV64I）：包括基本的算术、逻辑、移位和比较指令。</li>
+<li><strong>控制流指令</strong>：包括条件分支、无条件跳转和函数调用/返回指令。</li>
+<li><strong>内存访问指令</strong>：包括加载和存储指令，用于数据在寄存器和内存之间的传输。</li>
+</ol>
+<h3 id="risc-v-的扩展"><a class="header" href="#risc-v-的扩展">RISC-V 的扩展</a></h3>
+<ol>
+<li><strong>M 扩展</strong>（乘法和除法）：增加了整数乘法和除法指令。</li>
+<li><strong>A 扩展</strong>（原子操作）：支持原子读-修改-写指令，用于多线程同步。</li>
+<li><strong>F 和 D 扩展</strong>（浮点数）：增加了单精度（F）和双精度（D）浮点运算指令。</li>
+<li><strong>C 扩展</strong>（压缩指令）：通过使用更短的指令编码来减少程序的代码大小。</li>
+<li><strong>V 扩展</strong>（向量操作）：支持向量化操作，以加速数据并行计算。</li>
+</ol>
+<h3 id="risc-v-的应用"><a class="header" href="#risc-v-的应用">RISC-V 的应用</a></h3>
+<p>RISC-V 的灵活性和开放性使得它在多种领域中得到了应用，包括：</p>
+<ol>
+<li><strong>嵌入式系统</strong>：由于其简洁和高效，RISC-V 非常适合低功耗的嵌入式设备。</li>
+<li><strong>物联网（IoT）</strong>：开源的特点使得 RISC-V 可以广泛应用于各种物联网设备中。</li>
+<li><strong>高性能计算</strong>：通过添加特定的扩展模块，RISC-V 也可以应用于高性能计算领域。</li>
+<li><strong>教育和研究</strong>：RISC-V 的开放性和模块化设计使其成为教学和研究的理想平台。</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="risc-v基础指令集"><a class="header" href="#risc-v基础指令集">RISC-V基础指令集</a></h1>
+<p>本集训营用的最多的指令集是RV64I基础，它包含了处理器指令集最核心的部分:整数计算、控制流和内存访问指令，指令简单明了，适合快速掌握。</p>
+<p>下面是对 RV64I 基础指令集的详细介绍。</p>
+<h2 id="寄存器"><a class="header" href="#寄存器">寄存器</a></h2>
 <ul>
 <li><code>x0</code>-<code>x31</code>：32个整数寄存器。</li>
 <li><code>f0</code>-<code>f31</code>：32个浮点寄存器。</li>
+<li><code>pc</code>：程序计数器。</li>
+<li><code>sp</code>：堆栈指针。</li>
+<li><code>ra</code>：返回地址寄存器。</li>
 </ul>
-<h3 id="基本指令"><a class="header" href="#基本指令">基本指令</a></h3>
+<h2 id="指令格式"><a class="header" href="#指令格式">指令格式</a></h2>
+<p>指令格式如下：</p>
+<pre><code class="language-assembly">opcode rd, rs1, rs2 [, imm]
+</code></pre>
 <ul>
-<li><code>add rd, rs1, rs2</code>：rd = rs1 + rs2</li>
-<li><code>sub rd, rs1, rs2</code>：rd = rs1 - rs2</li>
-<li><code>mul rd, rs1, rs2</code>：rd = rs1 * rs2</li>
-<li><code>div rd, rs1, rs2</code>：rd = rs1 / rs2</li>
-<li><code>lw rd, offset(rs1)</code>：从内存加载字到rd</li>
-<li><code>sw rs2, offset(rs1)</code>：将字存储到内存</li>
+<li><code>opcode</code>：指令的操作码。</li>
+<li><code>rd</code>：目标寄存器。</li>
+<li><code>rs1</code>：源寄存器1。</li>
+<li><code>rs2</code>：源寄存器2。</li>
+<li><code>imm</code>：立即数。</li>
 </ul>
+<h2 id="指令集"><a class="header" href="#指令集">指令集</a></h2>
+<h3 id="rv32i-基础指令集"><a class="header" href="#rv32i-基础指令集">RV32I 基础指令集</a></h3>
+<p>RV32I 基础指令集包含了整数计算、控制流和内存访问指令。</p>
+<ul>
+<li>整数计算指令：<code>ADD</code>, <code>SUB</code>, <code>ADDI</code>, <code>AND</code>, <code>OR</code>, <code>XOR</code>, <code>ANDI</code>, <code>SLL</code>, <code>SRL</code>, <code>SRA</code>, <code>SLT</code>, <code>SLTU</code>, <code>SLTI</code></li>
+<li>控制流指令：<code>BEQ</code>, <code>BNE</code>, <code>BLT</code>, <code>BGE</code>, <code>JAL</code>, <code>JALR</code></li>
+<li>内存访问指令：<code>LW</code>, <code>LH</code>, <code>LHU</code>, <code>LB</code>, <code>LBU</code>, <code>SW</code>, <code>SH</code>, <code>SB</code></li>
+</ul>
+<h2 id="整数计算指令"><a class="header" href="#整数计算指令">整数计算指令</a></h2>
+<h3 id="算术指令"><a class="header" href="#算术指令">算术指令</a></h3>
+<ul>
+<li><strong>ADD</strong>: 将两个寄存器的值相加，结果存储在目标寄存器中。
+<pre><code class="language-assembly">ADD rd, rs1, rs2  # rd = rs1 + rs2
+</code></pre>
+</li>
+<li><strong>SUB</strong>: 将一个寄存器的值从另一个寄存器的值中减去，结果存储在目标寄存器中。
+<pre><code class="language-assembly">SUB rd, rs1, rs2  # rd = rs1 - rs2
+</code></pre>
+</li>
+<li><strong>ADDI</strong>: 将一个立即数与寄存器的值相加，结果存储在目标寄存器中。
+<pre><code class="language-assembly">ADDI rd, rs1, imm  # rd = rs1 + imm
+</code></pre>
+</li>
+</ul>
+<h3 id="逻辑指令"><a class="header" href="#逻辑指令">逻辑指令</a></h3>
+<ul>
+<li><strong>AND</strong>: 对两个寄存器的值执行按位与操作，结果存储在目标寄存器中。
+<pre><code class="language-assembly">AND rd, rs1, rs2  # rd = rs1 &amp; rs2
+</code></pre>
+</li>
+<li><strong>OR</strong>: 对两个寄存器的值执行按位或操作，结果存储在目标寄存器中。
+<pre><code class="language-assembly">OR rd, rs1, rs2  # rd = rs1 | rs2
+</code></pre>
+</li>
+<li><strong>XOR</strong>: 对两个寄存器的值执行按位异或操作，结果存储在目标寄存器中。
+<pre><code class="language-assembly">XOR rd, rs1, rs2  # rd = rs1 ^ rs2
+</code></pre>
+</li>
+<li><strong>ANDI</strong>: 将寄存器的值与一个立即数进行按位与操作，结果存储在目标寄存器中。
+<pre><code class="language-assembly">ANDI rd, rs1, imm  # rd = rs1 &amp; imm
+</code></pre>
+</li>
+</ul>
+<h3 id="移位指令"><a class="header" href="#移位指令">移位指令</a></h3>
+<ul>
+<li><strong>SLL</strong>: 将寄存器的值左移指定的位数，结果存储在目标寄存器中。
+<pre><code class="language-assembly">SLL rd, rs1, rs2  # rd = rs1 &lt;&lt; rs2
+</code></pre>
+</li>
+<li><strong>SRL</strong>: 将寄存器的值右移指定的位数，结果存储在目标寄存器中（逻辑右移）。
+<pre><code class="language-assembly">SRL rd, rs1, rs2  # rd = rs1 &gt;&gt; rs2
+</code></pre>
+</li>
+<li><strong>SRA</strong>: 将寄存器的值右移指定的位数，结果存储在目标寄存器中（算术右移）。
+<pre><code class="language-assembly">SRA rd, rs1, rs2  # rd = rs1 &gt;&gt; rs2 (arithmetic)
+</code></pre>
+</li>
+</ul>
+<h3 id="比较指令"><a class="header" href="#比较指令">比较指令</a></h3>
+<ul>
+<li><strong>SLT</strong>: 如果第一个寄存器的值小于第二个寄存器的值，则目标寄存器设置为1，否则设置为0（有符号比较）。
+<pre><code class="language-assembly">SLT rd, rs1, rs2  # rd = (rs1 &lt; rs2)
+</code></pre>
+</li>
+<li><strong>SLTU</strong>: 如果第一个寄存器的值小于第二个寄存器的值，则目标寄存器设置为1，否则设置为0（无符号比较）。
+<pre><code class="language-assembly">SLTU rd, rs1, rs2  # rd = (rs1 &lt; rs2) (unsigned)
+</code></pre>
+</li>
+<li><strong>SLTI</strong>: 如果寄存器的值小于立即数，则目标寄存器设置为1，否则设置为0（有符号比较）。
+<pre><code class="language-assembly">SLTI rd, rs1, imm  # rd = (rs1 &lt; imm)
+</code></pre>
+</li>
+</ul>
+<h2 id="控制流指令"><a class="header" href="#控制流指令">控制流指令</a></h2>
+<h3 id="条件分支指令"><a class="header" href="#条件分支指令">条件分支指令</a></h3>
+<ul>
+<li><strong>BEQ</strong>: 如果两个寄存器的值相等，则跳转到目标地址。
+<pre><code class="language-assembly">BEQ rs1, rs2, offset  # if (rs1 == rs2) PC += offset
+</code></pre>
+</li>
+<li><strong>BNE</strong>: 如果两个寄存器的值不相等，则跳转到目标地址。
+<pre><code class="language-assembly">BNE rs1, rs2, offset  # if (rs1 != rs2) PC += offset
+</code></pre>
+</li>
+<li><strong>BLT</strong>: 如果第一个寄存器的值小于第二个寄存器的值，则跳转到目标地址（有符号比较）。
+<pre><code class="language-assembly">BLT rs1, rs2, offset  # if (rs1 &lt; rs2) PC += offset
+</code></pre>
+</li>
+<li><strong>BGE</strong>: 如果第一个寄存器的值大于或等于第二个寄存器的值，则跳转到目标地址（有符号比较）。
+<pre><code class="language-assembly">BGE rs1, rs2, offset  # if (rs1 &gt;= rs2) PC += offset
+</code></pre>
+</li>
+</ul>
+<h3 id="无条件跳转指令"><a class="header" href="#无条件跳转指令">无条件跳转指令</a></h3>
+<ul>
+<li><strong>JAL</strong>: 跳转到目标地址，并将返回地址存储在目标寄存器中。
+<pre><code class="language-assembly">JAL rd, offset  # rd = PC + 4; PC += offset
+</code></pre>
+</li>
+<li><strong>JALR</strong>: 跳转到由寄存器和立即数计算出的地址，并将返回地址存储在目标寄存器中。
+<pre><code class="language-assembly">JALR rd, rs1, offset  # rd = PC + 4; PC = (rs1 + offset) &amp; ~1
+</code></pre>
+</li>
+</ul>
+<h2 id="内存访问指令"><a class="header" href="#内存访问指令">内存访问指令</a></h2>
+<h3 id="加载指令"><a class="header" href="#加载指令">加载指令</a></h3>
+<ul>
+<li><strong>LW</strong>: 从内存中加载一个字（32位）到目标寄存器。
+<pre><code class="language-assembly">LW rd, offset(rs1)  # rd = *(rs1 + offset)
+</code></pre>
+</li>
+<li><strong>LH</strong>: 从内存中加载一个半字（16位）到目标寄存器，并进行符号扩展。
+<pre><code class="language-assembly">LH rd, offset(rs1)  # rd = *(int16_t *)(rs1 + offset)
+</code></pre>
+</li>
+<li><strong>LHU</strong>: 从内存中加载一个半字（16位）到目标寄存器，并进行零扩展。
+<pre><code class="language-assembly">LHU rd, offset(rs1)  # rd = *(uint16_t *)(rs1 + offset)
+</code></pre>
+</li>
+<li><strong>LB</strong>: 从内存中加载一个字节（8位）到目标寄存器，并进行符号扩展。
+<pre><code class="language-assembly">LB rd, offset(rs1)  # rd = *(int8_t *)(rs1 + offset)
+</code></pre>
+</li>
+<li><strong>LBU</strong>: 从内存中加载一个字节（8位）到目标寄存器，并进行零扩展。
+<pre><code class="language-assembly">LBU rd, offset(rs1)  # rd = *(uint8_t *)(rs1 + offset)
+</code></pre>
+</li>
+</ul>
+<h3 id="存储指令"><a class="header" href="#存储指令">存储指令</a></h3>
+<ul>
+<li><strong>SW</strong>: 将一个字（32位）从源寄存器存储到内存中。
+<pre><code class="language-assembly">SW rs2, offset(rs1)  # *(rs1 + offset) = rs2
+</code></pre>
+</li>
+<li><strong>SH</strong>: 将一个半字（16位）从源寄存器存储到内存中。
+<pre><code class="language-assembly">SH rs2, offset(rs1)  # *(int16_t *)(rs1 + offset) = rs2
+</code></pre>
+</li>
+<li><strong>SB</strong>: 将一个字节（8位）从源寄存器存储到内存中。
+<pre><code class="language-assembly">SB rs2, offset(rs1)  # *(int8_t *)(rs1 + offset) = rs2
+</code></pre>
+</li>
+</ul>
+<p>这些指令构成了 RISC-V 基础指令集的重要部分，为各种计算和控制流操作提供了必要的功能。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="控制结构的汇编表示方法"><a class="header" href="#控制结构的汇编表示方法">控制结构的汇编表示方法</a></h1>
+<p>C语言与汇编往往呈现一一对应关系，但控制结构的汇编表示方法却有所不同。本节将介绍C语言控制结构的汇编表示方法，以大家最为熟悉的C语言结构——循环、分支、跳转为例，介绍如何用汇编语言表示这些控制结构。</p>
 <h2 id="内联汇编语法"><a class="header" href="#内联汇编语法">内联汇编语法</a></h2>
 <p>在GCC编译器中，内联汇编使用<code>asm</code>关键字。以下是一个基本的内联汇编语法示例：</p>
 <pre><code class="language-c">int result;
@@ -716,6 +996,7 @@ asm("add %0, %1, %2" : "=r" (result) : "r" (a), "r" (b));
 <li><code>: "=r" (result)</code>：输出操作数，<code>=r</code>表示输出到寄存器。</li>
 <li><code>: "r" (a), "r" (b)</code>：输入操作数，<code>r</code>表示从寄存器读取。</li>
 </ul>
+<p>在上面的示例中，<code>result</code>变量的值等于<code>a</code>和<code>b</code>的和。</p>
 <h2 id="控制结构的内联汇编表示"><a class="header" href="#控制结构的内联汇编表示">控制结构的内联汇编表示</a></h2>
 <h3 id="while循环"><a class="header" href="#while循环">while循环</a></h3>
 <pre><code class="language-c">int i = 0;
@@ -844,30 +1125,24 @@ asm volatile (
     : "t0", "cc"
 );
 </code></pre>
-<h2 id="参考资料"><a class="header" href="#参考资料">参考资料</a></h2>
-<ul>
-<li><a href="https://riscv.org/technical/specifications/">RISC-V 官方文档</a></li>
-<li><a href="https://gcc.gnu.org/onlinedocs/gcc/Using-Assembly-Language-with-C.html">GCC 内联汇编指南</a></li>
-<li><a href="https://riscv.org/software-tools/risc-v-assembly-programming/">RISC-V 汇编教程</a></li>
-</ul>
-<h2 id="相关教程"><a class="header" href="#相关教程">相关教程</a></h2>
-<ul>
-<li>《RISC-V汇编语言程序设计》</li>
-<li>《嵌入式系统与RISC-V架构》</li>
-<li><a href="https://riscvasm.com">Learn RISC-V Assembly</a></li>
-</ul>
-<p>通过本教程，你已经了解了如何在RISC-V架构上使用内联汇编，并掌握了将C语言中的控制结构转换为汇编代码的方法。希望这些内容对你在实际编程中有所帮助。</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="第四章-操作系统常用算法上"><a class="header" href="#第四章-操作系统常用算法上">第四章 操作系统常用算法（上）</a></h1>
-<h2 id="本章要求-3"><a class="header" href="#本章要求-3">本章要求</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="第四章-操作系统常用算法"><a class="header" href="#第四章-操作系统常用算法">第四章 操作系统常用算法</a></h1>
+<h2 id="40-本章要求"><a class="header" href="#40-本章要求">4.0 本章要求</a></h2>
 <ol>
 <li>了解操作系统中常用的页面置换算法。</li>
 <li>掌握FIFO页面置换算法的实现。</li>
 <li>掌握LRU页面置换算法的实现。</li>
+<li>理解并实现时间片轮转调度算法。</li>
 </ol>
-<h2 id="fifo-页面置换算法"><a class="header" href="#fifo-页面置换算法">FIFO 页面置换算法</a></h2>
-<h3 id="原理"><a class="header" href="#原理">原理</a></h3>
+<h2 id="主要内容-3"><a class="header" href="#主要内容-3">主要内容</a></h2>
+<ul>
+<li><a href="./chapter_4_1.html">FIFO 页面置换算法</a></li>
+<li><a href="./chapter_4_2.html">LRU 页面置换算法</a></li>
+<li><a href="./chapter_4_3.html">模拟时间片轮转调度算法</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="fifo-页面置换算法"><a class="header" href="#fifo-页面置换算法">FIFO 页面置换算法</a></h1>
+<h2 id="原理"><a class="header" href="#原理">原理</a></h2>
 <p>FIFO（First-In-First-Out）页面置换算法是一种最简单的页面置换算法。它将最早加载进内存的页面置换出去。换句话说，当需要一个新的页面时，最先进入内存的页面将被移除。</p>
-<h3 id="函数实现"><a class="header" href="#函数实现">函数实现</a></h3>
+<h2 id="函数实现"><a class="header" href="#函数实现">函数实现</a></h2>
 <p>以下是FIFO页面置换算法的实现：</p>
 <pre><code class="language-c">#include &lt;stdio.h&gt;
 #include &lt;string.h&gt;
@@ -932,10 +1207,10 @@ int main() {
     return 0;
 }
 </code></pre>
-<h2 id="lru-页面置换算法"><a class="header" href="#lru-页面置换算法">LRU 页面置换算法</a></h2>
-<h3 id="原理-1"><a class="header" href="#原理-1">原理</a></h3>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="lru-页面置换算法"><a class="header" href="#lru-页面置换算法">LRU 页面置换算法</a></h1>
+<h2 id="原理-1"><a class="header" href="#原理-1">原理</a></h2>
 <p>LRU（Least Recently Used）页面置换算法根据页面最近使用的情况来决定置换哪一个页面。具体来说，它将最久未被使用的页面置换出去。</p>
-<h3 id="函数实现-1"><a class="header" href="#函数实现-1">函数实现</a></h3>
+<h2 id="函数实现-1"><a class="header" href="#函数实现-1">函数实现</a></h2>
 <p>以下是LRU页面置换算法的实现：</p>
 <pre><code class="language-c">#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
@@ -1016,15 +1291,10 @@ int main() {
 }
 </code></pre>
 <p>这两个函数分别实现了FIFO和LRU页面置换算法。在每个函数中，<code>queue_frames</code>是页面访问序列，<code>num_frames</code>是可用的页框数。每次访问一个页面时，函数会检查该页面是否在页框中。如果不在，则需要置换一个页面。FIFO算法总是置换最早进入内存的页面，而LRU算法则置换最久未使用的页面。</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="第五章-操作系统常用算法下"><a class="header" href="#第五章-操作系统常用算法下">第五章 操作系统常用算法（下）</a></h1>
-<h2 id="本章要求-4"><a class="header" href="#本章要求-4">本章要求</a></h2>
-<ul>
-<li>理解并实现时间片轮转调度算法。</li>
-</ul>
-<h2 id="模拟时间片轮转调度算法"><a class="header" href="#模拟时间片轮转调度算法">模拟时间片轮转调度算法</a></h2>
-<h3 id="原理-2"><a class="header" href="#原理-2">原理</a></h3>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="模拟时间片轮转调度算法"><a class="header" href="#模拟时间片轮转调度算法">模拟时间片轮转调度算法</a></h1>
+<h2 id="原理-2"><a class="header" href="#原理-2">原理</a></h2>
 <p>时间片轮转（Round Robin, RR）是一种广泛使用的进程调度算法。其核心思想是将CPU时间划分成固定长度的时间片（time slices），并按顺序将这些时间片分配给就绪队列中的每个进程。每个进程在其时间片内运行，当时间片用完时，如果进程尚未完成，则将其置于就绪队列的末尾，等待下一轮调度。这样可以确保所有进程都能公平地获得CPU资源。</p>
-<h3 id="进程结构体"><a class="header" href="#进程结构体">进程结构体</a></h3>
+<h2 id="进程结构体"><a class="header" href="#进程结构体">进程结构体</a></h2>
 <p>进程结构体包含以下字段：</p>
 <ul>
 <li><code>pid</code>：进程ID，用于标识进程。</li>
@@ -1035,7 +1305,7 @@ int main() {
 <li><code>turnaround_time</code>：周转时间，进程从到达至完成所经历的总时间（完成时间 - 到达时间）。</li>
 <li><code>waiting_time</code>：等待时间，进程在就绪队列中等待的时间（周转时间 - 运行时间）。</li>
 </ul>
-<h3 id="输入数据"><a class="header" href="#输入数据">输入数据</a></h3>
+<h2 id="输入数据"><a class="header" href="#输入数据">输入数据</a></h2>
 <p>时间片长度：4 个时间单位。<br />
 进程数量：4 个进程。<br />
 每个进程的到达时间和运行时间如下表所示：</p>
@@ -1046,9 +1316,8 @@ int main() {
 <tr><td>P4</td><td>3</td><td>4</td></tr>
 </tbody></table>
 </div>
-<h3 id="计算方法"><a class="header" href="#计算方法">计算方法</a></h3>
-<h4 id="calculatetime-函数"><a class="header" href="#calculatetime-函数">calculateTime 函数</a></h4>
-<p>该函数将模拟时间片轮转调度算法，并计算每个进程的完成时间、周转时间和等待时间。</p>
+<h2 id="计算方法"><a class="header" href="#计算方法">计算方法</a></h2>
+<p>模拟时间片轮转调度算法，并计算每个进程的完成时间、周转时间和等待时间。</p>
 <pre><code class="language-c">#include &lt;stdio.h&gt;
 
 typedef struct {
@@ -1108,225 +1377,16 @@ int main() {
     return 0;
 }
 </code></pre>
-<h3 id="输出结果"><a class="header" href="#输出结果">输出结果</a></h3>
+<h2 id="输出结果"><a class="header" href="#输出结果">输出结果</a></h2>
 <p>根据输入数据和时间片轮转调度算法的规则，输出结果如下：</p>
 <pre><code>P1 完成时间: 28, 周转时间: 28, 等待时间: 18
 P2 完成时间: 22, 周转时间: 21, 等待时间: 15
 P3 完成时间: 26, 周转时间: 24, 等待时间: 16
 P4 完成时间: 16, 周转时间: 13, 等待时间: 9
 </code></pre>
-<h3 id="结论-1"><a class="header" href="#结论-1">结论</a></h3>
+<h3 id="516结论"><a class="header" href="#516结论">5.1.6结论</a></h3>
 <p>通过时间片轮转调度算法，每个进程都能公平地获得CPU资源，并且算法能够计算出每个进程的完成时间、周转时间和等待时间。这对于实现操作系统中的进程调度是非常重要的。</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="第六章-linux系统编程基础"><a class="header" href="#第六章-linux系统编程基础">第六章 Linux系统编程基础</a></h1>
-<h2 id="本章要求-5"><a class="header" href="#本章要求-5">本章要求</a></h2>
-<ol>
-<li>了解Linux系统编程的基本概念，包括进程、线程、内存管理、文件系统接口等。</li>
-<li>掌握Linux系统编程的基本技术，包括获取主机名、设置程序内存上限、使用<code>fork</code>创建子进程、通过管道进行进程间通讯等。</li>
-<li>能够编写简单的Linux系统编程程序。</li>
-</ol>
-<h2 id="介绍-1"><a class="header" href="#介绍-1">介绍</a></h2>
-<p>Linux系统编程涉及使用C语言与操作系统进行直接交互。本文将详细介绍一些基本的Linux系统编程技术，并通过示例代码展示如何获取主机名、设置程序内存上限、使用<code>fork</code>创建子进程，以及通过管道进行进程间通讯。</p>
-<h2 id="获取主机名"><a class="header" href="#获取主机名">获取主机名</a></h2>
-<h3 id="gethostname函数"><a class="header" href="#gethostname函数"><code>gethostname</code>函数</a></h3>
-<p><code>gethostname</code>函数用于获取当前主机的名称。它的原型如下：</p>
-<pre><code class="language-c">#include &lt;unistd.h&gt;
-int gethostname(char *name, size_t len);
-</code></pre>
-<h3 id="示例代码"><a class="header" href="#示例代码">示例代码</a></h3>
-<pre><code class="language-c">#include &lt;stdio.h&gt;
-#include &lt;unistd.h&gt;
-#include &lt;limits.h&gt;
-
-int main() {
-    char hostname[HOST_NAME_MAX];
-    
-    if (gethostname(hostname, sizeof(hostname)) == -1) {
-        perror("gethostname");
-        return 1;
-    }
-
-    printf("Hostname: %s\n", hostname);
-    return 0;
-}
-</code></pre>
-<h2 id="使用rlimit设置程序内存上限"><a class="header" href="#使用rlimit设置程序内存上限">使用<code>rlimit</code>设置程序内存上限</a></h2>
-<h3 id="setrlimit函数"><a class="header" href="#setrlimit函数"><code>setrlimit</code>函数</a></h3>
-<p><code>setrlimit</code>函数用于设置进程的资源限制。它的原型如下：</p>
-<pre><code class="language-c">#include &lt;sys/resource.h&gt;
-int setrlimit(int resource, const struct rlimit *rlim);
-</code></pre>
-<h3 id="示例代码-1"><a class="header" href="#示例代码-1">示例代码</a></h3>
-<pre><code class="language-c">#include &lt;stdio.h&gt;
-#include &lt;sys/resource.h&gt;
-
-int main() {
-    struct rlimit rl;
-    
-    // 设置程序的内存上限为128MB
-    rl.rlim_cur = 128 * 1024 * 1024;
-    rl.rlim_max = 128 * 1024 * 1024;
-    
-    if (setrlimit(RLIMIT_AS, &amp;rl) == -1) {
-        perror("setrlimit");
-        return 1;
-    }
-
-    printf("Memory limit set to 128MB\n");
-    return 0;
-}
-</code></pre>
-<h2 id="fork函数创建子进程"><a class="header" href="#fork函数创建子进程"><code>fork</code>函数创建子进程</a></h2>
-<h3 id="fork函数"><a class="header" href="#fork函数"><code>fork</code>函数</a></h3>
-<p><code>fork</code>函数用于创建一个子进程。它的原型如下：</p>
-<pre><code class="language-c">#include &lt;unistd.h&gt;
-pid_t fork(void);
-</code></pre>
-<h3 id="示例代码-2"><a class="header" href="#示例代码-2">示例代码</a></h3>
-<pre><code class="language-c">#include &lt;stdio.h&gt;
-#include &lt;unistd.h&gt;
-
-int main() {
-    pid_t pid = fork();
-
-    if (pid == -1) {
-        perror("fork");
-        return 1;
-    } else if (pid == 0) {
-        // 子进程
-        printf("Hello from the child process!\n");
-    } else {
-        // 父进程
-        printf("Hello from the parent process!\n");
-    }
-
-    return 0;
-}
-</code></pre>
-<h2 id="管道与进程间通讯"><a class="header" href="#管道与进程间通讯">管道与进程间通讯</a></h2>
-<h3 id="pipe函数"><a class="header" href="#pipe函数"><code>pipe</code>函数</a></h3>
-<p><code>pipe</code>函数用于创建一个管道，管道是进程间通讯的一种方式。它的原型如下：</p>
-<pre><code class="language-c">#include &lt;unistd.h&gt;
-int pipe(int pipefd[2]);
-</code></pre>
-<h3 id="示例代码-3"><a class="header" href="#示例代码-3">示例代码</a></h3>
-<pre><code class="language-c">#include &lt;stdio.h&gt;
-#include &lt;unistd.h&gt;
-#include &lt;string.h&gt;
-
-int main() {
-    int pipefd[2];
-    char buffer[128];
-
-    if (pipe(pipefd) == -1) {
-        perror("pipe");
-        return 1;
-    }
-
-    pid_t pid = fork();
-
-    if (pid == -1) {
-        perror("fork");
-        return 1;
-    } else if (pid == 0) {
-        // 子进程
-        close(pipefd[0]); // 关闭读端
-        char message[] = "Hello from the child process!";
-        write(pipefd[1], message, strlen(message));
-        close(pipefd[1]); // 关闭写端
-    } else {
-        // 父进程
-        close(pipefd[1]); // 关闭写端
-        read(pipefd[0], buffer, sizeof(buffer));
-        printf("Parent received: %s\n", buffer);
-        close(pipefd[0]); // 关闭读端
-    }
-
-    return 0;
-}
-</code></pre>
-<h2 id="资料-1"><a class="header" href="#资料-1">资料</a></h2>
-<p>学习Linux系统编程的相关资料和教程非常丰富，以下是一些推荐的资源：</p>
-<h3 id="书籍"><a class="header" href="#书籍">书籍</a></h3>
-<ol>
-<li>
-<p><strong>《UNIX环境高级编程》</strong>（Advanced Programming in the UNIX Environment） - 作者：W. Richard Stevens</p>
-<ul>
-<li>这本书被誉为UNIX编程的经典之作，详细介绍了UNIX系统编程的各个方面，是深入学习Linux编程的必备书籍。</li>
-</ul>
-</li>
-<li>
-<p><strong>《Linux系统编程》</strong>（Linux System Programming） - 作者：Robert Love</p>
-<ul>
-<li>本书专门介绍了Linux系统编程的基础和高级主题，涵盖了文件I/O、进程控制、线程和同步、网络编程等内容。</li>
-</ul>
-</li>
-<li>
-<p><strong>《深入理解Linux内核》</strong>（Understanding the Linux Kernel） - 作者：Daniel P. Bovet, Marco Cesati</p>
-<ul>
-<li>这本书深入解析了Linux内核的各个子系统和模块，对理解Linux系统的工作原理非常有帮助。</li>
-</ul>
-</li>
-</ol>
-<h3 id="在线教程和文档"><a class="header" href="#在线教程和文档">在线教程和文档</a></h3>
-<ol>
-<li>
-<p><strong>The Linux Programming Interface</strong> - 作者：Michael Kerrisk</p>
-<ul>
-<li>该书的官方网站提供了部分章节的在线阅读和示例代码，详细讲解了Linux编程接口。</li>
-</ul>
-</li>
-<li>
-<p><a href="https://www.gnu.org/software/libc/manual/"><strong>GNU C Library Documentation</strong></a></p>
-<ul>
-<li>官方文档详细介绍了GNU C库中的各个函数和数据结构，是查阅具体函数用法的权威资料。</li>
-</ul>
-</li>
-<li>
-<p><strong>Linux Manual Pages (man pages)</strong></p>
-<ul>
-<li>Linux系统自带的手册页提供了大量函数和命令的使用说明，使用<code>man</code>命令可以方便地查阅。</li>
-<li>例如，<code>man 2 fork</code> 可以查看<code>fork</code>系统调用的详细信息。</li>
-</ul>
-</li>
-</ol>
-<h3 id="在线课程"><a class="header" href="#在线课程">在线课程</a></h3>
-<ol>
-<li>
-<p><a href="(https://www.coursera.org/learn/os-power-user)"><strong>Coursera: "Operating Systems and You: Becoming a Power User"</strong></a></p>
-<ul>
-<li>这门课程由谷歌提供，介绍了Linux操作系统的基本使用和系统编程的基本概念。</li>
-</ul>
-</li>
-<li>
-<p><a href="https://www.udacity.com/course/linux-system-programming--ud923"><strong>Udacity: "Linux System Programming"</strong></a></p>
-<ul>
-<li>这门课程提供了Linux系统编程的入门知识，适合初学者学习。</li>
-</ul>
-</li>
-</ol>
-<h3 id="社区和论坛"><a class="header" href="#社区和论坛">社区和论坛</a></h3>
-<ol>
-<li>
-<p><a href="https://stackoverflow.com/"><strong>Stack Overflow</strong></a></p>
-<ul>
-<li>Stack Overflow是一个大型编程问答社区，里面有大量关于Linux系统编程的问答，搜索具体问题时可以找到许多有用的答案。</li>
-</ul>
-</li>
-<li>
-<p><a href="https://www.reddit.com/r/linux/"><strong>Reddit: r/linux</strong></a></p>
-<ul>
-<li>Reddit的Linux板块讨论Linux系统相关的各种话题，包括系统编程，里面有很多经验丰富的用户可以提供帮助。</li>
-</ul>
-</li>
-</ol>
-<h3 id="实验和实践"><a class="header" href="#实验和实践">实验和实践</a></h3>
-<ol>
-<li><a href="http://www.linuxfromscratch.org/lfs/"><strong>Linux From Scratch (LFS)</strong></a>
-<ul>
-<li>通过从零开始构建一个Linux系统，可以深入理解Linux的各个组件和编程接口。</li>
-</ul>
-</li>
-</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="第五章-linux系统编程基础"><a class="header" href="#第五章-linux系统编程基础">第五章 Linux系统编程基础</a></h1>
 
                     </main>
 

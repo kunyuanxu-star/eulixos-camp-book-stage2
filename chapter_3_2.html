@@ -1,0 +1,393 @@
+<!DOCTYPE HTML>
+<html lang="Chinese" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>RISC-V基础指令集 - 第一期傲来操作系统训练营进阶阶段学习引导</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> 第一章 矩阵与卷积算法</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_1_1.html"><strong aria-hidden="true">1.1.</strong> 矩阵与线性代数</a></li><li class="chapter-item expanded "><a href="chapter_1_2.html"><strong aria-hidden="true">1.2.</strong> 卷积算法</a></li><li class="chapter-item expanded "><a href="chapter_1_3.html"><strong aria-hidden="true">1.3.</strong> 矩阵转置</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> 第二章 Linux内核模块</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_2_1.html"><strong aria-hidden="true">2.1.</strong> 编写一个简单的内核模块</a></li><li class="chapter-item expanded "><a href="chapter_2_2.html"><strong aria-hidden="true">2.2.</strong> 内核模块传参</a></li><li class="chapter-item expanded "><a href="chapter_2_3.html"><strong aria-hidden="true">2.3.</strong> 创建字符设备</a></li><li class="chapter-item expanded "><a href="chapter_2_4.html"><strong aria-hidden="true">2.4.</strong> 实现计时器</a></li><li class="chapter-item expanded "><a href="chapter_2_5.html"><strong aria-hidden="true">2.5.</strong> 实现简单文件操作</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> 第三章 RISC-V架构内联汇编</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_3_1.html"><strong aria-hidden="true">3.1.</strong> RISC-V架构简介</a></li><li class="chapter-item expanded "><a href="chapter_3_2.html" class="active"><strong aria-hidden="true">3.2.</strong> RISC-V基础指令集</a></li><li class="chapter-item expanded "><a href="chapter_3_3.html"><strong aria-hidden="true">3.3.</strong> 控制结构的汇编表示方法</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> 第四章 操作系统常用算法</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_4_1.html"><strong aria-hidden="true">4.1.</strong> FIFO 页面置换算法</a></li><li class="chapter-item expanded "><a href="chapter_4_2.html"><strong aria-hidden="true">4.2.</strong> LRU 页面置换算法</a></li><li class="chapter-item expanded "><a href="chapter_4_3.html"><strong aria-hidden="true">4.3.</strong> 模拟时间片轮转调度算法</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">5.</strong> 第五章 Linux系统编程基础</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">第一期傲来操作系统训练营进阶阶段学习引导</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="risc-v基础指令集"><a class="header" href="#risc-v基础指令集">RISC-V基础指令集</a></h1>
+<p>本集训营用的最多的指令集是RV64I基础，它包含了处理器指令集最核心的部分:整数计算、控制流和内存访问指令，指令简单明了，适合快速掌握。</p>
+<p>下面是对 RV64I 基础指令集的详细介绍。</p>
+<h2 id="寄存器"><a class="header" href="#寄存器">寄存器</a></h2>
+<ul>
+<li><code>x0</code>-<code>x31</code>：32个整数寄存器。</li>
+<li><code>f0</code>-<code>f31</code>：32个浮点寄存器。</li>
+<li><code>pc</code>：程序计数器。</li>
+<li><code>sp</code>：堆栈指针。</li>
+<li><code>ra</code>：返回地址寄存器。</li>
+</ul>
+<h2 id="指令格式"><a class="header" href="#指令格式">指令格式</a></h2>
+<p>指令格式如下：</p>
+<pre><code class="language-assembly">opcode rd, rs1, rs2 [, imm]
+</code></pre>
+<ul>
+<li><code>opcode</code>：指令的操作码。</li>
+<li><code>rd</code>：目标寄存器。</li>
+<li><code>rs1</code>：源寄存器1。</li>
+<li><code>rs2</code>：源寄存器2。</li>
+<li><code>imm</code>：立即数。</li>
+</ul>
+<h2 id="指令集"><a class="header" href="#指令集">指令集</a></h2>
+<h3 id="rv32i-基础指令集"><a class="header" href="#rv32i-基础指令集">RV32I 基础指令集</a></h3>
+<p>RV32I 基础指令集包含了整数计算、控制流和内存访问指令。</p>
+<ul>
+<li>整数计算指令：<code>ADD</code>, <code>SUB</code>, <code>ADDI</code>, <code>AND</code>, <code>OR</code>, <code>XOR</code>, <code>ANDI</code>, <code>SLL</code>, <code>SRL</code>, <code>SRA</code>, <code>SLT</code>, <code>SLTU</code>, <code>SLTI</code></li>
+<li>控制流指令：<code>BEQ</code>, <code>BNE</code>, <code>BLT</code>, <code>BGE</code>, <code>JAL</code>, <code>JALR</code></li>
+<li>内存访问指令：<code>LW</code>, <code>LH</code>, <code>LHU</code>, <code>LB</code>, <code>LBU</code>, <code>SW</code>, <code>SH</code>, <code>SB</code></li>
+</ul>
+<h2 id="整数计算指令"><a class="header" href="#整数计算指令">整数计算指令</a></h2>
+<h3 id="算术指令"><a class="header" href="#算术指令">算术指令</a></h3>
+<ul>
+<li><strong>ADD</strong>: 将两个寄存器的值相加，结果存储在目标寄存器中。
+<pre><code class="language-assembly">ADD rd, rs1, rs2  # rd = rs1 + rs2
+</code></pre>
+</li>
+<li><strong>SUB</strong>: 将一个寄存器的值从另一个寄存器的值中减去，结果存储在目标寄存器中。
+<pre><code class="language-assembly">SUB rd, rs1, rs2  # rd = rs1 - rs2
+</code></pre>
+</li>
+<li><strong>ADDI</strong>: 将一个立即数与寄存器的值相加，结果存储在目标寄存器中。
+<pre><code class="language-assembly">ADDI rd, rs1, imm  # rd = rs1 + imm
+</code></pre>
+</li>
+</ul>
+<h3 id="逻辑指令"><a class="header" href="#逻辑指令">逻辑指令</a></h3>
+<ul>
+<li><strong>AND</strong>: 对两个寄存器的值执行按位与操作，结果存储在目标寄存器中。
+<pre><code class="language-assembly">AND rd, rs1, rs2  # rd = rs1 &amp; rs2
+</code></pre>
+</li>
+<li><strong>OR</strong>: 对两个寄存器的值执行按位或操作，结果存储在目标寄存器中。
+<pre><code class="language-assembly">OR rd, rs1, rs2  # rd = rs1 | rs2
+</code></pre>
+</li>
+<li><strong>XOR</strong>: 对两个寄存器的值执行按位异或操作，结果存储在目标寄存器中。
+<pre><code class="language-assembly">XOR rd, rs1, rs2  # rd = rs1 ^ rs2
+</code></pre>
+</li>
+<li><strong>ANDI</strong>: 将寄存器的值与一个立即数进行按位与操作，结果存储在目标寄存器中。
+<pre><code class="language-assembly">ANDI rd, rs1, imm  # rd = rs1 &amp; imm
+</code></pre>
+</li>
+</ul>
+<h3 id="移位指令"><a class="header" href="#移位指令">移位指令</a></h3>
+<ul>
+<li><strong>SLL</strong>: 将寄存器的值左移指定的位数，结果存储在目标寄存器中。
+<pre><code class="language-assembly">SLL rd, rs1, rs2  # rd = rs1 &lt;&lt; rs2
+</code></pre>
+</li>
+<li><strong>SRL</strong>: 将寄存器的值右移指定的位数，结果存储在目标寄存器中（逻辑右移）。
+<pre><code class="language-assembly">SRL rd, rs1, rs2  # rd = rs1 &gt;&gt; rs2
+</code></pre>
+</li>
+<li><strong>SRA</strong>: 将寄存器的值右移指定的位数，结果存储在目标寄存器中（算术右移）。
+<pre><code class="language-assembly">SRA rd, rs1, rs2  # rd = rs1 &gt;&gt; rs2 (arithmetic)
+</code></pre>
+</li>
+</ul>
+<h3 id="比较指令"><a class="header" href="#比较指令">比较指令</a></h3>
+<ul>
+<li><strong>SLT</strong>: 如果第一个寄存器的值小于第二个寄存器的值，则目标寄存器设置为1，否则设置为0（有符号比较）。
+<pre><code class="language-assembly">SLT rd, rs1, rs2  # rd = (rs1 &lt; rs2)
+</code></pre>
+</li>
+<li><strong>SLTU</strong>: 如果第一个寄存器的值小于第二个寄存器的值，则目标寄存器设置为1，否则设置为0（无符号比较）。
+<pre><code class="language-assembly">SLTU rd, rs1, rs2  # rd = (rs1 &lt; rs2) (unsigned)
+</code></pre>
+</li>
+<li><strong>SLTI</strong>: 如果寄存器的值小于立即数，则目标寄存器设置为1，否则设置为0（有符号比较）。
+<pre><code class="language-assembly">SLTI rd, rs1, imm  # rd = (rs1 &lt; imm)
+</code></pre>
+</li>
+</ul>
+<h2 id="控制流指令"><a class="header" href="#控制流指令">控制流指令</a></h2>
+<h3 id="条件分支指令"><a class="header" href="#条件分支指令">条件分支指令</a></h3>
+<ul>
+<li><strong>BEQ</strong>: 如果两个寄存器的值相等，则跳转到目标地址。
+<pre><code class="language-assembly">BEQ rs1, rs2, offset  # if (rs1 == rs2) PC += offset
+</code></pre>
+</li>
+<li><strong>BNE</strong>: 如果两个寄存器的值不相等，则跳转到目标地址。
+<pre><code class="language-assembly">BNE rs1, rs2, offset  # if (rs1 != rs2) PC += offset
+</code></pre>
+</li>
+<li><strong>BLT</strong>: 如果第一个寄存器的值小于第二个寄存器的值，则跳转到目标地址（有符号比较）。
+<pre><code class="language-assembly">BLT rs1, rs2, offset  # if (rs1 &lt; rs2) PC += offset
+</code></pre>
+</li>
+<li><strong>BGE</strong>: 如果第一个寄存器的值大于或等于第二个寄存器的值，则跳转到目标地址（有符号比较）。
+<pre><code class="language-assembly">BGE rs1, rs2, offset  # if (rs1 &gt;= rs2) PC += offset
+</code></pre>
+</li>
+</ul>
+<h3 id="无条件跳转指令"><a class="header" href="#无条件跳转指令">无条件跳转指令</a></h3>
+<ul>
+<li><strong>JAL</strong>: 跳转到目标地址，并将返回地址存储在目标寄存器中。
+<pre><code class="language-assembly">JAL rd, offset  # rd = PC + 4; PC += offset
+</code></pre>
+</li>
+<li><strong>JALR</strong>: 跳转到由寄存器和立即数计算出的地址，并将返回地址存储在目标寄存器中。
+<pre><code class="language-assembly">JALR rd, rs1, offset  # rd = PC + 4; PC = (rs1 + offset) &amp; ~1
+</code></pre>
+</li>
+</ul>
+<h2 id="内存访问指令"><a class="header" href="#内存访问指令">内存访问指令</a></h2>
+<h3 id="加载指令"><a class="header" href="#加载指令">加载指令</a></h3>
+<ul>
+<li><strong>LW</strong>: 从内存中加载一个字（32位）到目标寄存器。
+<pre><code class="language-assembly">LW rd, offset(rs1)  # rd = *(rs1 + offset)
+</code></pre>
+</li>
+<li><strong>LH</strong>: 从内存中加载一个半字（16位）到目标寄存器，并进行符号扩展。
+<pre><code class="language-assembly">LH rd, offset(rs1)  # rd = *(int16_t *)(rs1 + offset)
+</code></pre>
+</li>
+<li><strong>LHU</strong>: 从内存中加载一个半字（16位）到目标寄存器，并进行零扩展。
+<pre><code class="language-assembly">LHU rd, offset(rs1)  # rd = *(uint16_t *)(rs1 + offset)
+</code></pre>
+</li>
+<li><strong>LB</strong>: 从内存中加载一个字节（8位）到目标寄存器，并进行符号扩展。
+<pre><code class="language-assembly">LB rd, offset(rs1)  # rd = *(int8_t *)(rs1 + offset)
+</code></pre>
+</li>
+<li><strong>LBU</strong>: 从内存中加载一个字节（8位）到目标寄存器，并进行零扩展。
+<pre><code class="language-assembly">LBU rd, offset(rs1)  # rd = *(uint8_t *)(rs1 + offset)
+</code></pre>
+</li>
+</ul>
+<h3 id="存储指令"><a class="header" href="#存储指令">存储指令</a></h3>
+<ul>
+<li><strong>SW</strong>: 将一个字（32位）从源寄存器存储到内存中。
+<pre><code class="language-assembly">SW rs2, offset(rs1)  # *(rs1 + offset) = rs2
+</code></pre>
+</li>
+<li><strong>SH</strong>: 将一个半字（16位）从源寄存器存储到内存中。
+<pre><code class="language-assembly">SH rs2, offset(rs1)  # *(int16_t *)(rs1 + offset) = rs2
+</code></pre>
+</li>
+<li><strong>SB</strong>: 将一个字节（8位）从源寄存器存储到内存中。
+<pre><code class="language-assembly">SB rs2, offset(rs1)  # *(int8_t *)(rs1 + offset) = rs2
+</code></pre>
+</li>
+</ul>
+<p>这些指令构成了 RISC-V 基础指令集的重要部分，为各种计算和控制流操作提供了必要的功能。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="chapter_3_1.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="chapter_3_3.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="chapter_3_1.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="chapter_3_3.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

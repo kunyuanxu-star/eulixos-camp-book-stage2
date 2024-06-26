@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> 第一章 矩阵与卷积算法</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> 第二章 Linux内核模块</a></li><li class="chapter-item expanded "><a href="chapter_3.html" class="active"><strong aria-hidden="true">3.</strong> 第三章 RISC-V架构内联汇编</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> 第四章 操作系统常用算法（上）</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> 第五章 操作系统常用算法（下）</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> 第六章 Linux系统编程基础</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> 第一章 矩阵与卷积算法</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_1_1.html"><strong aria-hidden="true">1.1.</strong> 矩阵与线性代数</a></li><li class="chapter-item expanded "><a href="chapter_1_2.html"><strong aria-hidden="true">1.2.</strong> 卷积算法</a></li><li class="chapter-item expanded "><a href="chapter_1_3.html"><strong aria-hidden="true">1.3.</strong> 矩阵转置</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> 第二章 Linux内核模块</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_2_1.html"><strong aria-hidden="true">2.1.</strong> 编写一个简单的内核模块</a></li><li class="chapter-item expanded "><a href="chapter_2_2.html"><strong aria-hidden="true">2.2.</strong> 内核模块传参</a></li><li class="chapter-item expanded "><a href="chapter_2_3.html"><strong aria-hidden="true">2.3.</strong> 创建字符设备</a></li><li class="chapter-item expanded "><a href="chapter_2_4.html"><strong aria-hidden="true">2.4.</strong> 实现计时器</a></li><li class="chapter-item expanded "><a href="chapter_2_5.html"><strong aria-hidden="true">2.5.</strong> 实现简单文件操作</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_3.html" class="active"><strong aria-hidden="true">3.</strong> 第三章 RISC-V架构内联汇编</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_3_1.html"><strong aria-hidden="true">3.1.</strong> RISC-V架构简介</a></li><li class="chapter-item expanded "><a href="chapter_3_2.html"><strong aria-hidden="true">3.2.</strong> RISC-V基础指令集</a></li><li class="chapter-item expanded "><a href="chapter_3_3.html"><strong aria-hidden="true">3.3.</strong> 控制结构的汇编表示方法</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> 第四章 操作系统常用算法</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_4_1.html"><strong aria-hidden="true">4.1.</strong> FIFO 页面置换算法</a></li><li class="chapter-item expanded "><a href="chapter_4_2.html"><strong aria-hidden="true">4.2.</strong> LRU 页面置换算法</a></li><li class="chapter-item expanded "><a href="chapter_4_3.html"><strong aria-hidden="true">4.3.</strong> 模拟时间片轮转调度算法</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">5.</strong> 第五章 Linux系统编程基础</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -182,183 +182,33 @@
 </ol>
 <h2 id="介绍"><a class="header" href="#介绍">介绍</a></h2>
 <p>内联汇编允许在C语言代码中直接嵌入汇编指令，从而能够利用底层硬件特性来优化性能。本教程将介绍如何在RISC-V架构上使用内联汇编，涵盖RISC-V指令集的基础知识，以及如何将C语言中的常见控制结构用汇编表示。</p>
-<h2 id="risc-v指令集简介"><a class="header" href="#risc-v指令集简介">RISC-V指令集简介</a></h2>
-<p>RISC-V（Reduced Instruction Set Computing V）是一种开源的指令集架构（ISA），它具有简洁、模块化和高效等特点。以下是一些基本的RISC-V指令：</p>
-<h3 id="寄存器"><a class="header" href="#寄存器">寄存器</a></h3>
+<h2 id="主要内容"><a class="header" href="#主要内容">主要内容</a></h2>
 <ul>
-<li><code>x0</code>-<code>x31</code>：32个整数寄存器。</li>
-<li><code>f0</code>-<code>f31</code>：32个浮点寄存器。</li>
+<li><a href="./chapter_3_1.html">RISC-V架构简介</a></li>
+<li><a href="./chapter_3_2.html">RISC-V基础指令集</a></li>
+<li><a href="./chapter_3_3.html">控制结构的汇编表示方法</a></li>
 </ul>
-<h3 id="基本指令"><a class="header" href="#基本指令">基本指令</a></h3>
-<ul>
-<li><code>add rd, rs1, rs2</code>：rd = rs1 + rs2</li>
-<li><code>sub rd, rs1, rs2</code>：rd = rs1 - rs2</li>
-<li><code>mul rd, rs1, rs2</code>：rd = rs1 * rs2</li>
-<li><code>div rd, rs1, rs2</code>：rd = rs1 / rs2</li>
-<li><code>lw rd, offset(rs1)</code>：从内存加载字到rd</li>
-<li><code>sw rs2, offset(rs1)</code>：将字存储到内存</li>
-</ul>
-<h2 id="内联汇编语法"><a class="header" href="#内联汇编语法">内联汇编语法</a></h2>
-<p>在GCC编译器中，内联汇编使用<code>asm</code>关键字。以下是一个基本的内联汇编语法示例：</p>
-<pre><code class="language-c">int result;
-asm("add %0, %1, %2" : "=r" (result) : "r" (a), "r" (b));
-</code></pre>
-<ul>
-<li><code>"add %0, %1, %2"</code>：汇编指令模板。</li>
-<li><code>: "=r" (result)</code>：输出操作数，<code>=r</code>表示输出到寄存器。</li>
-<li><code>: "r" (a), "r" (b)</code>：输入操作数，<code>r</code>表示从寄存器读取。</li>
-</ul>
-<h2 id="控制结构的内联汇编表示"><a class="header" href="#控制结构的内联汇编表示">控制结构的内联汇编表示</a></h2>
-<h3 id="while循环"><a class="header" href="#while循环">while循环</a></h3>
-<pre><code class="language-c">int i = 0;
-while (i &lt; 10) {
-    // 循环体
-    i++;
-}
-</code></pre>
-<p>等价的内联汇编：</p>
-<pre><code class="language-c">int i = 0;
-asm volatile (
-    "loop_start:            \n\t"
-    "   blt  %[i], %[max], loop_body \n\t"
-    "   j    loop_end       \n\t"
-    "loop_body:             \n\t"
-    "   addi %[i], %[i], 1  \n\t"
-    "   j    loop_start     \n\t"
-    "loop_end:              \n\t"
-    : [i] "+r" (i)
-    : [max] "r" (10)
-    : "cc"
-);
-</code></pre>
-<h3 id="if-else语句"><a class="header" href="#if-else语句">if-else语句</a></h3>
-<pre><code class="language-c">int a = 5, b = 10;
-if (a &lt; b) {
-    // 真分支
-} else {
-    // 假分支
-}
-</code></pre>
-<p>等价的内联汇编：</p>
-<pre><code class="language-c">int a = 5, b = 10;
-asm volatile (
-    "   blt   %[a], %[b], if_true  \n\t"
-    "   j     else_branch          \n\t"
-    "if_true:                      \n\t"
-    // 真分支代码
-    "   j     end_if               \n\t"
-    "else_branch:                  \n\t"
-    // 假分支代码
-    "end_if:                       \n\t"
-    :
-    : [a] "r" (a), [b] "r" (b)
-    : "cc"
-);
-</code></pre>
-<h3 id="do-while循环"><a class="header" href="#do-while循环">do-while循环</a></h3>
-<pre><code class="language-c">int i = 0;
-do {
-    // 循环体
-    i++;
-} while (i &lt; 10);
-</code></pre>
-<p>等价的内联汇编：</p>
-<pre><code class="language-c">int i = 0;
-asm volatile (
-    "do_start:                \n\t"
-    "   addi %[i], %[i], 1    \n\t"
-    "   blt  %[i], %[max], do_start \n\t"
-    : [i] "+r" (i)
-    : [max] "r" (10)
-    : "cc"
-);
-</code></pre>
-<h3 id="switch语句"><a class="header" href="#switch语句">switch语句</a></h3>
-<pre><code class="language-c">int val = 2;
-switch (val) {
-    case 1:
-        // case 1代码
-        break;
-    case 2:
-        // case 2代码
-        break;
-    default:
-        // 默认代码
-        break;
-}
-</code></pre>
-<p>等价的内联汇编：</p>
-<pre><code class="language-c">int val = 2;
-asm volatile (
-    "   li    t0, 1           \n\t"
-    "   beq   %[val], t0, case1 \n\t"
-    "   li    t0, 2           \n\t"
-    "   beq   %[val], t0, case2 \n\t"
-    "   j     default_case    \n\t"
-    "case1:                   \n\t"
-    // case 1代码
-    "   j     end_switch      \n\t"
-    "case2:                   \n\t"
-    // case 2代码
-    "   j     end_switch      \n\t"
-    "default_case:            \n\t"
-    // 默认代码
-    "end_switch:              \n\t"
-    :
-    : [val] "r" (val)
-    : "t0", "cc"
-);
-</code></pre>
-<h3 id="continue与break"><a class="header" href="#continue与break">continue与break</a></h3>
-<p>在循环中使用<code>continue</code>和<code>break</code>：</p>
-<pre><code class="language-c">for (int i = 0; i &lt; 10; i++) {
-    if (i == 5) continue;
-    if (i == 8) break;
-    // 循环体
-}
-</code></pre>
-<p>等价的内联汇编：</p>
-<pre><code class="language-c">int i = 0;
-asm volatile (
-    "for_start:                \n\t"
-    "   bge   %[i], %[max], for_end   \n\t"
-    "   li    t0, 5           \n\t"
-    "   beq   %[i], t0, continue_loop \n\t"
-    "   li    t0, 8           \n\t"
-    "   beq   %[i], t0, for_end       \n\t"
-    // 循环体代码
-    "continue_loop:           \n\t"
-    "   addi  %[i], %[i], 1   \n\t"
-    "   j     for_start       \n\t"
-    "for_end:                 \n\t"
-    : [i] "+r" (i)
-    : [max] "r" (10)
-    : "t0", "cc"
-);
-</code></pre>
-<h2 id="参考资料"><a class="header" href="#参考资料">参考资料</a></h2>
+<h2 id="简介"><a class="header" href="#简介">简介</a></h2>
+<p>通过本教程，你将了解如何在RISC-V架构上使用内联汇编，并掌握将C语言中的控制结构转换为汇编代码的方法。希望这些内容对你在实际编程中有所帮助。</p>
+<h2 id="36-参考资料"><a class="header" href="#36-参考资料">3.6 参考资料</a></h2>
 <ul>
 <li><a href="https://riscv.org/technical/specifications/">RISC-V 官方文档</a></li>
 <li><a href="https://gcc.gnu.org/onlinedocs/gcc/Using-Assembly-Language-with-C.html">GCC 内联汇编指南</a></li>
 <li><a href="https://riscv.org/software-tools/risc-v-assembly-programming/">RISC-V 汇编教程</a></li>
-</ul>
-<h2 id="相关教程"><a class="header" href="#相关教程">相关教程</a></h2>
-<ul>
+<li><a href="https://riscvasm.com">Learn RISC-V Assembly</a></li>
 <li>《RISC-V汇编语言程序设计》</li>
 <li>《嵌入式系统与RISC-V架构》</li>
-<li><a href="https://riscvasm.com">Learn RISC-V Assembly</a></li>
 </ul>
-<p>通过本教程，你已经了解了如何在RISC-V架构上使用内联汇编，并掌握了将C语言中的控制结构转换为汇编代码的方法。希望这些内容对你在实际编程中有所帮助。</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="chapter_2.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="chapter_2_5.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="chapter_4.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="chapter_3_1.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -368,11 +218,11 @@ asm volatile (
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="chapter_2.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="chapter_2_5.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="chapter_4.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="chapter_3_1.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

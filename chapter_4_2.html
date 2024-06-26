@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>第五章 操作系统常用算法（下） - 第一期傲来操作系统训练营进阶阶段学习引导</title>
+        <title>LRU 页面置换算法 - 第一期傲来操作系统训练营进阶阶段学习引导</title>
 
 
         <!-- Custom HTML head -->
@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> 第一章 矩阵与卷积算法</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> 第二章 Linux内核模块</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> 第三章 RISC-V架构内联汇编</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> 第四章 操作系统常用算法（上）</a></li><li class="chapter-item expanded "><a href="chapter_5.html" class="active"><strong aria-hidden="true">5.</strong> 第五章 操作系统常用算法（下）</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> 第六章 Linux系统编程基础</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> 第一章 矩阵与卷积算法</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_1_1.html"><strong aria-hidden="true">1.1.</strong> 矩阵与线性代数</a></li><li class="chapter-item expanded "><a href="chapter_1_2.html"><strong aria-hidden="true">1.2.</strong> 卷积算法</a></li><li class="chapter-item expanded "><a href="chapter_1_3.html"><strong aria-hidden="true">1.3.</strong> 矩阵转置</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> 第二章 Linux内核模块</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_2_1.html"><strong aria-hidden="true">2.1.</strong> 编写一个简单的内核模块</a></li><li class="chapter-item expanded "><a href="chapter_2_2.html"><strong aria-hidden="true">2.2.</strong> 内核模块传参</a></li><li class="chapter-item expanded "><a href="chapter_2_3.html"><strong aria-hidden="true">2.3.</strong> 创建字符设备</a></li><li class="chapter-item expanded "><a href="chapter_2_4.html"><strong aria-hidden="true">2.4.</strong> 实现计时器</a></li><li class="chapter-item expanded "><a href="chapter_2_5.html"><strong aria-hidden="true">2.5.</strong> 实现简单文件操作</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> 第三章 RISC-V架构内联汇编</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_3_1.html"><strong aria-hidden="true">3.1.</strong> RISC-V架构简介</a></li><li class="chapter-item expanded "><a href="chapter_3_2.html"><strong aria-hidden="true">3.2.</strong> RISC-V基础指令集</a></li><li class="chapter-item expanded "><a href="chapter_3_3.html"><strong aria-hidden="true">3.3.</strong> 控制结构的汇编表示方法</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> 第四章 操作系统常用算法</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_4_1.html"><strong aria-hidden="true">4.1.</strong> FIFO 页面置换算法</a></li><li class="chapter-item expanded "><a href="chapter_4_2.html" class="active"><strong aria-hidden="true">4.2.</strong> LRU 页面置换算法</a></li><li class="chapter-item expanded "><a href="chapter_4_3.html"><strong aria-hidden="true">4.3.</strong> 模拟时间片轮转调度算法</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">5.</strong> 第五章 Linux系统编程基础</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -173,117 +173,100 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="第五章-操作系统常用算法下"><a class="header" href="#第五章-操作系统常用算法下">第五章 操作系统常用算法（下）</a></h1>
-<h2 id="本章要求"><a class="header" href="#本章要求">本章要求</a></h2>
-<ul>
-<li>理解并实现时间片轮转调度算法。</li>
-</ul>
-<h2 id="模拟时间片轮转调度算法"><a class="header" href="#模拟时间片轮转调度算法">模拟时间片轮转调度算法</a></h2>
-<h3 id="原理"><a class="header" href="#原理">原理</a></h3>
-<p>时间片轮转（Round Robin, RR）是一种广泛使用的进程调度算法。其核心思想是将CPU时间划分成固定长度的时间片（time slices），并按顺序将这些时间片分配给就绪队列中的每个进程。每个进程在其时间片内运行，当时间片用完时，如果进程尚未完成，则将其置于就绪队列的末尾，等待下一轮调度。这样可以确保所有进程都能公平地获得CPU资源。</p>
-<h3 id="进程结构体"><a class="header" href="#进程结构体">进程结构体</a></h3>
-<p>进程结构体包含以下字段：</p>
-<ul>
-<li><code>pid</code>：进程ID，用于标识进程。</li>
-<li><code>arrival_time</code>：到达时间，进程进入系统的时间。</li>
-<li><code>burst_time</code>：运行时间，进程需要的总CPU时间。</li>
-<li><code>remaining_time</code>：剩余运行时间，用于记录进程还需要多少时间完成。</li>
-<li><code>completion_time</code>：完成时间，进程完成执行的时间。</li>
-<li><code>turnaround_time</code>：周转时间，进程从到达至完成所经历的总时间（完成时间 - 到达时间）。</li>
-<li><code>waiting_time</code>：等待时间，进程在就绪队列中等待的时间（周转时间 - 运行时间）。</li>
-</ul>
-<h3 id="输入数据"><a class="header" href="#输入数据">输入数据</a></h3>
-<p>时间片长度：4 个时间单位。<br />
-进程数量：4 个进程。<br />
-每个进程的到达时间和运行时间如下表所示：</p>
-<div class="table-wrapper"><table><thead><tr><th>进程ID</th><th>到达时间</th><th>运行时间</th></tr></thead><tbody>
-<tr><td>P1</td><td>0</td><td>10</td></tr>
-<tr><td>P2</td><td>1</td><td>6</td></tr>
-<tr><td>P3</td><td>2</td><td>8</td></tr>
-<tr><td>P4</td><td>3</td><td>4</td></tr>
-</tbody></table>
-</div>
-<h3 id="计算方法"><a class="header" href="#计算方法">计算方法</a></h3>
-<h4 id="calculatetime-函数"><a class="header" href="#calculatetime-函数">calculateTime 函数</a></h4>
-<p>该函数将模拟时间片轮转调度算法，并计算每个进程的完成时间、周转时间和等待时间。</p>
+                        <h1 id="lru-页面置换算法"><a class="header" href="#lru-页面置换算法">LRU 页面置换算法</a></h1>
+<h2 id="原理"><a class="header" href="#原理">原理</a></h2>
+<p>LRU（Least Recently Used）页面置换算法根据页面最近使用的情况来决定置换哪一个页面。具体来说，它将最久未被使用的页面置换出去。</p>
+<h2 id="函数实现"><a class="header" href="#函数实现">函数实现</a></h2>
+<p>以下是LRU页面置换算法的实现：</p>
 <pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
 
-typedef struct {
-    int pid;               // 进程ID
-    int arrival_time;      // 到达时间
-    int burst_time;        // 运行时间
-    int remaining_time;    // 剩余运行时间
-    int completion_time;   // 完成时间
-    int turnaround_time;   // 周转时间
-    int waiting_time;      // 等待时间
-} Process;
+#define MAX_FRAMES 100
 
-#define TIME_SLICE 4
-#define NUM_PROCESSES 4
-
-void calculateTime(Process processes[], int n) {
+/**
+ * 函数：模拟LRU页面置换算法。
+ *
+ * @param queue_frames 一个字符串，表示页面访问序列。
+ *                     字符串中的每个字符是一个数字，表示一个页面号。
+ * @param num_frames   页框的数量，表示物理内存中可用的页框数。
+ */
+void lru_page_replacement(char *queue_frames, int num_frames) {
+    int frames[MAX_FRAMES];
+    int counter[MAX_FRAMES];
     int time = 0;
-    int completed = 0;
+    int page_faults = 0;
 
-    while (completed &lt; n) {
-        for (int i = 0; i &lt; n; i++) {
-            if (processes[i].arrival_time &lt;= time &amp;&amp; processes[i].remaining_time &gt; 0) {
-                if (processes[i].remaining_time &lt;= TIME_SLICE) {
-                    time += processes[i].remaining_time;
-                    processes[i].remaining_time = 0;
-                    processes[i].completion_time = time;
-                    processes[i].turnaround_time = processes[i].completion_time - processes[i].arrival_time;
-                    processes[i].waiting_time = processes[i].turnaround_time - processes[i].burst_time;
-                    completed++;
-                } else {
-                    time += TIME_SLICE;
-                    processes[i].remaining_time -= TIME_SLICE;
-                }
+    for (int i = 0; i &lt; num_frames; i++) {
+        frames[i] = -1;  // 初始化页框为空
+        counter[i] = 0;  // 初始化计数器
+    }
+
+    for (int i = 0; i &lt; strlen(queue_frames); i++) {
+        int page = queue_frames[i] - '0';
+        int found = 0;
+
+        // 检查页面是否已经在页框中
+        for (int j = 0; j &lt; num_frames; j++) {
+            if (frames[j] == page) {
+                found = 1;
+                counter[j] = ++time;  // 更新页面使用时间
+                break;
             }
         }
+
+        // 页面不在页框中，需要置换
+        if (!found) {
+            page_faults++;
+            int lru_index = 0;
+            int lru_time = counter[0];
+
+            // 找到最久未使用的页面
+            for (int j = 1; j &lt; num_frames; j++) {
+                if (counter[j] &lt; lru_time) {
+                    lru_time = counter[j];
+                    lru_index = j;
+                }
+            }
+
+            frames[lru_index] = page;
+            counter[lru_index] = ++time;
+
+            // 打印当前页框状态
+            printf("Page %d: [", page);
+            for (int j = 0; j &lt; num_frames; j++) {
+                printf("%d", frames[j]);
+                if (j &lt; num_frames - 1) {
+                    printf(" ");
+                }
+            }
+            printf("]\n");
+        }
     }
+
+    printf("Total page faults: %d\n", page_faults);
 }
 
 int main() {
-    Process processes[NUM_PROCESSES] = {
-        {1, 0, 10, 10, 0, 0, 0},
-        {2, 1, 6, 6, 0, 0, 0},
-        {3, 2, 8, 8, 0, 0, 0},
-        {4, 3, 4, 4, 0, 0, 0}
-    };
+    char queue_frames[] = "70120304230321201701";
+    int num_frames = 3;
 
-    calculateTime(processes, NUM_PROCESSES);
-
-    for (int i = 0; i &lt; NUM_PROCESSES; i++) {
-        printf("P%d 完成时间: %d, 周转时间: %d, 等待时间: %d\n",
-               processes[i].pid,
-               processes[i].completion_time,
-               processes[i].turnaround_time,
-               processes[i].waiting_time);
-    }
+    lru_page_replacement(queue_frames, num_frames);
 
     return 0;
 }
 </code></pre>
-<h3 id="输出结果"><a class="header" href="#输出结果">输出结果</a></h3>
-<p>根据输入数据和时间片轮转调度算法的规则，输出结果如下：</p>
-<pre><code>P1 完成时间: 28, 周转时间: 28, 等待时间: 18
-P2 完成时间: 22, 周转时间: 21, 等待时间: 15
-P3 完成时间: 26, 周转时间: 24, 等待时间: 16
-P4 完成时间: 16, 周转时间: 13, 等待时间: 9
-</code></pre>
-<h3 id="结论"><a class="header" href="#结论">结论</a></h3>
-<p>通过时间片轮转调度算法，每个进程都能公平地获得CPU资源，并且算法能够计算出每个进程的完成时间、周转时间和等待时间。这对于实现操作系统中的进程调度是非常重要的。</p>
+<p>这两个函数分别实现了FIFO和LRU页面置换算法。在每个函数中，<code>queue_frames</code>是页面访问序列，<code>num_frames</code>是可用的页框数。每次访问一个页面时，函数会检查该页面是否在页框中。如果不在，则需要置换一个页面。FIFO算法总是置换最早进入内存的页面，而LRU算法则置换最久未使用的页面。</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="chapter_4.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="chapter_4_1.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="chapter_6.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="chapter_4_3.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -293,11 +276,11 @@ P4 完成时间: 16, 周转时间: 13, 等待时间: 9
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="chapter_4.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="chapter_4_1.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="chapter_6.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="chapter_4_3.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
