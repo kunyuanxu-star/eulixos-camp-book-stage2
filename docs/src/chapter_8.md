@@ -1,94 +1,47 @@
 # RISC-V向量拓展基础与优化基础C库实践
 
-## RISC-V 向量拓展 (V Extension) 基础
+## 本章要求
 
-RISC-V 向量拓展 (Vector Extension, V) 是 RISC-V 指令集架构的一部分，旨在为高性能计算、机器学习、图像处理等领域提供高效的向量处理能力。向量拓展指令集支持单指令多数据 (SIMD) 操作，能够显著提高并行计算性能。
+1. 掌握RISC-V向量拓展基础知识
+2. 掌握RISC-V向量拓展优化基础知识
+3. 掌握C语言中向量化编程的基本方法
+4. 掌握C语言中向量化编程的优化方法
 
-### 向量寄存器与指令集
+## 主要内容
 
-1. **向量寄存器**
-   - RISC-V V 扩展提供了一组向量寄存器 (Vector Registers)，每个寄存器可以存储多个数据元素。
-   - 向量寄存器的数量通常为 32 个，标识为 v0 到 v31。
-   - 每个向量寄存器的长度是可配置的，可以是 128 位、256 位、512 位等。
+- [RISC-V 向量拓展 (V Extension) 基础](./chapter_8_1.md)
+- [RISC-V SIMD 和 Unroll 优化方案](./chapter_8_2.md)
 
-2. **向量指令集**
-   - RISC-V V 扩展定义了一组向量指令，用于对向量寄存器进行操作。这些指令包括但不限于：
-     - **加载/存储指令**：用于在内存和向量寄存器之间传输数据。
-     - **算术运算指令**：用于执行加法、减法、乘法、除法等运算。
-     - **逻辑运算指令**：用于执行按位与、或、异或等操作。
-     - **比较指令**：用于比较向量寄存器中的数据。
-     - **数据重排指令**：用于重排、合并、拆分向量数据。
+## 参考资料
 
-### SIMD 和向量化
+1. **RISC-V指令集架构手册** - 这是理解RISC-V架构的基础，包括其向量扩展和SIMD能力。
+   - 链接：[RISC-V ISA Manual](https://riscv.org/technical/specifications/)
 
-1. **SIMD (Single Instruction, Multiple Data)**
-   - SIMD 是一种并行计算模式，在 RISC-V 向量扩展中得到了体现。
-   - SIMD 允许单条指令同时对多个数据元素进行操作，从而提高计算效率。
+2. **RISC-V Vector Extension Specification** - 详细介绍了RISC-V的向量扩展，包括指令集和编程模型。
+   - 链接：[RISC-V Vector Extension](https://github.com/riscv/riscv-v-spec)
 
-2. **向量化**
-   - 向量化是指将标量操作转换为向量操作，以利用 SIMD 指令的并行计算能力。
-   - 向量化可以通过手动编写向量指令，或者使用编译器自动向量化实现。
+3. **GCC编译器文档** - 包括如何使用GCC编译器进行RISC-V程序的编译和优化。
+   - 链接：[GCC RISC-V Options](https://gcc.gnu.org/onlinedocs/gcc-9.2.0/gcc/RISC-V-Options.html)
 
-## RISC-V C 语言计算库
+4. **LLVM编译器文档** - LLVM项目也支持RISC-V，文档中包含了编译和优化RISC-V程序的相关信息。
+   - 链接：[LLVM RISC-V Documentation](https://llvm.org/docs/RISCV.html)
 
-为了在 C 语言中高效地利用 RISC-V 的向量拓展和 SIMD 指令，可以使用专门的计算库。这些库提供了高层次的 API，简化了向量指令的使用。
+5. **RISC-V Software Development Tools** - 介绍RISC-V软件开发工具，包括编译器、调试器和性能分析工具。
+   - 链接：[RISC-V Software Tools](https://riscv.org/software-tools/)
 
-### RISC-V 向量计算库
+6. **RISC-V International Conferences** - RISC-V相关的国际会议论文集，包含最新的研究成果和开发实践。
+   - 链接：[RISC-V International Conferences](https://riscv.org/conference/)
 
-1. **RVV Intrinsics**
-   - RVV Intrinsics 是一组内嵌函数，允许在 C 语言中直接使用 RISC-V 向量指令。
-   - Intrinsics 函数通常以 `__riscv_v_` 开头，如 `__riscv_v_add_vv` 用于向量加法。
+7. **RISC-V社区论坛和邮件列表** - 社区讨论和技术支持，可以获取关于RISC-V编程和优化的实用建议。
+   - 链接：[RISC-V Community](https://riscv.org/community/)
 
-2. **使用示例**
-   ```c
-   #include <riscv_vector.h>
+8. **性能分析工具文档** - 如gprof和perf，这些工具可以帮助你分析程序的性能并识别优化点。
+   - gprof文档：通常包含在GCC的文档中。
+   - perf文档：[perf Documentation](https://www.kernel.org/doc/html/latest/dev-tools/perf.html)
 
-   void vector_add(const int *a, const int *b, int *c, int n) {
-       size_t vl;
-       for (size_t i = 0; i < n; i += vl) {
-           vl = vsetvl_e32m1(n - i); // 设置向量长度
-           vint32m1_t va = vle32_v_i32m1(&a[i], vl); // 加载向量a
-           vint32m1_t vb = vle32_v_i32m1(&b[i], vl); // 加载向量b
-           vint32m1_t vc = vadd_vv_i32m1(va, vb, vl); // 执行向量加法
-           vse32_v_i32m1(&c[i], vc, vl); // 存储结果向量c
-       }
-   }
-   ```
+9. **并行编程和优化书籍** - 这些书籍通常包含关于如何优化并行程序的通用策略，可以应用于RISC-V SIMD优化。
+   - 例如："Parallel Programming for Multicore and Cluster Systems" by Mikel L. Z. Luque
 
-### RISC-V 向量库优化
+10. **学术期刊和会议论文** - 搜索与RISC-V SIMD和Unroll优化相关的学术论文，可以提供深入的技术分析和案例研究。
 
-1. **循环展开 (Loop Unrolling)**
-   - 循环展开是一种编译优化技术，通过减少循环控制开销提高性能。
-   - 手动循环展开可以结合向量指令进一步提升性能。
-
-2. **自动向量化**
-   - 编译器可以自动识别并向量化循环和数据操作，以生成高效的 SIMD 代码。
-   - 需要确保代码中的数据访问和操作是连续且没有数据依赖的，以便编译器可以进行向量化。
-
-3. **手动向量化**
-   - 在某些情况下，手动编写向量化代码可以获得更高的性能。
-   - 使用 RVV Intrinsics 或者汇编语言直接编写向量操作代码。
-
-## RISC-V SIMD 和 Unroll 优化方案
-
-优化 C 语言程序以利用 RISC-V 的 SIMD 和 Unroll 技术需要以下几个步骤：
-
-1. **识别热点代码**
-   - 使用性能分析工具（如 gprof 或 perf）识别程序中的热点代码段。
-
-2. **重构循环**
-   - 确保循环中的数据访问是连续的，并消除循环体内的依赖。
-   - 使用循环展开技术减少循环控制开销。
-
-3. **使用向量指令**
-   - 使用 RVV Intrinsics 或者向量计算库将标量操作转换为向量操作。
-   - 确保数据对齐，以充分利用向量指令的性能优势。
-
-4. **编译器优化**
-   - 启用编译器的自动向量化选项（如 `-O3` 和 `-ftree-vectorize`）。
-   - 检查编译器生成的汇编代码，确保循环和数据操作被向量化。
-
-5. **性能测试和调优**
-   - 使用基准测试和性能分析工具验证优化效果。
-   - 根据测试结果进一步调整代码和编译选项，最大化性能提升。
-- RISC-V 向量拓展 (V Extension) 提供了强大的 SIMD 能力，为高性能计算提供了基础。通过使用向量指令和优化技术，可以显著提升 C 语言程序在 RISC-V 架构上的执行效率。合理利用 RVV Intrinsics、循环展开和编译器优化选项，结合性能分析和调优工具，可以实现高效的向量化计算。
+请注意，上述链接可能需要根据实际可用性和访问权限进行调整。在使用这些资源时，请确保遵循适当的引用规范和版权法规。

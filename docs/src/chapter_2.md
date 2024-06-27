@@ -15,6 +15,7 @@
 - [创建字符设备](./chapter_2_3.md)
 - [实现计时器](./chapter_2_4.md)
 - [实现简单文件操作](./chapter_2_5.md)
+- [Linux系统编程基础](./chapter_2_6.md)
 
 ## 注意
 
