@@ -9,9 +9,9 @@
 
 ## 主要内容
 
-- [FIFO 页面置换算法](./chapter_4_1.md)
-- [LRU 页面置换算法](./chapter_4_2.md)
-- [模拟时间片轮转调度算法](./chapter_4_3.md)
+- [FIFO 页面置换算法](./chapter-7_1.md)
+- [LRU 页面置换算法](./chapter-7_2.md)
+- [模拟时间片轮转调度算法](./chapter-7_3.md)
 
 ## 注意
 

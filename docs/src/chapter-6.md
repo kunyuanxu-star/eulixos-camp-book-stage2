@@ -8,9 +8,9 @@
 
 ## 主要内容
 
-- [RISC-V架构简介](./chapter_3_1.md)
-- [RISC-V基础指令集](./chapter_3_2.md)
-- [控制结构的汇编表示方法](./chapter_3_3.md)
+- [RISC-V架构简介](./chapter-6_1.md)
+- [RISC-V基础指令集](./chapter-6_2.md)
+- [控制结构的汇编表示方法](./chapter-6_3.md)
 
 
 ## 注意

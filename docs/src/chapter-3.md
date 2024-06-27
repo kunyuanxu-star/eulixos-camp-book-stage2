@@ -9,8 +9,8 @@
 
 ## 主要内容
 
-- [RISC-V 向量拓展 (V Extension) 基础](./chapter_8_1.md)
-- [RISC-V SIMD 和 Unroll 优化方案](./chapter_8_2.md)
+- [RISC-V 向量拓展 (V Extension) 基础](./chapter-3_1.md)
+- [RISC-V SIMD 和 Unroll 优化方案](./chapter-3_2.md)
 
 ## 参考资料
 
