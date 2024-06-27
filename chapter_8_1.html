@@ -1,0 +1,323 @@
+<!DOCTYPE HTML>
+<html lang="Chinese" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>RISC-V 向量拓展 (V Extension) 基础 - 第一期傲来操作系统训练营进阶阶段学习引导</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="preface.html"><strong aria-hidden="true">1.</strong> 前言</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">2.</strong> 第一章 虚拟内存与物理内存管理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_6_1.html"><strong aria-hidden="true">2.1.</strong> 虚拟内存与物理内存管理概念</a></li><li class="chapter-item expanded "><a href="chapter_6_2.html"><strong aria-hidden="true">2.2.</strong> RISC-V 虚拟内存管理机制</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">3.</strong> 第二章 系统虚拟化与容器</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_7_1.html"><strong aria-hidden="true">3.1.</strong> 虚拟化技术</a></li><li class="chapter-item expanded "><a href="chapter_7_2.html"><strong aria-hidden="true">3.2.</strong> 容器技术</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_8.html"><strong aria-hidden="true">4.</strong> 第三章 RISC-V向量拓展基础与优化基础C库实践</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_8_1.html" class="active"><strong aria-hidden="true">4.1.</strong> RISC-V 向量拓展 (V Extension) 基础</a></li><li class="chapter-item expanded "><a href="chapter_8_2.html"><strong aria-hidden="true">4.2.</strong> RISC-V SIMD 和 Unroll 优化方案</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">5.</strong> 第四章 矩阵与卷积算法</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_1_1.html"><strong aria-hidden="true">5.1.</strong> 矩阵与线性代数</a></li><li class="chapter-item expanded "><a href="chapter_1_2.html"><strong aria-hidden="true">5.2.</strong> 卷积算法</a></li><li class="chapter-item expanded "><a href="chapter_1_3.html"><strong aria-hidden="true">5.3.</strong> 矩阵转置</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">6.</strong> 第五章 Linux内核模块</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_2_1.html"><strong aria-hidden="true">6.1.</strong> 编写一个简单的内核模块</a></li><li class="chapter-item expanded "><a href="chapter_2_2.html"><strong aria-hidden="true">6.2.</strong> 内核模块传参</a></li><li class="chapter-item expanded "><a href="chapter_2_3.html"><strong aria-hidden="true">6.3.</strong> 创建字符设备</a></li><li class="chapter-item expanded "><a href="chapter_2_4.html"><strong aria-hidden="true">6.4.</strong> 实现计时器</a></li><li class="chapter-item expanded "><a href="chapter_2_5.html"><strong aria-hidden="true">6.5.</strong> 实现简单文件操作</a></li><li class="chapter-item expanded "><a href="chapter_2_6.html"><strong aria-hidden="true">6.6.</strong> Linux系统编程基础</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">7.</strong> 第六章 RISC-V架构内联汇编</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_3_1.html"><strong aria-hidden="true">7.1.</strong> RISC-V架构简介</a></li><li class="chapter-item expanded "><a href="chapter_3_2.html"><strong aria-hidden="true">7.2.</strong> RISC-V基础指令集</a></li><li class="chapter-item expanded "><a href="chapter_3_3.html"><strong aria-hidden="true">7.3.</strong> 控制结构的汇编表示方法</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">8.</strong> 第七章 操作系统常用算法</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_4_1.html"><strong aria-hidden="true">8.1.</strong> FIFO 页面置换算法</a></li><li class="chapter-item expanded "><a href="chapter_4_2.html"><strong aria-hidden="true">8.2.</strong> LRU 页面置换算法</a></li><li class="chapter-item expanded "><a href="chapter_4_3.html"><strong aria-hidden="true">8.3.</strong> 模拟时间片轮转调度算法</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_9.html"><strong aria-hidden="true">9.</strong> 第八章 习题引导</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="exercises/22.html"><strong aria-hidden="true">9.1.</strong> 22 - 矩阵相乘 - 矩阵</a></li><li class="chapter-item expanded "><a href="exercises/23.html"><strong aria-hidden="true">9.2.</strong> 23 - 2D卷积操作 - 矩阵</a></li><li class="chapter-item expanded "><a href="exercises/24.html"><strong aria-hidden="true">9.3.</strong> 24 - 矩阵原地转置 - 矩阵</a></li><li class="chapter-item expanded "><a href="exercises/25.html"><strong aria-hidden="true">9.4.</strong> 25 - 包含0的行列进行矩阵置零 - 矩阵</a></li><li class="chapter-item expanded "><a href="exercises/26.html"><strong aria-hidden="true">9.5.</strong> 26 - 查找矩阵中第K个最小的元素 - 矩阵</a></li><li class="chapter-item expanded "><a href="exercises/36.html"><strong aria-hidden="true">9.6.</strong> 36 - 编写一个内核模块求最大值 - 内核模块</a></li><li class="chapter-item expanded "><a href="exercises/37.html"><strong aria-hidden="true">9.7.</strong> 37 - 编写一个内核模块启动一个定时器 - 内核模块</a></li><li class="chapter-item expanded "><a href="exercises/38.html"><strong aria-hidden="true">9.8.</strong> 38 - 编写一个内核模块创建一个虚拟字符设备 - 内核模块</a></li><li class="chapter-item expanded "><a href="exercises/39.html"><strong aria-hidden="true">9.9.</strong> 39 - 编写一个内核模块实现一个简单的文件操作函数 - 内核模块</a></li><li class="chapter-item expanded "><a href="exercises/43.html"><strong aria-hidden="true">9.10.</strong> 43 - 内联汇编实现斐波那契数列 - RISC-V基础指令</a></li><li class="chapter-item expanded "><a href="exercises/44.html"><strong aria-hidden="true">9.11.</strong> 44 - 内联汇编实现整数数组求和 - RISC-V基础指令</a></li><li class="chapter-item expanded "><a href="exercises/45.html"><strong aria-hidden="true">9.12.</strong> 45 - 内联汇编实现查找数组最大值 - RISC-V基础指令</a></li><li class="chapter-item expanded "><a href="exercises/46.html"><strong aria-hidden="true">9.13.</strong> 46 - 内联汇编实现判断数组是否有序 - RISC-V基础指令</a></li><li class="chapter-item expanded "><a href="exercises/47.html"><strong aria-hidden="true">9.14.</strong> 47 - 内联汇编实现数组目标元素个数 - RISC-V基础指令</a></li><li class="chapter-item expanded "><a href="exercises/50.html"><strong aria-hidden="true">9.15.</strong> 50 - 模拟FIFO页面置换算法 - 操作系统</a></li><li class="chapter-item expanded "><a href="exercises/51.html"><strong aria-hidden="true">9.16.</strong> 51 - 模拟LRU页面置换算法 - 操作系统</a></li><li class="chapter-item expanded "><a href="exercises/52.html"><strong aria-hidden="true">9.17.</strong> 52 - 获取容器主机名 - 操作系统</a></li><li class="chapter-item expanded "><a href="exercises/53.html"><strong aria-hidden="true">9.18.</strong> 53 - 简单虚拟地址到物理地址的转换 - 操作系统</a></li><li class="chapter-item expanded "><a href="exercises/54.html"><strong aria-hidden="true">9.19.</strong> 54 - 模拟时间片轮转调度算法 - 操作系统</a></li><li class="chapter-item expanded "><a href="exercises/55.html"><strong aria-hidden="true">9.20.</strong> 55 - 模拟虚拟内存限制 - 操作系统</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">第一期傲来操作系统训练营进阶阶段学习引导</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="risc-v-向量拓展-v-extension-基础"><a class="header" href="#risc-v-向量拓展-v-extension-基础">RISC-V 向量拓展 (V Extension) 基础</a></h1>
+<p>RISC-V 向量拓展 (Vector Extension, V) 是 RISC-V 指令集架构的一部分，旨在为高性能计算、机器学习、图像处理等领域提供高效的向量处理能力。向量拓展指令集支持单指令多数据 (SIMD) 操作，能够显著提高并行计算性能。</p>
+<h2 id="向量寄存器与指令集"><a class="header" href="#向量寄存器与指令集">向量寄存器与指令集</a></h2>
+<ol>
+<li>
+<p><strong>向量寄存器</strong></p>
+<ul>
+<li>RISC-V V 扩展提供了一组向量寄存器 (Vector Registers)，每个寄存器可以存储多个数据元素。</li>
+<li>向量寄存器的数量通常为 32 个，标识为 v0 到 v31。</li>
+<li>每个向量寄存器的长度是可配置的，可以是 128 位、256 位、512 位等。</li>
+</ul>
+</li>
+<li>
+<p><strong>向量指令集</strong></p>
+<ul>
+<li>RISC-V V 扩展定义了一组向量指令，用于对向量寄存器进行操作。这些指令包括但不限于：
+<ul>
+<li><strong>加载/存储指令</strong>：用于在内存和向量寄存器之间传输数据。</li>
+<li><strong>算术运算指令</strong>：用于执行加法、减法、乘法、除法等运算。</li>
+<li><strong>逻辑运算指令</strong>：用于执行按位与、或、异或等操作。</li>
+<li><strong>比较指令</strong>：用于比较向量寄存器中的数据。</li>
+<li><strong>数据重排指令</strong>：用于重排、合并、拆分向量数据。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="simd-和向量化"><a class="header" href="#simd-和向量化">SIMD 和向量化</a></h2>
+<ol>
+<li>
+<p><strong>SIMD (Single Instruction, Multiple Data)</strong></p>
+<ul>
+<li>SIMD 是一种并行计算模式，在 RISC-V 向量扩展中得到了体现。</li>
+<li>SIMD 允许单条指令同时对多个数据元素进行操作，从而提高计算效率。</li>
+</ul>
+</li>
+<li>
+<p><strong>向量化</strong></p>
+<ul>
+<li>向量化是指将标量操作转换为向量操作，以利用 SIMD 指令的并行计算能力。</li>
+<li>向量化可以通过手动编写向量指令，或者使用编译器自动向量化实现。</li>
+</ul>
+</li>
+</ol>
+<h2 id="risc-v-c-语言计算库"><a class="header" href="#risc-v-c-语言计算库">RISC-V C 语言计算库</a></h2>
+<p>为了在 C 语言中高效地利用 RISC-V 的向量拓展和 SIMD 指令，可以使用专门的计算库。这些库提供了高层次的 API，简化了向量指令的使用。</p>
+<h3 id="risc-v-向量计算库"><a class="header" href="#risc-v-向量计算库">RISC-V 向量计算库</a></h3>
+<ol>
+<li>
+<p><strong>RVV Intrinsics</strong></p>
+<ul>
+<li>RVV Intrinsics 是一组内嵌函数，允许在 C 语言中直接使用 RISC-V 向量指令。</li>
+<li>Intrinsics 函数通常以 <code>__riscv_v_</code> 开头，如 <code>__riscv_v_add_vv</code> 用于向量加法。</li>
+</ul>
+</li>
+<li>
+<p><strong>使用示例</strong></p>
+<pre><code class="language-c">#include &lt;riscv_vector.h&gt;
+
+void vector_add(const int *a, const int *b, int *c, int n) {
+    size_t vl;
+    for (size_t i = 0; i &lt; n; i += vl) {
+        vl = vsetvl_e32m1(n - i); // 设置向量长度
+        vint32m1_t va = vle32_v_i32m1(&amp;a[i], vl); // 加载向量a
+        vint32m1_t vb = vle32_v_i32m1(&amp;b[i], vl); // 加载向量b
+        vint32m1_t vc = vadd_vv_i32m1(va, vb, vl); // 执行向量加法
+        vse32_v_i32m1(&amp;c[i], vc, vl); // 存储结果向量c
+    }
+}
+</code></pre>
+</li>
+</ol>
+<h3 id="risc-v-向量库优化"><a class="header" href="#risc-v-向量库优化">RISC-V 向量库优化</a></h3>
+<ol>
+<li>
+<p><strong>循环展开 (Loop Unrolling)</strong></p>
+<ul>
+<li>循环展开是一种编译优化技术，通过减少循环控制开销提高性能。</li>
+<li>手动循环展开可以结合向量指令进一步提升性能。</li>
+</ul>
+</li>
+<li>
+<p><strong>自动向量化</strong></p>
+<ul>
+<li>编译器可以自动识别并向量化循环和数据操作，以生成高效的 SIMD 代码。</li>
+<li>需要确保代码中的数据访问和操作是连续且没有数据依赖的，以便编译器可以进行向量化。</li>
+</ul>
+</li>
+<li>
+<p><strong>手动向量化</strong></p>
+<ul>
+<li>在某些情况下，手动编写向量化代码可以获得更高的性能。</li>
+<li>使用 RVV Intrinsics 或者汇编语言直接编写向量操作代码。</li>
+</ul>
+</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="chapter_8.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="chapter_8_2.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="chapter_8.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="chapter_8_2.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
